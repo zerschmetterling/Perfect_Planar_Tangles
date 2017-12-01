@@ -1,0 +1,42 @@
+\setlength{\epigraphwidth}{0.61\textwidth}
+%\textit{I have not seen far, despite standing on the shoulders of giants.}
+\epigraph{\textit{Rigor cleans the window through which intuition shines.}}{Elliot D.\ Cooper\footnotemark} \footnotetext{\cite{cooper2011mathematical}}
+
+\noindent 
+Maldacena's initial discovery \cite{maldacena1999large} of evidence for the AdS/CFT correspondence in 1997 has, without a doubt, greatly shaped the modern physics community.
+This remarkable (proposed) duality between theories of quantum gravity in $(d+1+1)$-dimensional anti-de Sitter space and conformal field theories on its $(d+1)$-dimensional conformal boundary has provided a lot of new insights about \emph{quantum gravity} as a whole. 
+
+One facet of this is a manifest connection between entanglement and geometry, resulting in the famous Ryu-Takayanagi conjecture \cite{ryu2006holographic}, which asserts that the entanglement entropy of a a region in the boundary CFT is proportional to the area of a specific surface in the bulk gravitational theory.
+
+There are some problems, for example the boundary dual of a \emph{local} bulk operator, see  \cite{Pastawski2015Holographic} and in particular Figure 9 of \cite{almheiri2015bulk}. However, this problem was resolved in \cite{almheiri2015bulk}, using the theory of quantum error correction to translate local bulk operators to \emph{logical} operators on the boundary. 
+
+Prompted by this, Pastawski, Yoshida, Harlow, and Preskill \cite{Pastawski2015Holographic} proposed a family of exactly solvable toy models for the holographic correspondence, using \emph{holographic states}, i.e.\ tensor networks that are built from so-called \emph{perfect tensors}, which are associated with quantum error correcting codes \cite{raissi2017constructingQECC}. These states, sitting in a space slice of $AdS_{2+1}$, realize some interesting properties: Among other things, they satisfy a discrete version of Ryu-Takayanagi when the boundary region is connected.
+
+In this thesis, we take tensors that are only \emph{planarly} perfect --- not quite perfect but sufficiently so --- and generalize them to the setting of planar algebras (a purely pictorial endeavor, for all intents and purposes) with the aim of finding new constructions and realizations.
+
+\bigskip
+In the first chapter we motivate this thesis for a broader audience by showing a natural progression of extracting the notion of \emph{perfect tensor} from an easy quantum-mechanical context. We then define tensor networks, and use the inherent graphical calculus to whet the appetite for what's to come, namely a lot of calculations with pictures. We also briefly mention what perfect tensors have been used for, e.g.\ in the paper \cite{Pastawski2015Holographic} that introduced them.
+
+We hint at the next chapters by defining the most important foundational part of this thesis, namely the \emph{Temperley-Lieb algebras}, first introduced in \cite{temperley1971relations} and turned into a diagrammatic algebra in \cite{kauffman1987state}.
+
+\bigskip
+The second chapter is a quick introduction to the theory of \emph{planar algebras}, originally published by Jones in 1999 \cite{jones1999planar1}, a pictorial language for the standard invariant of a subfactor. Interestingly, the question whether there exists a ``functorial'' connection between finite-index subfactors and CFTs is an area of active research. But it is unfortunately not yet known whether every subfactor gives rise to a CFT, or, if that is the case, if the subfactor can then be recovered at all \cite{oberwolfach}.
+
+\bigskip
+The heart of this thesis is undoubtedly the third chapter, where we propose the concept of \emph{perfect tangles} --- elements in a planar ${}^*$-algebra that are unitary (up to nonzero scalar), and all of whose rotations are unitary as well. These new mathematical objects can serve as a generalization of a few notions, including \emph{biunitaries} in planar algebras, and (planarly) perfect tensors. While this alone certainly serves as a motivation and justification for studying perfect tangles, another reason is that it's just interesting to see whether these at first glance highly artificial things even exist and what they look like --- and it's a fun \emph{Spielerei}.
+
+But not only are we doing that, we are also discussing how to simplify calculations considerably, at least in the Temperley-Lieb case, followed by a discussion about the support of perfect TL tangles, and the connection to the braid group. 
+
+Then, after stating and proving a suggestion by Jones, namely a construction of large perfect tangles from smaller perfect tangles using braiding-based intuition coming from the Temperley-Lieb case, we conjecture that this is actually valid in a more general setting, and in particular is true when applied to planarly perfect tensors. We then ask the natural question whether a certain well-defined way of constructing large tangles from smaller perfect tangles always yields something perfect, and whether this assignment is injective. This question remains open, despite good evidence and handwaving supporting an affirmative answer.
+
+If all of this is true then we have found a way of taking planarly perfect tensors and constructing tensor networks that are themselves planarly perfect, allowing for a lot of different geometries.
+
+After the theoretical part of the chapter, we can finally present a few examples of perfect tangles that have been found. Many of them are indeed in the Temperley-Lieb planar algebra --- an initial object in the category of subfactor planar algebras --- but a few are also in trivalent categories.
+
+\bigskip
+Finally, the appendix consists of 
+\begin{itemize}
+\item[\textsf{A.}] a brief introduction to category theory, to fix conventions and help clarify the definition of trivalent categories.
+\item[\textsf{B.}] a more rigorous formulation of planar tangles following \cite{KODIYALAM:OnPlanarAlgebras}.
+\item[\textsf{C.}] some bits and pieces of the code produced for this thesis. The full code can be found here: \url{github.com/zerschmetterling/ppt_code}
+\end{itemize}

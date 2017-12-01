@@ -1,0 +1,44 @@
+\label{App: Code}
+
+Here we will showcase some of the codes for the calculations in e.g.\ Temperley-Lieb, together with some explanations. The code presented in this chapter\footnotemark{} can be run using \texttt{sage}, an open source computer algebra system which interfaces many wonderful little helpers, like \emph{Singular}, \emph{GAP}, or various \emph{python} libraries such as \emph{sympy}. \texttt{sage} itself is python-based and comes with a very good documentation, which may readily be found on-line.
+
+Finding the relevant equations can be done using \texttt{sage}, but usually only an additional use of \emph{Mathematica's} powerful \texttt{Reduce} feature allows us to find actual solutions.
+
+We assume the reader is familiar with the basics of programming. The syntax of python and thus \texttt{sage} is very easy to comprehend, the only thing a bit challenging at first might list  comprehension, but that is quickly learned.
+
+The entire (documented and therefore self-explanatory) code produced for this thesis can be found on the author's \emph{github} at
+\begin{center}
+\url{github.com/zerschmetterling/ppt_code}~
+	\footnote{As of the printing and submission of this thesis the most recent commit was 
+		\begin{center}
+			\url{github.com/zerschmetterling/ppt_code/tree/c2d8a0fd86b6d630617bcaad622aa2c89ae30aa3}
+		\end{center}
+		The code is still maintained and updated. A few tweaks can always be made. Also, the goal of implementing planar tangles is still something the author is trying.
+		}
+\end{center}
+
+
+\section*{The Temperley-Lieb Planar Algebra}
+Amazingly, some brilliant people have implemented Temperley-Lieb algebras, or generally, partition algebras, in \texttt{sage}. Instead of printing the entire code on paper --- which would be 	quite preposterous --- we will only show the basic usage. The code can, as mentioned above, be fetched from github.
+
+Say we want to get the equations for a self-adjoint perfect tangle in $TL_3$. The setup then looks like this, with \texttt{sage} executed in the same directory as \texttt{perfectness.sage}. We start \texttt{sage} and either type \texttt{load("selfadjoint\_tl3.sage")}, of which the first part looks like
+
+\lstinputlisting[language=Python, firstline=1, lastline=36]{./../sage/selfadjoint_tl3.sage}
+
+A quick check then reveals that we are dealing with $16$ real equations in $4$ real unknowns, as expected.
+
+\bigno
+Using standard python file I/O operations we can then write the equations and variables to some file --- calling them \texttt{equations} and \texttt{variables}, respectively --- in Mathematica-parseable form using \texttt{mathematica(real\_symEq)}. After loading the file in Mathematica, we can proceed with solving the equations by using something like
+\begin{lstlisting}[language=Mathematica]
+Reduce[ equations, variables, Reals ]
+\end{lstlisting} 
+and maybe applying \texttt{LogicalExpand} and \texttt{FullSimplify} to the result.
+
+Using a bit of elementary algebra and arithmetic it is then easy to bring the results into the form of the self-adjoint solutions presented in \textsf{Chapter 3}.
+
+\section*{Trivalent Categories}
+For trivalent categories we unfortunately don't get a shortcut like above --- the calculations for obtaining the solutions had to be done by hand, and, as already mentioned, we can't normalize the coefficient of the identity to $1$. As an example, we look at \texttt{mm\_square.nb}, which just contains the equations, and a function to simplify the solutions as best as possible. At the end one the solutions is checked, and the result is \texttt{True}.
+
+\lstinputlisting[language=Mathematica]{./../sage/mm_square.nb}
+
+\bigno Unfortunately, simplifications like this cannot always be done. In the $H3$ category for example the output of \texttt{Reduce} was in terms of roots of polynomials with order exceeding 5. Despite that we managed to find solutions by taking numerical approximations of the roots and asking WolframAlpha what the nearest algebraic number is. Most of the times it didn't succeed --- see the file \texttt{haagerup\_solutions} --- but it worked in two instances, producing conjugate solutions: The ones we have seen in the example section.

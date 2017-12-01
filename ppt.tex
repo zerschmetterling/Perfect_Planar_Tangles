@@ -1,0 +1,208 @@
+\documentclass[11pt,a4paper,twoside]{article}
+\usepackage[utf8]{inputenc}
+
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+% ***************************************************************************************************************************************
+% math and graphics 
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{thmtools}
+\usepackage{mathtools}
+\usepackage{braket}
+\usepackage{graphicx,svg,subcaption}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{sagetex}
+\usepackage{pdfpages}
+\usepackage{todonotes}
+\usepackage{braids}
+
+
+% ***************************************************************************************************************************************
+% TikZ libraries
+\usetikzlibrary{arrows, calc,decorations.markings,cd,external}
+\tikzexternalize[prefix=figures/, figure name=figure_subsection\thesubsection_no]
+%\input{./tikzcd_hack.tex}
+\usepackage{etoolbox}
+\AtBeginEnvironment{tikzcd}{\tikzexternaldisable}
+\AtEndEnvironment{tikzcd}{\tikzexternalenable}
+\newcommand{\ruggedtodo}[2][]{\tikzexternaldisable\todo[#1]{#2}\tikzexternalenable}
+\makeatletter 
+\tikzstyle{inlinenotestyle} = [
+    draw=\@todonotes@currentbordercolor,
+    fill=\@todonotes@currentbackgroundcolor,
+    line width=0.5pt,
+    inner sep = 0.8 ex,
+    rounded corners=4pt]
+
+\renewcommand{\@todonotes@drawInlineNote}{%
+        {\begin{tikzpicture}[remember picture,baseline=(current bounding box.base)]%
+            \draw node[inlinenotestyle,font=\@todonotes@sizecommand, anchor=base,baseline]{%
+              \if@todonotes@authorgiven%
+                {\noindent \@todonotes@sizecommand \@todonotes@author:\,\@todonotes@text}%
+              \else%
+                {\noindent \@todonotes@sizecommand \@todonotes@text}%
+              \fi};%
+           \end{tikzpicture}}}%
+\makeatother   
+%\AtBeginEnvironment{tikzpicture}{\renewcommand{\thisName}{\the\value{chapter}\relax chapter}\tikzsetnextfilename{\thisName}}
+%\newcommand{\thisName}{}
+
+% ***************************************************************************************************************************************
+% appearance
+%\newcommand{\changefont}{%
+%    \fontsize{9}{11}\selectfont
+%}
+%\fancyhf{}
+%\fancyhead[LE, RO]{\thepage}
+%\fancyhead[LO]{\changefont \sffamily \nouppercase{\rightmark}} %section
+%\fancyhead[RE]{\changefont \sffamily \nouppercase{\leftmark}} %chapter
+
+\newcommand{\figref}[1]{\textsf{Figure \ref{#1}}}
+\renewcommand{\eqref}[1]{\textsf{Equation (\ref{#1})}}
+
+
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage[hidelinks=true]{hyperref}
+%\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm,includehead]{geometry}
+%\usepackage[left=3.5cm,right=3.5cm,top=2.5cm,bottom=4cm,includehead]{geometry}
+%\usepackage[left=3.5cm,right=3.5cm,top=3cm,bottom=5cm]{geometry}
+\usepackage[inner=3.3cm,textwidth=400pt, top=3.2cm,bottom=4.8cm, includehead]{geometry}
+\usepackage{ragged2e}
+\usepackage{microtype}
+\usepackage{hhline}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{amsfonts}
+
+%\addtokomafont{pageheadfoot}{\scshape\small}
+\renewcommand{\theequation}{{\textsf{\thechapter.\arabic{equation}}}}
+
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+%\definecolor{myblue}{rgb}{0,0,1}
+%\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{myblue}{rgb}{0,0,0}
+\definecolor{mymauve}{rgb}{0,0,0}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{myblue},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=5,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  %title=                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+% ***************************************************************************************************************************************
+% additional behavior: index, bib
+\usepackage{imakeidx,url}
+\usepackage[labelfont=sf]{caption}
+\usepackage[nottoc]{tocbibind}
+\usepackage[titletoc,header]{appendix}
+\usepackage{epigraph}
+%\setcounter{secnumdepth}{1}
+%\usepackage{refstyle}
+\makeindex[intoc]
+\allowdisplaybreaks 
+
+
+% ***************************************************************************************************************************************
+% environments
+\newcounter{conj}
+\renewcommand{\theconj}{\Alph{conj}}
+\newcounter{factoid}
+
+\declaretheorem[style=definition,qed=$\triangle$,numberwithin=section,postheadhook={~\\ \indent}]{definition}
+\declaretheorem[style=remark,qed=$\blacktriangle$,sibling=definition,postheadhook={~\\ \indent}]{remark}
+\declaretheorem[style=plain,sibling=definition]{theorem}
+\declaretheorem[style=plain,numberlike=conj,qed=$\blacktriangle$]{conjecture}
+\declaretheorem[style=plain,sibling=definition]{lemma}
+\declaretheorem[style=definition,numberlike=factoid]{fact}
+\declaretheorem[style=plain,sibling=definition]{proposition}
+\declaretheorem[style=plain,sibling=definition]{example}
+% ***********************************************************   commands  ***********************************************************
+% ********************** MATH ******************************
+\renewcommand{\phi}{\varphi}
+\renewcommand{\theta}{\vartheta}
+\newcommand{\hilbert}[1]{\mathcal{H}_{#1}}
+\newcommand{\tensor}{\otimes}
+\newcommand{\inv}{^{-1}}
+\newcommand{\eqasd}{•}
+\newcommand{\interior}[1]{#1^\circ}
+\newcommand{\markedPoint}{\star}
+\newcommand{\rotatedmultiplication}[1]{\stackrel{#1}{\curvearrowleft}\,}
+\newcommand\at[2]{\left.#1\right|_{#2}}
+\newcommand{\morphism}[1]{\xrightarrow{#1}}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\mult}{mult}
+\DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\catname}[1]{{\normalfont\textbf{#1}}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+% ********************* Other ****************************
+\newcommand{\bigno}{\bigskip\noindent}
+
+
+\author{Johannes Berger, Tobias J Osborne}
+\title{On Perfect Planar Tangles}
+\date{}
+
+% DOCUMENT
+\begin{document}\pagestyle{headings}
+\maketitle
+%\listoftodos
+\begin{center}
+	\begin{minipage}{0.8\textwidth}
+		\textsc{Abstract.} We propose the concept of \emph{perfect planar tangles}, which can serve as a generalization of biunitaries as well as perfect tensors.
+	\end{minipage}
+\end{center}
+
+
+%\chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction}
+%	\input{./chapters/introduction.tex}
+
+\section{Planar Algebras}
+	\index{Planar Algebras}
+	\input{./chapters/planar_algebras.tex}
+
+\section{Perfect Tangles: Definition and Examples}
+	\input{./chapters/examples.tex}
+
+\input{./c4_braiding.tex}
+
+%\bibstyle{amsalpha}\pagestyle{plain}
+\nocite{*}
+%\bibliography{./master_bibliography.bib}
+\end{document}

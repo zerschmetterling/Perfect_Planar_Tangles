@@ -1,0 +1,992 @@
+In this chapter we will get to the heart of this thesis, and finally generalize (planarly) perfect tensors to planar algebras. Most of the definitions will be for planar algebras which are (implicitly) shaded, i.e.\ we only consider tangles with an even number of marked points, as they are far easier to handle. And of course, shaded planar algebras are a subset of unshaded ones in a certain way --- that means examples found in the shaded case will work just as well for the unshaded case.
+
+After defining \emph{perfect tangles}, we will see a a few ways of constructing `larger' perfect tangles from `smaller' ones. The first of these was hinted at by Jones, subsequent results were found applying a similar strategy, but it is not yet entirely clear why this strategy seems to work: One uses braid-infused heuristics to draw pictures and translates these into the language of planar tangles. In the special case of the Temperley-Lieb planar algebra this is justified, since perfect tangles give rise to a unitary representation of the braid group, as we will show --- but for general labelled tangles the proof of the Yang-Baxter equation, i.e.\ the third Reidemeister move, is not clear. Something similar to this braiding has already been seen in \cite[Theorem 2.11.3]{jones1999planar1}.
+
+Because of how our definitions and proofs work, this is applicable to perfect tensors as well, so in particular the constructions yield tensor networks with an even number of open edges such that inserting a perfect tensor at each vertex will result in the evaluated tensor network being perfect --- planarly, of course.
+
+\bigno After that we will give a few explicit examples that have been found with the aid of an open source computer algebra system, \texttt{sage}, and Mathematica. Unfortunately, the amount of equations one has to solve is fairly large --- and they are all quadratic, with a lot of variables. The resulting high computational cost prevented the efficient discovery of more than a few examples. But there's still some hope, as some examples can be obtained by directly applying the general constructions to already known smaller perfect tangles.
+
+\section{Perfect Tangles in Planar Algebras}
+Our approach is fairly simple, and may readily be seen as some sort of generalization of \emph{biunitaries}, as defined in \cite[p.\ 54 ff.]{jones1999planar1}. Biunitaries, however, are a bit more restricted. Despite them being perfect, not every perfect tangle of the appropriate color is a biunitary in the sense of Jones.
+
+As before, we shall only look at planar algebras with modulus. While it is certainly easier to proceed the way we will --- defining this only for unshaded planar algebras --- one must keep the subtleties that come with substituting `unshaded' with `shaded' in mind, e.g.\ rotating the multiplicative unit by one click swaps the shading, or the fact that the loop values for $\circ$ and {$\bullet$} might be different (this, however, only changes the proportionality factor, and in general we assume that all planar algebras have a single positive modulus).
+
+\bigno The setting is now in some unshaded planar algebra, say $P$, but we will only regard boxes with an even number of distinct boundary points, i.e.\ a shaded planar algebra where, roughly speaking, the shading does not make a difference.
+
+\begin{definition}[Rotated Multiplication]\index{Rotated Multiplication}
+Consider $2k$-boxes. For ${0\leq n < 2k}$
+we define the \emph{rotated multiplications}
+\begin{align*}
+\rotatedmultiplication{n}\equiv \mult_k \circ \left( \rot^n,\rot^{-n} \right),
+\end{align*}
+written as an infix, that is
+\begin{align*}
+T \rotatedmultiplication{n} S = \rot^n(T)\cdot \rot^{-n}(S).
+\end{align*}
+Note that a negative exponent on $\rot$ means \emph{clockwise rotation}.
+\end{definition}
+
+The rotated multiplication has a rather interesting property. To express this property in a fairly condensed fashion, we can analogously define something like $\stackrel{m}{\curvearrowright}$, where the first argument is rotated clockwise and the second one counterclockwise.
+
+\begin{proposition}\label{Prop:ROT INVROT}
+Let $T\in P_{2k}$. Then the following are equivalent.
+\begin{itemize}
+\item[(i)] $\forall 0\leq n <2k:\quad T \rotatedmultiplication{n} T^* \propto\mathbf{1}_k$
+\item[(ii)] $\forall 0\leq n <2k:\quad T^* \stackrel{n}{\curvearrowright} T \propto\mathbf{1}_k$,
+\end{itemize}
+where $\mathbf{1}_k$ is the is the multiplicative unit.
+
+\normalfont This should not come as a surprise, and the crucial insight only comes in the proof.
+\begin{proof}
+First, let $0\leq n < k$. Then
+\begin{align*}
+	T\rotatedmultiplication{n}T^* &= \,
+	\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+		\node[draw] (T) at (0,-0.8) {$\mathrm{rot}^n T$};
+		\node[draw] (Tdag) at (0,0.8) {$\mathrm{rot}^{-n} T^*$};
+		\draw (T.south) -- ++ (0,-0.5);
+		\draw (Tdag.north) -- ++ (0,0.5);
+		\draw (T.north) -- node[right]{$k$} (Tdag.south);
+	\end{tikzpicture} = \,
+	\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+		\node[draw,rotate=180] (T) at (0,-1) {$\mathrm{rot}^n T$};
+		\node[draw,rotate=180] (Tdag) at (0,1) {$\mathrm{rot}^{-n} T^*$};
+		\draw ($(T.south)+(-0.4,0)$) arc[start angle=0, end angle=180, radius=5mm] -- ++(0,-1.3);
+		\draw ($(Tdag.north)+(-0.4,0)$) arc[start angle=0, end angle=-180, radius=5mm] -- ++ (0,1.3);
+		\draw ($(Tdag.south)+(0.4,0)$) arc[start angle=180, end angle=0, radius=5mm] -- 
+			($(T.north)+(1.4,0)$) arc[start angle=0, end angle=-180, radius=5mm];
+	\end{tikzpicture}\\
+	&=\,
+	\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+		\node[draw,rotate=180] (T) at (0,-1) {$\mathrm{rot}^k\mathrm{rot}^n T$};
+		\node[draw,rotate=180] (Tdag) at (0,1) {$\mathrm{rot}^{-k}\mathrm{rot}^{-n} T^*$};
+		\draw (T.north) -- ++ (0,-0.5);
+		\draw (Tdag.south) -- ++ (0,0.5);
+		\draw (T.south) -- node[right]{$k$} (Tdag.north);
+	\end{tikzpicture}\\
+	&= \mathrm{rot}^k\left( \mathrm{rot}^{-(k+n)} T^*\cdot \mathrm{rot}^{k+n}T \right) \\
+	&= \mathrm{rot}^k\left( T^* \stackrel{k+n}{\curvearrowright} T \right)
+\end{align*}
+Thus for all $0\leq n < k$:
+\begin{align*}
+T\rotatedmultiplication{n}T^* \propto \mathbf{1}_k \quad \iff\quad T^*  \stackrel{k+n}{\curvearrowright} T\propto \mathbf{1}_k,
+\end{align*}
+and one similarly shows
+\begin{align*}
+T\rotatedmultiplication{k+n}T^* \propto \mathbf{1}_k \quad \iff\quad T^*  \stackrel{n}{\curvearrowright} T\propto \mathbf{1}_k.
+\end{align*}
+Because $\mathrm{rot}^{2k} = \id$ and $\mathrm{rot}^n\mathrm{rot}^m = \mathrm{rot}^{n+m}$, we finally obtain for all $0\leq n< 2k$
+\begin{align*}
+T\rotatedmultiplication{n}T^* \propto \mathbf{1}_k \quad \iff\quad T^*  \stackrel{k+n}{\curvearrowright} T\propto \mathbf{1}_k.
+\end{align*}
+\end{proof}
+\end{proposition}
+To draw these diagrams this way we used the simple fact that $ \mathrm{rot}_k^n(T) ^* = \left(\mathrm{rot}_k^n\circ T\right)^*= \left(\mathrm{rot}_k^n\right)^*\circ T^*=\mathrm{rot}_k^{-n}\left( T^* \right)$.
+
+\begin{definition}[Perfect Tangle]\label{def:Perfect Tangle}
+Let $T\in P_{2k}$. $T$ is called a \emph{perfect $k$-tangle} if for $0\leq n < k$
+\begin{align*}
+T \rotatedmultiplication{n} T^* \propto T^* \stackrel{n}{\curvearrowright} T \propto \mathbf{1}_k
+\end{align*}
+
+As an illustrating example we refer to \figref{fig:Perfect Tangle Condition}. $T$ might also be called a \emph{rotation-invariant unitary} or \emph{a k-unitary}, in analogy with the term \emph{biunitary}.
+\end{definition}
+The name comes from the first examples found in Temperley-Lieb, where $T$ is actually an honest planar tangle. Note that perfect $k$-tangles are `even' and live in $P_{2k}$. This is just \emph{compression of information}.
+In the future we will refer to any $x\in P_k$ as a tangle because $x=Z(\mathrm{id}_k)(x)$, i.e.\ it is a \emph{labelled tangle}.
+
+\begin{figure}[!htp]\centering
+	\begin{tikzpicture}[scale=1.3]
+		\begin{scope}
+			\coordinate (center) at (0,0);
+			\draw ($(center) + (-1.2,1.2)$) rectangle ($(center) + (1.2,-1.2)$);
+			\draw ($(center) + (-0.6,0.8)$) rectangle ($(center) + (0.6,0.3)$);
+			\draw ($(center) + (-0.6,-0.8)$) rectangle ($(center) + (0.6,-0.3)$);
+
+			\node (T) at ($(center) + (0,0.55)$) {$T$};
+			\node (TStar) at ($(center) + (0,-0.55)$) {$T^*$};
+			
+			\draw ($(center) + (-0.5,0.8)$) arc [start angle = 0, end angle= 180, radius=1.5mm] -- node[midway, left] {$n$} 
+					($(center) + (-0.8,-0.8)$) arc [start angle = 180, end angle=360, radius=1.5mm];
+			\draw ($(center) + (0.5,0.3)$) arc [start angle = 180, end angle=360, radius=1.5mm] --
+					($(center) + (0.8,1.2)$);
+			\draw ($(center) + (0.5,-0.3)$) arc [start angle = 180, end angle=0, radius=1.5mm] --
+					($(center) + (0.8,-1.2)$);
+					
+			\draw ($(center) + (-0.3,0.8)$) -- ($(center) + (-0.3,1.2)$) node [midway, right] {\hspace*{-1mm}\footnotesize $k-n$};
+			\draw ($(center) + (-0.3,-0.8)$) -- ($(center) + (-0.3,-1.2)$) node [midway, right] {\hspace*{-1mm}\footnotesize $k-n$};
+			\draw ($(center) + (-0.3,-0.3)$) -- ($(center) + (-0.3,0.3)$) node [midway, right] {\hspace*{-1mm}\footnotesize $k-n$};
+		\end{scope}
+		\node (propto) at (1.5,0) {$\propto$};
+		\begin{scope}
+			\coordinate (center) at (3,0);
+			\draw ($(center) + (-1.2,1.2)$) rectangle ($(center) + (1.2,-1.2)$);
+			\draw ($(center) + (-0.6,0.8)$) rectangle ($(center) + (0.6,0.3)$);
+			\draw ($(center) + (-0.6,-0.8)$) rectangle ($(center) + (0.6,-0.3)$);
+
+			\node (T) at ($(center) + (0,0.55)$) {$T^*$};
+			\node (TStar) at ($(center) + (0,-0.55)$) {$T$};
+			
+			\draw ($(center) + (0.5,0.8)$) arc [start angle = 180, end angle= 0, radius=1.5mm] -- 
+					($(center) + (0.8,-0.8)$) arc [start angle = 360, end angle=180, radius=1.5mm];
+			\draw ($(center) + (-0.5,0.3)$) arc [start angle = 360, end angle=180, radius=1.5mm] -- node[midway, left] {$n$} 
+					($(center) + (-0.8,1.2)$);
+			\draw ($(center) + (-0.5,-0.3)$) arc [start angle = 0, end angle=180, radius=1.5mm] --
+					($(center) + (-0.8,-1.2)$);
+					
+			\draw ($(center) + (-0.3,0.8)$) -- ($(center) + (-0.3,1.2)$) node [midway, right] {\hspace*{-1mm}\footnotesize $k-n$};
+			\draw ($(center) + (-0.3,-0.8)$) -- ($(center) + (-0.3,-1.2)$) node [midway, right] {};
+			\draw ($(center) + (-0.3,-0.3)$) -- ($(center) + (-0.3,0.3)$) node [midway, right] {};
+		\end{scope}
+		\node (propTO) at (4.5,0) {$\propto$};
+		\begin{scope}
+			\coordinate (center) at (6,0);
+			\draw ($(center) + (-1.2,1.2)$) rectangle ($(center) + (1.2,-1.2)$);
+			\draw  ($ (center) + (0,-1.2)$)  -- ($ (center) + (0,1.2)$) node [midway, right] (TextNode) {\hspace*{-1mm}\footnotesize $k$};
+		\end{scope}
+	\end{tikzpicture}
+	\caption[Definition of perfect planar tangle]{The defining condition a $k$-tangle $T$ has to satisfy to be perfect}
+	\label{fig:Perfect Tangle Condition}
+\end{figure}
+
+\bigskip \noindent Before justifying this definition we first introduce new families of diagrams.
+
+\begin{definition}[$(m\rightarrow n)$-family]
+Let $T$ be a $k$-tangle. We will call the strings emanating from boundary of the internal (labelled) box the \emph{legs} of $T$. A $k$-tangle thus has $k$ legs, which we can partition into two connected collections with cardinalities $n$ and $m$, respectively, such that $n+m=k$. We do not lose generality when we stipulate $1\leq m\leq n$.
+
+Now, take a partition where the $m$ legs are along the bottom boundary (w.r.t.\ the marked point) of $T$, without loss starting at the leftmost point. The remaining $k-m$ legs along the bottom are bent upwards, i.e.\ isotoped so that they `point in the same direction' as the legs along the top. The result is surrounded by a (dotted) box with $n$ points on the top, $m$ points on the bottom.
+
+This procedure, applied to all rotations of $T$, generates all such boxes that may be obtained from $T$, which we then collect into the so-called \emph{$(m\rightarrow n)$-family} of $T$, also denoted $T[m\rightarrow n]$. The motivation behind the arrow is: Read the tangle as flowing from the bottom to the top.
+
+The dual construction then yields the families $T^*[n\rightarrow m]$ by simple applying ${}^*$ to $T[m\rightarrow n]$, or rotating $T^*$ clockwise, then bending the obvious legs down.
+
+This definition is then extended linearly.
+\end{definition}
+\begin{figure}[!htp]\centering
+	\begin{tikzpicture}
+		\node (T) at (0,0) {$T$};
+		\draw (-0.5,0.5) rectangle (0.5,-0.5);
+		\foreach \x in {0,0.4}
+			\draw (\x, 0.5) -- (\x,0.8);
+		\draw (-0.4,-0.5) -- (-0.4,-1.2);
+		\draw (-0.4,0.5) arc [start angle=0, end angle=180, radius=2mm] -- (-0.8,-1.2);
+		\draw (0.4,-0.5) arc [start angle=180, end angle=360, radius=2mm] -- (0.8,0.8);
+		\draw (0,-0.5) arc [start angle=180, end angle=360, radius=6mm] -- (1.2,0.8);				
+		\draw[dotted] (-1,0.8) rectangle (1.4,-1.2);
+		
+		\node (comma) at (1.8, -0.2) {,};
+		
+		\node (TStar) at (3.5,-0.4) {$T^*$};
+		\draw (3,0.1) rectangle (4,-0.9);
+		\foreach \x in {3.5,3.9}
+			\draw (\x, -0.9) -- (\x,-1.2);
+		\draw (3.5-0.4,0.1) -- (3.5-0.4,0.8);
+		\draw (3.5-0.4,-0.9) arc [start angle=0, end angle=-180, radius=2mm] -- (3.5-0.8,0.8);
+		\draw (3.5+0.4,0.1) arc [start angle=180, end angle=0, radius=2mm] -- (3.5+0.8,-1.2);
+		\draw (3.5 + 0,0.1) arc [start angle=180, end angle=0, radius=6mm] -- (3.5+1.2,-1.2);				
+		\draw[dotted] (2.5,0.8) rectangle (4.9,-1.2);
+	\end{tikzpicture}
+	\caption[Bending the legs]{An element of $T[2\rightarrow 4]$ and its dual, for a $6$-tangle $T$. This one is essentially the result of first rotating $T$ by one click, then applying the procedure.}
+\end{figure}
+Multiplication $\alpha\cdot \beta$ of $\alpha\in T[m\rightarrow n]$ with $\beta\in T^*[n\rightarrow m]$ is given by stacking $\beta$ on top of $\alpha$, resulting in a proper $m$-tangle.
+
+\begin{lemma}
+If $T\in P_{2k}$ is a perfect $k$-tangle, then for all $\alpha\in T[m\rightarrow n]$ with $m<k$ we have $\alpha\cdot \alpha^* \propto \mathbf{1}_m$.
+\begin{proof}
+It is clear that $A=\alpha\cdot\alpha^*$ is an $m$-tangle. We can uniquely surround the boxes in $A$ by another box such that the result is a $k$-tangle $\mathcal{T}$, satisfying 
+\begin{align*}
+A = \mathcal{E}^m_k\left( \mathcal{T} \right).
+\end{align*}
+It follows from the construction of $T[m\rightarrow n]$ that there is an $ 0\leq l < k$ such that $\alpha$ is `generated' by $\mathrm{rot}^l_k(T)$.
+Clearly we thus have
+\begin{align*}
+A &= \mathcal{E}^m_k\left( \mathcal{T} \right)\\
+&= \mathcal{E}^m_k\left(  \mathrm{rot}^l_k(T)\cdot \mathrm{rot}^{-l}_k\left( T^* \right)  \right)\\
+&= \mathcal{E}^{m}_k\left( T\rotatedmultiplication{l}T^* \right)\\
+&= \mathcal{E}^m_k \left( \lambda\mathbf{1}_k \right)\\
+&\propto  \mathbf{1}_m
+\end{align*}
+The proportionality in the last line is given by a function of the loop values.
+\end{proof}
+\end{lemma}
+
+A picture might help clarifying this proof. Here the dotted rectangle is the lower half of the box we surrounded $\alpha\cdot\alpha^*$ with in the proof, for $\alpha$ the $T[2\rightarrow 4]$ element from above:
+%\begin{figure}[!htp]\centering
+	\begin{tikzpicture}[scale=0.7,baseline=-1ex]
+		\draw (-0.5,0.5) rectangle (0.5,-0.5);
+		\foreach \x in {0,0.4}
+			\draw (\x, 0.5) -- (\x,0.8);
+		\draw (-0.4,-0.5) -- (-0.4,-1.2);
+		\draw (-0.4,0.5) arc [start angle=0, end angle=180, radius=2mm] -- (-0.8,-1.2);
+		\draw (0.4,-0.5) arc [start angle=180, end angle=360, radius=2mm] -- (0.8,0.8);
+		\draw (0,-0.5) arc [start angle=180, end angle=360, radius=6mm] -- (1.2,0.8);				
+		\draw[dotted] (-1,0.8) rectangle (1,-0.8);
+	\end{tikzpicture}
+%\end{figure}
+
+Note that this lemma tells us: You only need to calculate the products for all $2k$ elements of $T[k\rightarrow k]$, i.e.\ all rotations of $T$. Everything else follows. Thus this definition of perfect tangle is indeed a good generalization of the notion of planarly perfect tensor, in that it captures the isometric properties of \emph{all} planar bipartitions. 
+
+In particular this is the argument for not working in the Temperley-Lieb category, where objects are natural numbers and we more or less have $\mathrm{Hom}(n,m) = T[n\rightarrow m].$ Working with standard TL-diagrams is sufficient.
+
+~\\
+\begin{remark}
+But we are also interested in finding perfect tangles in trivalent categories. To distinguish them, we shall call them \emph{perfect morphisms}. Remembering the definition of perfect tensors, it is relatively easy to define perfect $(2n+1)$-tangles. We only need to define a multiplication like the \emph{rotated multiplication} --- where the lower (upper) disk has $n+1$ legs bent up (down), and rotation is given like before. $n+1$ is exactly $\ceil{\frac{2n+1}{2}}$, i.e.\ the smallest integer larger than half the number of boundary points.
+
+This can be justified similarly to the previous lemma.
+
+So far, we did not find odd perfect morphisms aside from the obvious one, the trivalent vertex itself. Thus not a lot is known about these, and we will only briefly mention them.
+\end{remark}
+
+\section{Simplifications in the Temperley-Lieb Planar Algebra}
+As mentioned before, we will mostly be working in the TL planar algebra. We thus need to discuss  the complexity of the calculations and how to reduce it, if possible. 
+
+The amount of equations obtained from computing all products of all $2n$ rotations of a general Temperley-Lieb $n$-tangle is rather frightening. Indeed, if the coefficients are assumed to be complex, then the number of (real) variables is $2$ times the dimension, i.e.\
+\begin{align*}
+2 C_n = 2 \cdot \frac{1}{n+1}\binom{2n}{n},
+\end{align*}
+\begin{sagesilent}
+output_str = r""
+for i in range(1,6):
+    answer = 2*catalan_number(i)
+    output_str += r"$%s$, "%(answer)
+
+answer = 2*catalan_number(6)
+output_str += r"$%s$"%(answer)
+\end{sagesilent}
+hence the first few numbers read \sagestr{output_str}. The equations are the coefficients of the vectors (in the product) unequal to the unit, together with the inequality $\alpha \neq 0$, where $\alpha$ is the coefficient of the unit. The maximum number of (complex) equations is then \emph{dimension times rotations} $= 2 n\cdot C_n$, which obviously grows very quickly
+
+\bigno Luckily, we can reduce this a bit. In $TL_n$ there are no extra relations for the tangles, it is the \emph{free} vector space on the appropriate set. It is thus necessary that a perfect tangle have support on $\mathbf{1}_n$, which allows us to normalize so that the coefficient of $\mathbf{1}_n$ is of modulus $1$. We will for the sake of simplicity and without loss of generality set $\alpha=1$. This already reduces the number of coefficients by $2$.\footnote{But beware: This does not work in other situations, like trivalent categories for example.}
+
+ We could also only look, say, at rotation invariant tangles, i.e.\ $n$-tangles $T$ with $\rot(T)=T$. We then only have to compute $T\cdot T^*$ and find solutions to get perfect tangles. Moreover, since the coefficient of the unit is normalized to $1$, coefficients of all rotations also have to be $1$, effectively reducing the number of coefficients by more than $n-1$. Then
+ \begin{align*}
+ \# \text{unknowns} < 2(C_n - n), \qquad  \# \text{equations}  < C_n - n,
+ \end{align*}
+ i.e.\ solving this problem is already a lot easier.
+ 
+Of course, a logical approach is also to look only at self-adjoint tangles, that is tangles $T$ with $T^* = T$. At the very least the generators of $TL_n$ (of which there are $n-1$, cf.\ our first discussion of the Temperley-Lieb algebras) are self-adjoint, so that their respective coefficients have to be real.
+
+Combining both of these approaches is possible as well, and they are implemented in the code (see \textsf{Appendix \ref{App: Code}} and the code for details).
+
+\bigno Another thing one might hope to succeed is looking at $n$-tangles that are eigenvectors of rotation with eigenvalue a primitive $(2n)$th root of unity, that is
+\begin{align*}
+\rot T  = e^{\frac{2\pi i}{2n}}T.
+\end{align*}
+However, in the following lemma we proof that these don't exist in the Temperley-Lieb case.
+
+\begin{lemma}
+Let $T\in TL_n$. If
+\begin{align*}
+\rot  T  = e^{\frac{2\pi i}{2n}}T,
+\end{align*}
+then $T$ is not perfect.
+\begin{proof}
+Suppose $T$ is an $n$-tangle with that property, and assume that it is perfect. Note that is then has support on $\mathbf{1}_n$. Then
+\begin{align*}
+\rot^n T =& \left( e^{\frac{\pi i}{n}} \right)^n T \\
+=& e^{i\pi} T \\
+=& -T.
+\end{align*}
+But $\rot^n \mathbf{1}_n = \mathbf{1}_n$,  contradicting $T = -T$.
+\end{proof}
+\end{lemma}
+
+\section{On the Support of Perfect Temperley-Lieb Tangles}
+Later, when we encounter examples of our first general construction, we can observe that all tangles obtained this way seem to have full support, i.e.\ they have nonzero coefficients for all tangles in the standard basis.
+
+We will now make a few observations that hint at this being true for any perfect tangle in Temperley-Lieb, which would of course mean that a perfect tangle in $TL_n$ would be a sum of $\dim TL_n$ terms. A proof, however, is not being provided.
+
+\bigno The statement is trivially true for $n=2$, and the $3$-strand case follows the same procedure as the others, but is not as interesting. We will mainly focus on $TL_4$, but a few observations can be made for arbitrary $n$.
+
+We write $\supp T$ for the support of a tangle $T$. From the definition of \emph{perfectness} and because 
+\begin{align*}
+1_n \in \supp{\left( TT^* \right)} \iff 1_n \in \supp T
+\end{align*}
+we can immediately extract that 
+\begin{align*}
+T\text{ is perfect } \implies \{\rot^l 1_n : 0\leq l < n\}\subseteq \supp T.
+\end{align*}
+One then might naively guess the inclusion is actually a proper equality for some tangles, but for all cases other than $n=2$ this will not work. Observe first that
+\begin{align*}
+\rot^l 1_n = 
+\begin{cases}
+	\quad\begin{tikzpicture}[scale = 0.5, baseline]
+		\draw (-1,2) -- node[above, sloped]{$n-2l$} (1,-2);
+		\draw (0,2) arc[start angle=180, end angle=360, radius=5mm];
+		\draw (-1,-2) arc[start angle=180, end angle=0, radius=5mm];
+	\end{tikzpicture}
+	&\quad l < \ceil{\frac{n}{2}},\\[3.5em]
+	\hspace*{1.03mm}\begin{tikzpicture}[scale = 0.5, baseline]
+		\draw (-1,-2) -- node[above, sloped]{$2l-n$} (1,2);
+		\draw (0,-2) arc[start angle=180, end angle=0, radius=5mm];
+		\draw (-1,2) arc[start angle=180, end angle=360, radius=5mm];
+	\end{tikzpicture}
+	&\quad l \geq \ceil{\frac{n}{2}},
+\end{cases}
+\end{align*}
+whence 
+\begin{align*}
+\rot^l 1_n \cdot \rot^{-k} 1_n \propto\,
+\begin{tikzpicture}[scale=0.5, baseline=-1mm]
+	\draw (-1,1) arc[start angle=180, end angle=360, radius=5mm];
+	\draw (-1,-1) arc[start angle=180, end angle=0, radius=5mm];
+	\draw (1,-1) -- node[above, sloped, rotate=180] {$n-2$} (1,1);
+\end{tikzpicture}
+\quad \iff \quad k = l = 1.
+\end{align*}
+But this means: If $T$ has support only on the rotations of $1_n$, and if we label the coefficient of $\rot 1_n$ in $T$ $\alpha$, then there will be a term whose support is $q\lvert \alpha \rvert^2$ times the basis tangle $S$ which is proportional to $\rot 1_n \cdot \rot\inv 1_n$. So if $T$ were perfect, $\alpha$ would have to vanish, contradicting the fact that $T$ has support on $\rot 1_n$. Therefore, $T$ cannot be perfect.
+
+In other words
+\begin{align*}
+T\text{ is perfect } \implies \{\rot^l 1_n : 0\leq l < n\}\subsetneq \supp T.
+\end{align*}
+
+So we have to include all tangles that are rotations of the first generator of Temperley-Lieb as well. But, at least for $n=4$, this cannot be the minimal support. This is verified by loading the file \texttt{minimal\_support\_tl4.sage}: The equations we obtain are contradictory, and in $TL_4$ a perfect tangle must have full support, i.e.\ be a sum of 14 different terms.
+
+There might even be a beautiful argument for this, but so far we have only found evidence hinting at this being generally true. If it is, then calculations in $TL_n$ become terribly complicated, and there would be next to no hope in finding perfect tangles for large $n$. Fortunately, though, we have a construction that gives us perfect Temperley-Lieb tangles in all of $TL$, as presented and proved in the following. We will, however, first showcase the connection between perfect tangles in $TL_2$ and the braid group, which gives rise to one proven and other possible constructions.
+
+\section{Perfect Tangles in \texorpdfstring{$TL_2$}{TL2} and the Braid Group \texorpdfstring{$B_n$}{Bn}}
+Fix any $q>0$. The Temperley-Lieb algebra on two strands with loop parameter $q$ is two-dimensional, the basis elements being \tikz[scale=0.5, baseline=-1mm]{\foreach \x in {0, 0.5} \draw (\x, -0.5) -- (\x, 0.5);} and \tikz[scale=0.5, baseline=-1mm]{\draw (0, 0.5) arc[start angle=-180, end angle=0, radius=2.5mm]; \draw (0, -0.5) arc[start angle=180, end angle=0, radius=2.5mm];}.
+Letting 
+\begin{align*}
+T \equiv \alpha\,  \tikz[scale=0.5, baseline=-1mm]{\foreach \x in {0, 0.5} \draw (\x, -0.5) -- (\x, 0.5);}
+ \,+\beta\, \tikz[scale=0.5, baseline=-1mm]{\draw (0, 0.5) arc[start angle=-180, end angle=0, radius=2.5mm]; \draw (0, -0.5) arc[start angle=180, end angle=0, radius=2.5mm];}\,,
+\end{align*}
+we immediately note three things:
+\begin{itemize}
+\item[•] $T^*$ will be the same as $T$, but with conjugated coefficients,
+\item[•] rotating $T$ once simply exchanges $\alpha$ and $\beta$,
+\item[•] $T$ is invariant under rotation by two clicks.
+\end{itemize} 
+Because of these nice symmetries we don't have to compute everything explicitly. More concretely, we only need to compute $TT^*$ and get the rotation for free by exchanging $\alpha$ and $\beta$, and this then gives us all equations that need to be satisfied for $T$ to be perfect.  Computing $TT^*$ is very easy and can be done without diagrams. To see this, simply compute $(\alpha+\beta)(\overline{\alpha} + \overline{\beta})$ and remember that closed loops yield a factor of $q$. The unit 2-tangle multiplied with any other tangle will yield the other tangle, thus we get the two equations
+\begin{align}\label{eq:perfect2Tangle equations1}
+\lvert \alpha \rvert^2 \neq 0 \qquad  \wedge\qquad 
+\alpha \overline{\beta} + \overline{\alpha}\beta + q\lvert \beta \rvert^2 \overset{!}{=}0
+\end{align}
+and consequently also
+\begin{align}\label{eq:perfect2Tangle equations2}
+\lvert \beta \rvert^2 \neq 0 \qquad  \wedge\qquad 
+\alpha \overline{\beta} + \overline{\alpha}\beta + q\lvert \alpha \rvert^2 \overset{!}{=}0
+\end{align}
+from the rotation. Necessarily then $\lvert \alpha \rvert = \lvert \beta \rvert$. 
+
+We remark that solution to these equations exist for $0<q\leq 2$, but we will not give explicit solutions now. They can be found in \textsf{Section \ref{section:EXAMPLES}}, along with other examples, in particular also ones obtained from the general constructions we will discuss later.
+
+\bigno These perfect Temperley-Lieb 2-tangles now give rise to a unitary representation of the braid group. Before we delve into this, let us quickly recap the braid group.
+
+\begin{definition}[Braid Group $B_n$]\label{def:braid group}\index{Braid Group}
+The \emph{braid group on $n$ strands} is the group with $n-1$ generators $\{\sigma_i\}_{i=1}^{n-1}$, subject to the relations
+\begin{alignat*}{2}
+\sigma_i\sigma_j &= \sigma_j\sigma_i &\text{for } i\neq j\pm 1\\
+\sigma_i\sigma_{i+1}\sigma_i &= \sigma_{i+1}\sigma_i\sigma_{i+1} \qquad & \text{for } 1\leq i \leq n-2 \tag{YB}
+\end{alignat*}
+YB are called the \emph{Yang-Baxter equations}.
+\end{definition}
+The braid group has its own visual representation. Let us look at $B_4$. Strands are really strands, i.e.\ straight lines, and the generators are
+\begin{align*}
+\sigma_1=\,
+\begin{tikzpicture}[scale=0.7, baseline=-6mm]
+	\braid[number of strands = 4] s_1;
+\end{tikzpicture}\, ,\quad
+\sigma_2=\,
+\begin{tikzpicture}[scale=0.7, baseline=-6mm]
+	\braid[number of strands = 4] s_2;
+\end{tikzpicture}
+\, ,\quad
+\sigma_3=\,
+\begin{tikzpicture}[scale=0.7, baseline=-6mm]
+	\braid[number of strands = 4] s_3;
+\end{tikzpicture}\, .
+\end{align*}
+Multiplication is, again, given by stacking. Clearly then $\sigma_1\sigma_3 = \sigma_3\sigma_1$. Dropping the last strand, the Yang-Baxter equation for the first two generators then translates to
+\begin{align*}
+\begin{tikzpicture}[scale=0.7, baseline = -15mm]
+	\braid[number of strands = 3] s_2 s_1 s_2;
+\end{tikzpicture}
+\, = \,
+\begin{tikzpicture}[scale=0.7, baseline = -15mm]
+	\braid[number of strands = 3] s_1 s_2 s_1;
+\end{tikzpicture}\, ,
+\end{align*}
+and this way of seeing it allows for a certain intuitive interpretation.
+
+\bigno But how exactly do we get a unitary representation of $B_n$ in $TL_n$ from perfect 2-tangles now? Fix some $n$, let $(T_i)_{i=1}^{n-1}$ be perfect 2-tangles with
+\begin{align*}
+T_i \equiv \alpha_i\cdot  \tikz[scale=0.5, baseline=-1mm]{\foreach \x in {0, 0.5} \draw (\x, -0.5) -- (\x, 0.5);}
+ \,+\beta_i\cdot \tikz[scale=0.5, baseline=-1mm]{\draw (0, 0.5) arc[start angle=-180, end angle=0, radius=2.5mm]; \draw (0, -0.5) arc[start angle=180, end angle=0, radius=2.5mm];}\,.
+\end{align*}
+We will now, disregarding the shading, view these as $n$ tangles via the prescription
+\begin{align*}
+T_i \overset{\cdot}{=} 1_{i-1} \tensor T_i \tensor 1_{n-i-1} =
+\tikz[scale=0.5, baseline=-1mm]{ 
+	\draw (0,-1.1) -- node[left] {\tiny$i-1$} (0,1.1); 
+	\node[draw] (T) at (1,0) {$T_i$};
+	\path 
+		($(T.north) + (0.2,0)$)	edge ($(T.north) + (0.2,0.5)$)
+		($(T.north) + (-0.2,0)$)	edge ($(T.north) + (-0.2,0.5)$)
+		($(T.south) + (0.2,0)$)	edge ($(T.south) + (0.2,-0.5)$)
+		($(T.south) + (-0.2,0)$)	edge ($(T.south) + (-0.2,-0.5)$);
+	\draw (2,-1.1) -- node[right] {\tiny$n-i-1$} (2,1.1); 
+	}
+\end{align*}
+The first property in the definition of the braid group, $T_i T_j = T_j T_i$ for $\lvert i - j \rvert \geq 2$, is obviously true, but what about the Yang-Baxter relation? There seems to be no quick justification, so we will have to do a few calculations. Firstly w.l.o.g.\ set $n=3$, and we thus only look at $T_1$ and $T_2$. Let us make the substitution $\alpha = \alpha_1$, $\beta = \beta_1$, $\gamma = \alpha_2$, and $\delta = \beta_2$.
+
+The Yang-Baxter equation is now
+\begin{align}\label{eq:YB with tangles}
+\begin{tikzpicture}[baseline = -2mm]
+	\node[draw] (T1) at (0,0) {$T_1$};
+	\node[draw] (T2O) at (0.5,1) {$T_2$};
+	\node[draw] (T2U) at (0.5,-1) {$T_2$};
+	\path 
+		($(T2O.south) + (-0.2,0)$) edge ($(T1.north) + (0.2,0)$)
+		($(T2O.south) + (0.2,0)$) edge ($(T2U.north) + (0.2,0)$)
+		($(T2U.north) + (-0.2,0)$) edge ($(T1.south) + (0.2,0)$);
+	\foreach \x in {0.2, -0.2} \draw ($(T2O.north) + (\x, 0)$) -- ($(T2O.north) + (\x, 0.3)$);
+	\foreach \x in {0.2, -0.2} \draw ($(T2U.south) + (\x, 0)$) -- ($(T2U.south) + (\x, -0.3)$);
+	\draw ($(T1.north) + (-0.2,0)$) -- ($(T1 |- T2O.north) + (-0.2, 0.3)$);
+	\draw ($(T1.south) + (-0.2,0)$) -- ($(T1 |- T2U.south) + (-0.2, -0.3)$);
+\end{tikzpicture}
+\, = \,
+\begin{tikzpicture}[baseline = -2mm]
+	\node[draw] (T1) at (0.5,0) {$T_2$};
+	\node[draw] (T2O) at (0,1) {$T_1$};
+	\node[draw] (T2U) at (0,-1) {$T_1$};
+	\path 
+		($(T2O.south) + (0.2,0)$) edge ($(T1.north) + (-0.2,0)$)
+		($(T2O.south) + (-0.2,0)$) edge ($(T2U.north) + (-0.2,0)$)
+		($(T2U.north) + (0.2,0)$) edge ($(T1.south) + (-0.2,0)$);
+	\foreach \x in {0.2, -0.2} \draw ($(T2O.north) + (\x, 0)$) -- ($(T2O.north) + (\x, 0.3)$);
+	\foreach \x in {0.2, -0.2} \draw ($(T2U.south) + (\x, 0)$) -- ($(T2U.south) + (\x, -0.3)$);
+	\draw ($(T1.north) + (0.2,0)$) -- ($(T1 |- T2O.north) + (0.2, 0.3)$);
+	\draw ($(T1.south) + (0.2,0)$) -- ($(T1 |- T2U.south) + (0.2, -0.3)$);
+\end{tikzpicture} \, ,
+\end{align}
+and a direct computation of the left hand side yields
+\begin{align*}
+\begin{pmatrix}
+\alpha\gamma^2 \\
+\gamma\delta\beta\\
+\gamma\delta\beta\\
+2\alpha\gamma\delta + q\alpha\delta^2 + \delta^2 \beta\\
+\gamma^2\beta
+\end{pmatrix},
+\end{align*}
+where the basis vectors are ordered like in \textsf{Example \ref{ex:TL3}}.
+
+Looking closely, we see that to obtain the right hand side we would have to do the exchanges $\alpha \leftrightarrow \gamma$, $\beta\leftrightarrow\delta$, as well as switching the fourth and fifth entry of the vector. 
+
+We subtract the right hand side from the left hand side and get a total of five equations to be satisfied, namely
+\begin{align*}
+\begin{pmatrix}
+\alpha\gamma^2  - \gamma \alpha^2\\
+\gamma\delta\beta - \alpha\beta\delta \\
+\gamma\delta\beta - \alpha\beta\delta \\
+2\alpha\gamma\delta + q\alpha\delta^2 + \delta^2 \beta - \alpha^2\delta\\
+\gamma^2\beta - 2\gamma\alpha\beta - q\gamma\beta^2 - \beta^2 \delta
+\end{pmatrix} 
+=
+0.
+\end{align*}
+Since all of the four numbers are unequal to zero, the first equation already tells us $\alpha = \gamma$, whence the next two equations follow. Substituting $\alpha$ for $\gamma$ in the last two equations leaves us with
+\begin{align*}
+\begin{pmatrix}
+\alpha^2\delta + q\alpha\delta^2 + \delta^2 \beta \\
+\alpha^2\beta +q\alpha\beta^2 +\beta^2 \delta
+\end{pmatrix}
+=0,
+\end{align*}
+we can then divide the first of these by $\delta$, the second by $\beta$, obtaining
+\begin{align*}
+\begin{pmatrix}
+\alpha^2 + q\alpha\delta + \delta \beta \\
+\alpha^2 +q\alpha\beta+\beta \delta
+\end{pmatrix}
+=0.
+\end{align*}
+But now subtract one from the other, and we get $q\alpha(\beta - \delta) \overset{!}{=}0$, hence $\beta = \delta$. So all in all, $T_1 = T_2$. That is, we can only find the braid group within this construction if we build all braidings from the same perfect tangle.
+
+This unitary representation of the braid group\footnote{It is unitary in the sense that if the generator gets mapped to the 2-tangle $T$, then its inverse will be mapped to $T^*$. Of course, this is only a proper representation if we either don't care about multiplicative factors, or if we assume $TT^*=\mathbf{1}_2$. In our setting we don't lose too much sleep over multiplicative factors: In Temperley-Lieb we can always normalize so that $TT^* = \mathbf{1}_2$.}
+enables us to apply braidlike operations to construct larger perfect tangles. The first of these procedures, which we will present in the next section, was suggested by Jones and proved by the author. The basic idea is interpreting a perfect 2-tangle $T$ as a braid, which means that multiplying $T$ with its adjoint (which is the horizontally mirrored braid) is really like `\emph{pulling the strings straight, so that there are two parallel strings}'.
+
+%\input{./../jones_notes/constructing.tex}
+
+\section{A Conjecture}
+Motivated by the results of the previous section we will here state a conjecture which, if true, basically asserts that there is a simple method of of obtaining infinitely many constructions of larger perfect tangles from smaller ones. This conjecture is split into multiple parts and stems from the same observation that gave rise to the construction discussed in the previous section.
+
+As a first example, consider the following tangle:
+\begin{align}\label{eq:HorizontalConstruction}
+T(\bullet, \bullet) \equiv \,
+\begin{tikzpicture}[scale=1.7, baseline=-1mm]
+%	\node[draw, blue] (A) at (-0.5,0) {$1$};
+%	\node[draw, red] (B) at (0.5,0) {$2$};
+%%
+%	\draw[blue] ($(A.north) + (0.05,0)$) .. controls +(up:1mm)  .. + (0.8,1);
+%	\draw[blue] ($(A.south) + (0.05,0)$) .. controls +(down:1mm)  .. + (0.8,-1);
+%	\draw[blue] ($(A.north) + (-0.05,0)$) .. controls +(up:1mm)  ..+ (0.4,1);
+%	\draw[blue] ($(A.south) + (-0.05,0)$) .. controls +(down:1mm)  ..+ (0.4,-1);	
+%%
+%	\draw[red] ($(B.north) + (0.05,0)$) --+ (0,1);
+%	\draw[red] ($(B.south) + (0.05,0)$) --+ (0,-1);
+%	\draw[line width=4pt,white] ($(B.north) + (-0.05,0)$) .. controls +(up:1mm)  .. ($(A.north) + (-0.05,1)$) ;
+%	\draw[red] ($(B.north) + (-0.05,0)$) .. controls +(up:1mm)  .. ($(A.north) + (-0.05,1)$) ;	\
+%	\draw[line width=4pt, white] ($(B.south) + (-0.05,-0)$) .. controls +(down:1mm)  .. ($(A.south) + (-0.05,-1)$) ;
+%	\draw[red] ($(B.south) + (-0.05,0)$) .. controls +(down:1mm)  .. ($(A.south) + (-0.05,-1)$) ;
+%	
+	\node[draw, black] (A) at (-0.5,0) {$1$};
+	\node[draw, black] (B) at (0.5,0) {$2$};
+%
+	\draw[black] ($(A.north) + (0.05,0)$) .. controls +(up:1mm)  .. + (0.8,1);
+	\draw[black] ($(A.south) + (0.05,0)$) .. controls +(down:1mm)  .. + (0.8,-1);
+	\draw[black] ($(A.north) + (-0.05,0)$) .. controls +(up:1mm)  ..+ (0.4,1);
+	\draw[black] ($(A.south) + (-0.05,0)$) .. controls +(down:1mm)  ..+ (0.4,-1);	
+%
+	\draw[black] ($(B.north) + (0.05,0)$) --+ (0,1);
+	\draw[black] ($(B.south) + (0.05,0)$) --+ (0,-1);
+	\draw[line width=4pt,white] ($(B.north) + (-0.05,0)$) .. controls +(up:1mm)  .. ($(A.north) + (-0.05,1)$) ;
+	\draw[black] ($(B.north) + (-0.05,0)$) .. controls +(up:1mm)  .. ($(A.north) + (-0.05,1)$) ;	\
+	\draw[line width=4pt, white] ($(B.south) + (-0.05,-0)$) .. controls +(down:1mm)  .. ($(A.south) + (-0.05,-1)$) ;
+	\draw[black] ($(B.south) + (-0.05,0)$) .. controls +(down:1mm)  .. ($(A.south) + (-0.05,-1)$) ;
+\end{tikzpicture}
+\end{align}
+We now assume that we insert perfect tangles into both boxes, and without loss call the the resulting tangle $T$. 
+
+Without making any reference to the braid group, i.e.\ without substituting the crossings with perfect tangles, we can still make the argument that $T\cdot T^*\propto \mathbf{1}_4$. This is easily seen by simply pulling the strings straight. Even more so, we can quickly see that this is actually true for all rotations, i.e.\ $\rot^l T \cdot \rot^{-l}T^* \propto \mathbf{1}_4$, by observing that the legs that are bent down and the legs that are bent up `belong' to the same internal box, for each rotation.
+
+Part of the conjecture is now that this yields a sort of \emph{horizontal construction} of perfect tangles, by the following rule.\footnote{Note that this is only for tangles with an even number of legs.}
+\begin{conjecture}
+From an $n$-tangle $T$ and an $m$-tangle $S$, both perfect, and a fixed perfect $2$-tangle $R$ one can build perfect $(n+m)$-tangles by following a few simple steps:
+\begin{itemize}
+\item[•] Look at $T\tensor S$, i.e.\ draw the tangles next to each other, as boxes in standard form, so that their respective `midpoints' lie on some imagined $x$-axis.
+\item[•] Braid the lower legs in any way you want, but subject to the requirement that strings coming from the same box don't cross. By lower legs we mean all $n+m$ legs in the negative $y$ portion of the plane.
+\item[•] Mirror the same braiding for the upper legs. \emph{Mirroring} is here supposed to mean the following, by example: If, counting from the left, the $r$th lower leg of $S$ is braided down to the $l$th position, $1\leq l \leq n+m$, then the $(m-r+1)$th upper leg must be braided to position $n+m-l+1$. This, in a sense, mimics \emph{reflection at a point}.
+\item[•] Replace all crossings by $R$.
+\end{itemize}
+If we call the braiding of the lower legs $\mathcal{L}$, then the tangle obtained via the above procedure shall be denoted by the symbol 
+\begin{align*}
+T \oslash_\mathcal{L} S
+\end{align*}
+\end{conjecture}
+To be fair, this is pretty confusing, so another example for $n=m=3$, given in \figref{fig:HorizontalConstruction}, should illuminate this. 
+\begin{figure}[!htp]\centering
+\begin{tikzpicture}[scale=2]
+	\node[draw, blue,line width=1pt] (A) at (-1,0) {$\phantom{\hat{ABC}^2}$};
+	\node[draw, red,line width=1pt] (B) at (1,0) {$\phantom{\hat{ABC}^2}$};
+
+	\draw[blue,line width=1pt] ($(A.north) - (0.2,0)$) .. controls +(up:1mm)  .. + (0.5, 1);
+	\draw[blue,line width=1pt] ($(A.north) - (0,0)$) .. controls +(up:1mm)  .. + (1.2, 1);
+	\draw[blue,line width=1pt] ($(A.north) + (0.2,0)$) .. controls +(up:1mm)  .. + (2, 1);
+	
+	\draw[blue,line width=1pt] ($(A.south) - (0.2,0)$) -- +(0, -1);
+	\draw[blue,line width=1pt] ($(A.south) - (0,0)$) .. controls +(down:1mm)  .. +(0.8, -1);
+	\draw[blue,line width=1pt] ($(A.south) + (0.2,0)$) .. controls +(down:1mm)  .. +(1.8, -1);
+	
+	\draw[line width=6pt, white] ($(B.north) + (0.2,0)$) .. controls +(up:1mm)  ..  + (-0.5, 1);
+	\draw[line width=6pt, white] ($(B.north) - (0,0)$) .. controls +(up:1mm)  .. + (-1.2, 1);
+	\draw[line width=6pt, white] ($(B.north) - (0.2,0)$) .. controls +(up:1mm)  .. + (-2, 1);	
+	\draw[red,line width=1pt] ($(B.north) + (0.2,0)$) .. controls +(up:1mm)  .. + (-0.5, 1);
+	\draw[red,line width=1pt] ($(B.north) - (0,0)$) .. controls +(up:1mm)  .. + (-1.2, 1);
+	\draw[red,line width=1pt] ($(B.north) - (0.2,0)$) .. controls +(up:1mm)  .. + (-2, 1);
+	
+	\draw[line width=6pt, white] ($(B.south) + (0.2,0)$) -- +(0, -1);
+	\draw[line width=6pt, white] ($(B.south) - (0,0)$) .. controls +(down:1mm)  .. +(-0.8, -1);
+	\draw[line width=6pt, white] ($(B.south) - (0.2,0)$) .. controls +(down:1mm)  .. +(-1.8, -1);
+	\draw[red,line width=1pt] ($(B.south) + (0.2,0)$) -- +(0, -1);
+	\draw[red,line width=1pt] ($(B.south) - (0,0)$) .. controls +(down:1mm)  .. +(-0.8, -1);
+	\draw[red,line width=1pt] ($(B.south) - (0.2,0)$) .. controls +(down:1mm)  .. +(-1.8, -1);
+\end{tikzpicture}
+\caption[Horizontal construction of larger perfect tangles]{Obtaining a perfect $6$-tangle from two perfect $3$-tangles via the horizontal construction. On the bottom we braided so that no two strings of the same color are next to another, and with red on the left. Consequently, on the top we need red on the right, and still the colors have to alternate. It is easy, albeit fairly tedious, to verify that this tangle is perfect, given that the 3-boxes and the crossings are perfect.}
+\label{fig:HorizontalConstruction}
+\end{figure}
+
+It should be noted that we did already prove a special of this conjecture, in the previous section. Fixing any perfect 2-tangle $T$ and with the trivial braidings, we see that if $A_2 = T = \mathbf{1}\oslash_\emptyset \mathbf{1}_1$, then $A_3 = \mathbf{1}_1\oslash_{\mathbf{1}_3} T$, and $A_n = \mathbf{1}_1\oslash_{\mathbf{1}_n} A_{n-1}$.
+
+\begin{conjecture}
+Let $T,S$ as in the previous conjecture. Fix a braiding $\mathcal{L}$. 
+
+Then it is not necessary to insert the same perfect $2$-tangle for each braiding, yet the conjecture is still valid. That is, if we enumerate all crossings in $T\oslash_\mathcal{L}S$ --- call the $i$th one $c_i$ --- then in $\rot^l \left(T\oslash_\mathcal{L}S\right) \cdot \rot^{-l}\left( T\oslash_\mathcal{L} S \right)^*$, the crossing $c_i$ in the first factor will always \emph{annihilate} with the obvious crossing $c_i^*$ in the second factor.
+
+In particular this works for any planar algebra where biunitaries exist.
+\end{conjecture}
+It is clear that this also works when writing multiple perfect tensors next to each other, because then the collection of perfect tangles is closed under $\oslash$. But associativity is, a priori. not satisfied. For example, a quick calculations shows that
+\begin{align*}
+\left( \mathbf{1}_2\oslash_\mathbf{1}  \mathbf{1}_2  \right) \oslash_ \mathbf{1}  \mathbf{1}_2 =  \mathbf{1}_2 \oslash_ \mathbf{1} \left(  \mathbf{1}_2 \oslash_ \mathbf{1}  \mathbf{1}_2 \right) \implies \text{a `higher Yang-Baxter relation' is satisfied}
+\end{align*}
+only if a `higher Yang-Baxter relation' is satisfied. This is always the case if perfect $2$-tangles realize the braid group, such as in Temperley-Lieb, but in general it is not satisfied.
+
+\bigno A proof by hand-waving is easy, and the validity of small examples is (more or less) quickly verified. But a \emph{good} proof should be verifiable by a computer program. Thus this remains a conjecture: So far, there is no (obvious) way of writing these constructions inductively so that a proof by induction easily follows.
+
+\bigno To emphasize the actual extent of this:
+\begin{center}
+\begin{minipage}{0.8\textwidth}
+If true, then this also holds for perfect tensors, and by simply fixing a 4-leg perfect tensor (these exist) to substitute the crossings with, we get an incredibly rich family of constructions for larger perfect tensors.
+\end{minipage}
+\end{center}
+
+\section{Some Explicit Examples}\label{section:EXAMPLES}
+In this section we will finally reveal a few of the perfect tangles found via the various means developed during this master's project, i.e.\ one found with computational aid, and those built from smaller ones using the approaches discussed in the previous sections.
+
+\subsection*{Keeping it Simple: \texorpdfstring{$TL_2$}{TL}}\addcontentsline{toc}{subsection}{Keeping it Simple: \texorpdfstring{$TL_2$}{TL}}
+Examples here only exist when $0< q \leq 2$, as will become apparent. We have already seen the equations that must be satisfied so that the 2-tangle 
+\begin{align*}
+T \equiv \alpha\,  \tikz[scale=0.5, baseline=-1mm]{\foreach \x in {0, 0.5} \draw (\x, -0.5) -- (\x, 0.5);}
+ \,+\beta\, \tikz[scale=0.5, baseline=-1mm]{\draw (0, 0.5) arc[start angle=-180, end angle=0, radius=2.5mm]; \draw (0, -0.5) arc[start angle=180, end angle=0, radius=2.5mm];}\,,
+\end{align*}
+is perfect, but let us restate them anyways:
+\begin{alignat*}{2}
+\lvert \alpha \rvert^2 &\neq 0, \qquad &
+\alpha \overline{\beta} + \overline{\alpha}\beta + q\lvert \beta \rvert^2 \overset{!}{=}0, \\
+\lvert \beta \rvert^2 &\neq 0,\qquad &
+\alpha \overline{\beta} + \overline{\alpha}\beta + q\lvert \alpha \rvert^2 \overset{!}{=}0.
+\end{alignat*}
+
+We normalize, i.e.\ $\alpha = 1$, and note that $\lvert \beta \rvert^2 =\lvert \alpha \rvert^2 = 1$. Thus $\beta = e^{i\theta}$. Reinserting this into, say, the second equation we obtain
+\begin{align*}
+e^{-i\theta} + e^{i\theta}  + q = 0,
+\end{align*}
+whence
+\begin{align*}
+\cos(\theta) = -\frac{q}{2}.
+\end{align*}
+Thus $\theta = \pm \arccos\left(-\frac{q}{2}\right)$, the $\pm$ coming from the cosine being even. This is well-defined since $0<q\leq 2$ by assumption. 
+
+For $n\geq 3$ let
+\begin{align*}
+f(q)\equiv 
+\begin{cases}
+\frac{n-1}{n}\pi & \text{if } q=2\cos \frac{\pi}{n} \\
+\pi &\text{if } q = 2 \\
+\arccos\left( -\frac{q}{2} \right) & \text{else}
+\end{cases}.
+\end{align*}
+The solutions are then given by
+\begin{align*}
+\alpha = 1, \qquad \beta = e^{\pm i f(q)}=
+\begin{cases}
+\exp\left( \pm i \frac{n-1}{n} \pi \right) & q = 2\cos \frac{\pi}{n}\\
+-1 & q = 2 \\
+-\frac{q}{2} \pm \frac{i}{2}\sqrt{4-q^2} & \text{else}
+\end{cases}.
+\end{align*}
+
+\subsection*{Building Larger Tangles}\addcontentsline{toc}{subsection}{Building Larger Tangles}
+
+We will now use the theorem from \textsf{Section \ref{sec:FirstGeneralConstruction}} to get a perfect tangle in $TL_3$ from one in $TL_2$ . In our discussion of the braid group and $TL_2$ we have seen what the 3-tangle obtained from the construction will look like, namely on the left hand side of \eqref{eq:YB with tangles}.
+
+We already computed that side, and now only need so substitute $\alpha, \gamma$ with 1, and $\beta, \delta$ with $\exp\left(\pm i f(q) \right)$, which yields
+\begin{align*}
+\begin{tikzpicture}[baseline = -2mm]
+	\node[draw] (T1) at (0,0) {$T_\pm$};
+	\node[draw] (T2O) at (0.5,1) {$T_\pm$};
+	\node[draw] (T2U) at (0.5,-1) {$T_\pm$};
+	\path 
+		($(T2O.south) + (-0.2,0)$) edge ($(T1.north) + (0.2,0)$)
+		($(T2O.south) + (0.2,0)$) edge ($(T2U.north) + (0.2,0)$)
+		($(T2U.north) + (-0.2,0)$) edge ($(T1.south) + (0.2,0)$);
+	\foreach \x in {0.2, -0.2} \draw ($(T2O.north) + (\x, 0)$) -- ($(T2O.north) + (\x, 0.3)$);
+	\foreach \x in {0.2, -0.2} \draw ($(T2U.south) + (\x, 0)$) -- ($(T2U.south) + (\x, -0.3)$);
+	\draw ($(T1.north) + (-0.2,0)$) -- ($(T1 |- T2O.north) + (-0.2, 0.3)$);
+	\draw ($(T1.south) + (-0.2,0)$) -- ($(T1 |- T2U.south) + (-0.2, -0.3)$);
+\end{tikzpicture}
+\, &= \,
+\begin{pmatrix}
+1 \\
+\beta^2\\
+\beta^2\\
+2\beta + q\beta^2 + \beta^3 \\
+\beta
+\end{pmatrix}\\
+&=e^{\pm i f(q)}
+\begin{pmatrix}
+e^{\mp i f(q)}\\
+e^{\pm i f(q)}\\
+e^{\pm f(q)}\\
+ 2 + qe^{\pm i f(q)} + e^{\pm 2i f(q)}\\
+1
+\end{pmatrix}\\
+&=
+e^{\pm i f(q)}\left\{
+	e^{\mp i f(q)}\,
+	\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+		\foreach \x in {-0.5,0,0.5}
+			\draw (\x, 0.8) -- (\x,-0.8);
+	\end{tikzpicture}
+	+ e^{\pm i f(q)}
+	\left(\,
+		\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+			\draw (0,0.8) .. controls (0,-0.5+0.8) and (0.5,-0.5+0.8) .. (0.5,0.8);
+			\draw (-0.5,-0.8) .. controls (-0.5,1-0.5-0.8) and (0,1-0.5-0.8) .. (0,-0.8);
+			\draw (-0.5,0.8) .. controls (-0.5,0) and (0.5,0) .. (0.5, -0.8);
+		\end{tikzpicture}
+		+
+		\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+			\draw (-0.5,0.8) .. controls (-0.5,-0.5+0.8) and (0,-0.5+0.8) .. (0,0.8);
+			\draw (-0,-0.8) .. controls (-0,1-0.5-0.8) and (0.5,1-0.5-0.8) .. (0.5,-0.8);
+			\draw (-0.5,-0.8) .. controls (-0.5,0) and (0.5,0) .. (0.5, 0.8);
+		\end{tikzpicture}\,
+	\right)
+\right.\\[1em]
+&\phantom{=}\left.+
+	\left( 2 + qe^{\pm i f(q)} + e^{\pm 2i f(q)}\right)
+	\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+		\draw (-0.5,0.8) -- (-0.5,-0.8);
+		\draw (0,0.8) .. controls (0,-0.5+0.8) and (0.5,-0.5+0.8) .. (0.5,0.8);
+		\draw (-0,-0.8) .. controls (-0,1-0.5-0.8) and (0.5,1-0.5-0.8) .. (0.5,-0.8);
+	\end{tikzpicture}
+	\,+ \,
+	\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+		\draw (0.5,0.8) -- (0.5,-0.8);
+		\draw (-0.5,0.8) .. controls (-0.5,-0.5+0.8) and (0,-0.5+0.8) .. (0,0.8);
+		\draw (-0.5,-0.8) .. controls (-0.5,1-0.5-0.8) and (0,1-0.5-0.8) .. (0,-0.8);
+	\end{tikzpicture}\,
+\right\}.
+\end{align*}
+Of course we may simply drop the phase factor in front, and the result will still be perfect.
+
+Verifying the perfectness of this by hand is a bit of a pain. Fortunately for both the author and the reader a verification can be found in the code, namely in the file \texttt{verification\_tl3.sage}
+
+\subsection*{Some Simple Solutions in \texorpdfstring{$TL_3$}{TL3}}\addcontentsline{toc}{subsection}{Some Simple Solutions in \texorpdfstring{$TL_3$}{TL3}}
+We are also interested in solutions that don't necessarily come from the construction. To make the problem a little less hard we can e.g.\ ask for self-adjoint solutions only. Because we are in Temperley-Lieb we normalize and it becomes even easier. In $TL_3$ we then quickly find that no solutions for $q > 2$ exist, so again we focus only $0<q\leq 2$.
+
+Solutions here will be given as the coefficients of the general self-adjoint element
+\begin{align*}\tikzexternaldisable
+\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+		\foreach \x in {-0.5,0,0.5}
+			\draw (\x, 0.8) -- (\x,-0.8);
+	\end{tikzpicture}
+	+ \alpha\,
+		\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+			\draw (0,0.8) .. controls (0,-0.5+0.8) and (0.5,-0.5+0.8) .. (0.5,0.8);
+			\draw (-0.5,-0.8) .. controls (-0.5,1-0.5-0.8) and (0,1-0.5-0.8) .. (0,-0.8);
+			\draw (-0.5,0.8) .. controls (-0.5,0) and (0.5,0) .. (0.5, -0.8);
+		\end{tikzpicture}
+	+\overline{\alpha}\,
+		\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+			\draw (-0.5,0.8) .. controls (-0.5,-0.5+0.8) and (0,-0.5+0.8) .. (0,0.8);
+			\draw (-0,-0.8) .. controls (-0,1-0.5-0.8) and (0.5,1-0.5-0.8) .. (0.5,-0.8);
+			\draw (-0.5,-0.8) .. controls (-0.5,0) and (0.5,0) .. (0.5, 0.8);
+		\end{tikzpicture}\,
++\beta\,
+	\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+		\draw (-0.5,0.8) -- (-0.5,-0.8);
+		\draw (0,0.8) .. controls (0,-0.5+0.8) and (0.5,-0.5+0.8) .. (0.5,0.8);
+		\draw (-0,-0.8) .. controls (-0,1-0.5-0.8) and (0.5,1-0.5-0.8) .. (0.5,-0.8);
+	\end{tikzpicture}
+	\,+ \,\gamma\,
+	\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+		\draw (0.5,0.8) -- (0.5,-0.8);
+		\draw (-0.5,0.8) .. controls (-0.5,-0.5+0.8) and (0,-0.5+0.8) .. (0,0.8);
+		\draw (-0.5,-0.8) .. controls (-0.5,1-0.5-0.8) and (0,1-0.5-0.8) .. (0,-0.8);
+	\end{tikzpicture}\,,
+\end{align*}
+where $\beta$ and $\gamma$ are necessarily real.
+
+For $q=2$, the only solution is given by
+\begin{align*}
+\alpha = 1,\qquad
+\beta= -1,\qquad
+\gamma = -1.
+\end{align*}
+If now $q=2\cos\frac{\pi}{n}$ for $n\geq 3$, then we define
+\begin{align*}
+f_{SA}(q) \equiv \frac{\pm \sqrt{4 - q^2} - 2}{q}.
+\end{align*}
+With this, the self-adjoint solutions are given by
+\begin{align*}
+\alpha = 1,\qquad
+\beta= f_{SA}(q),\qquad
+\gamma = \frac{1}{f_{SA}(q)}.
+\end{align*}
+Finally if $n=6$, that is $q=\sqrt{3}$, another solution given by
+\begin{align*}
+\alpha = 1,\qquad
+\beta= -q,\qquad
+\gamma = -q
+\end{align*}
+exists.
+
+Computations and verifications are in the file \texttt{selfadjoint\_tl3.sage}.
+
+\bigno
+Another simplification is to look for rotation invariant solutions. Clearly then $\alpha = 1$, and $\beta = \gamma$. In fact, we have already seen one solution above: If $q=2$, then the self-adjoint tangle is also clearly rotationally invariant.
+
+If $q=2\cos\frac{\pi}{n}$ for $n\geq 6$ then we have solutions described by
+\begin{align*}
+\beta = 
+-\frac{q}{q^2-2}
+\pm i
+\sqrt{-\frac{q^4-7 q^2+12}{\left(q^2-2\right)^2}}.
+\end{align*}
+These are in fact valid whenever $\sqrt{3}\leq q < 2$, and this is verified in the same file as the verifications of the self-adjoint solutions.
+
+\begin{remark}
+As an aside, we also found that rotation invariant perfect tangles in $TL_4$ would require $q<0$, and thus do not exist, according to our convention $q>0$.
+\end{remark}
+
+\section{Perfect Morphisms in Trivalent Categories}
+Of course, any perfect Temperley-Lieb tangle gives rise to a perfect morphism, by simply interpreting the TL diagrams as string diagrams. These morphisms always live in the hom-spaces $\mathcal{C}_{2n}$, and by definition do not include the trivalent vertex at all. 
+
+There are, fortunately, also perfect morphisms that are not so trivial and do include the trivalent vertex. Of course, one of those is the trivalent vertex itself. But we will here focus on perfect morphisms in $\mathcal{C}_4 = \mathrm{Hom}\left( 1, X^{\tensor 4} \right)$, because we know how then to construct other perfect morphisms in $\mathcal{C}_{n}$ for $n\geq 4$ even by \textsf{Theorem \ref{thm:general_existence}}. No obvious such construction for odd $n$ is known.
+\begin{remark}
+In fact, we cannot use braid heuristics to naively construct a perfect $2(n+m+1)$-morphism from a perfect $(2n+1)$-morphism $\rho$ and a perfect $(2m+1)$-morphism $\sigma$, the reason being
+\begin{align*}
+\ceil[\bigg]{\frac{2(n+m+1)}{2}} &= n+m +1 \\
+&<  n + 1 + m + 1\\
+&= \ceil[\bigg]{\frac{2n+1}{2}} + \ceil[\bigg]{\frac{2m+1}{2}}.
+\end{align*}
+This means that when braiding $\rho$ and $\sigma$, which are ``morphisms in disks'', we get a ``morphism in a box'' (i.e.\ with an even number of boundary points), say $\eta$. Checking whether $\eta$ is perfect will then (for some rotation) result in $\rho$ and its conjugate meeting at less than $n+1$ points. By assumption we cannot say anything about that situation. It is, in general, wrong to assume $\eta$ is perfect.
+
+An easier argument is that for an uneven number of legs it is not possible to always bent legs coming from the same tangle up and down at the same time.
+\end{remark}
+ 
+\bigno Calling the loop and triangle values $d$ and $t$, respectively, we restrict our attention to \emph{cubic categories}, i.e.\ trivalent categories with $\dim \mathcal{C}_4=4$ and such that the diagrams without internal faces give a basis for that hom-space. There is thus a relation for the square, to wit
+\begin{align*}
+\begin{tikzpicture}[scale = 0.7, baseline=-1mm]
+	\draw (-1,1)  -- (-0.7,0.7) -- (0.7,0.7) -- (1,1);
+	\draw (-1,-1)  -- (-0.7,-0.7) -- (0.7,-0.7) -- (1,-1);	
+	\draw (-0.7,0.7) -- (-0.7,-0.7);
+	\draw (0.7,0.7) -- (0.7,-0.7);	
+\end{tikzpicture}
+=
+A\cdot \left( \,
+	\begin{tikzpicture}[scale=0.7, baseline=-1mm]
+		\begin{scope}
+			\foreach \x in {0, 1} \draw (\x, -1) -- (\x, 1);
+		\end{scope}
+		\begin{scope}[shift={(2.2,0)}]
+			\node (beta) at (-0.5,0) {$+$};
+			\draw (0,1) arc[start angle=180, end angle=360, radius=5mm];
+			\draw (0,-1) arc[start angle=180, end angle=0, radius=5mm];
+		\end{scope}
+	\end{tikzpicture}
+\, \right)
++ B\cdot \left( \,
+	\begin{tikzpicture}[scale=0.7, baseline=-1mm]
+		\begin{scope}[shift={(0,0)}]
+			\draw (-0.8,1) -- (-0.4, 0) -- (0.4,0) -- (0.8,1);
+			\draw (-0.8,-1) -- (-0.4, 0) -- (0.4,0) -- (0.8,-1);
+		\end{scope}
+		\begin{scope}[shift={(2.2,0)}]
+			\node (delta) at (-1,0) {$+$};
+			\draw (0.7, 1) -- (0, 0.5) -- (-0.7, 1);
+			\draw (0.7, -1) -- (0, -0.5) -- (-0.7, -1);
+			\draw (0, 0.5) -- (0, -0.5);
+		\end{scope}
+	\end{tikzpicture}
+	\, \right),
+\end{align*}
+where $A = \frac{d t^2 + t^2 -1}{dt + d +t}$ and $B = \frac{-t^2 + t+1}{dt + d +t}$. 
+Consequently, it is no longer true that a morphism is perfect only if it has support on the identity.
+
+\bigno
+A general element in $\mathcal{C}_4$ will be of the form
+\begin{align*}
+T \equiv  \,
+\begin{tikzpicture}[scale=0.7, baseline=-1mm]
+	\begin{scope}
+		\node (alpha) at (-0.5,0) {$\alpha$};
+		\foreach \x in {0, 1} \draw (\x, -1) -- (\x, 1);
+	\end{scope}
+	\begin{scope}[shift={(2.2,0)}]
+		\node (beta) at (-0.5,0) {$+\,\beta$};
+		\draw (0,1) arc[start angle=180, end angle=360, radius=5mm];
+		\draw (0,-1) arc[start angle=180, end angle=0, radius=5mm];
+	\end{scope}\, 
+	\begin{scope}[shift={(5.2,0)}]
+		\node (gamma) at (-1.4,0) {$+\,\gamma$};
+		\draw (-0.8,1) -- (-0.4, 0) -- (0.4,0) -- (0.8,1);
+		\draw (-0.8,-1) -- (-0.4, 0) -- (0.4,0) -- (0.8,-1);
+	\end{scope}
+	\begin{scope}[shift={(7.5,0)}]
+		\node (delta) at (-1,0) {$+\,\delta$};
+		\draw (0.7, 1) -- (0, 0.5) -- (-0.7, 1);
+		\draw (0.7, -1) -- (0, -0.5) -- (-0.7, -1);
+		\draw (0, 0.5) -- (0, -0.5);
+	\end{scope}
+\end{tikzpicture}
+,
+\end{align*}
+and we will give solutions only in terms of coefficients. Clearly $T$ is invariant under rotation by $\pi$, and taking the adjoint will only result in conjugation of the coefficients. One rotation simply exchanges $\alpha$ and $\beta$, and $\gamma$ and $\delta$. Using the notation
+\begin{align*}
+(\alpha, \beta) \equiv \alpha\overline{\beta} + \overline{\alpha}\beta = 2 \left( \Re{\alpha}\Re{\beta} + \Im{\alpha}\Im{\beta}\right) \in\mathbb{R},
+\end{align*}
+one quickly finds the equations that have to be satisfied for a perfect morphism, by calculating $T\cdot T^*$ and $\rot T \cdot \rot\inv T^*$. The 8 equations are
+\begin{align*}
+\tag{$\mathcal{C}_4.1$}\lvert \alpha \rvert^2 + A \lvert \gamma \rvert^2 & \neq 0 \\
+\tag{$\mathcal{C}_4.2$}\lvert \beta \rvert^2 + A \lvert \delta \rvert^2 & \neq 0 \\
+\tag{$\mathcal{C}_4.3$}d\lvert \beta \rvert^2 + (\alpha+\gamma, \beta)+ A \lvert \gamma \rvert^2 & = 0 \\
+\tag{$\mathcal{C}_4.4$}d\lvert \alpha \rvert^2 + (\beta+\delta, \alpha)+ A \lvert \delta \rvert^2 & = 0\\
+\tag{$\mathcal{C}_4.1^\prime$}(\alpha,\gamma) + B\lvert \gamma \rvert^2 & = 0 \\
+\tag{$\mathcal{C}_4.2^\prime$}(\beta,\delta) + B\lvert \delta \rvert^2 & = 0 \\
+\tag{$\mathcal{C}_4.3^\prime$}\lvert \delta \rvert^2 + (\alpha+t \gamma, \delta) + B\lvert \gamma \rvert^2 & = 0 \\
+\tag{$\mathcal{C}_4.4^\prime$}\lvert \gamma \rvert^2 + (\beta+t \delta, \gamma) + B\lvert \delta \rvert^2 & = 0 
+\end{align*}
+These equations are real, and, since $(\alpha,\beta) = (\overline{\alpha},\overline{\beta})$, indeed cover all rotations.
+
+\subsection*{Kuperberg's Spider \texorpdfstring{$G_2$}{G2}}\addcontentsline{toc}{subsection}{Kuperberg's Spider \texorpdfstring{$G_2$}{G2}}
+Explicit examples were found in the cubic category $\left( G_2 \right)_q$, as defined in \cite[Def.\ 5.22]{Morrison2017Trivalent}, at $q$ a primitive $8th$ root of unity. 
+In the $\left( G_2 \right)_q$-categories,
+\begin{align*}
+d = q^{10}+ q^8+ q^2+ 1 + q^{-2}+ q^{-8}+ q^{-10}
+\end{align*}
+and
+\begin{align*}
+t = - \frac{q^2 - 1 + q^{-2}}{q^4 + q^{-4}}.
+\end{align*}
+Due to restricted computational power, a general solution for arbitrary roots of unity $q$ solving the defining polynomial 
+\begin{align*}
+P_{G_2} = d^2t^5+ 2dt^5 - 4dt^4 - dt^3+ 6dt^2+ 4dt + d + t^5 - 4t^4+ t^3+ 7t^2 - 2 
+\end{align*}
+could not be produced so far. 
+
+\bigno If $q$ is an $8th$ root of unity, then one computes 
+\begin{align*}
+d = 3,\quad t= -\frac{1}{2}, \quad A = \frac{1}{4}, \quad B = 0.
+\end{align*}
+
+Using \emph{Mathematica}'s \texttt{Reduce}-function we can find solutions.\footnote{cf.\ the file \texttt{mm\_square.nb} in the code} If $\alpha \neq 0$ we may normalize to $\alpha = 1$. If, on the other hand, $\alpha = 0$, one sees from Equation $(\mathcal{C}_4.4)$ that $\delta = 0$ is required, and without loss we normalize so that $\beta = 1$.
+
+The two simplest solutions are then given by 
+\begin{align*}
+&
+\alpha = 1, \qquad 
+\beta = 0, \qquad
+\gamma = 0, \qquad
+\delta = -2 \\
+\text{or}\quad&
+\alpha = 0, \qquad 
+\beta = 1, \qquad
+\gamma = -2, \qquad
+\delta = 0.
+\end{align*}
+Unsurprisingly, these two are rotations of one another. The first one is actually just the $r=0$ case of the simple solution
+\begin{align*}
+\alpha = 1, \qquad \beta = i r, \qquad \gamma = -2 i r ,\qquad \delta = -2,
+\end{align*}
+valid for $r\in\mathbb{R}$, and the second is the only solution with $\alpha = 0$, $\beta=1$.
+
+Finally, for $r \in (-4,0)$, we get a last set of solutions
+\begin{align*}
+\alpha = 1, \qquad 
+\beta = r \pm i (r - 1) f(r) ,\qquad
+\gamma = \pm i 10  f(r) ,\quad
+\delta = \mp i \frac{2\beta}{f(r)},
+\end{align*}
+where $f:(-4,0) \rightarrow \mathbb{R}_{>0}$ is the injective function defined by
+\begin{align*}
+f(r)\equiv \sqrt{\frac{-r}{4+r}}.
+\end{align*}
+This is in the file \texttt{mm\_square.nb}.
+
+\subsection*{In the Haagerup Fusion Category \texorpdfstring{$H3$}{H3}}\addcontentsline{toc}{subsection}{In the Haagerup Fusion Category \texorpdfstring{$H3$}{H3}}
+By convention, the $H3$ category is the one with loop and triangle values
+\begin{align*}
+d = \frac{3 +\sqrt{13}}{2},\qquad t = \frac{2-\sqrt{13}}{3}.
+\end{align*}
+It is cubic, so we employ the equations we had before to find solutions.
+
+We quickly find that a perfect morphism needs to be supported on the identity. Two solutions are then given by
+\begin{align*}
+\alpha &= \frac{4}{ \sqrt{3}}   \\[1em]
+\beta &=  \frac{d}{\sqrt{3}} \mp i \sqrt{5 - d} \\[1em]
+\gamma &= - 2 \sqrt{3}  (d + 1) \pm i2 \sqrt{5d + 2} \\[1em]
+\delta &= - 3 \sqrt{3} d \pm i \sqrt{5 - d},
+\end{align*}
+where we did not normalize to $\alpha = 1$ for readability reasons. This result is verified in the file \texttt{haaagerup.nb}.

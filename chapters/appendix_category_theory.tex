@@ -1,0 +1,232 @@
+\label{Appendix:Categories}
+Even though most of this thesis can be understood without any knowledge of category theory, we will in this chapter present the basic notions and a few facts. Knowing about categories helps in seeing the grand scheme of things, i.e.\ the interplay of superficially different yet deeply connected concepts.
+
+In this work we only ever need small categories, hence our usage of \emph{sets} rather than \emph{classes} in the following definition.
+\begin{definition}[Category]\index{Category} A \emph{category} $\mathbf{C}$ consists of a set $\mathsf{obj}(\mathbf{C})$ of \emph{objects}, and a set $\mathsf{mor}(\mathbf{C})$ of \emph{morphisms}, subject to the following axioms. To each morphism we assign two objects called the \emph{source} and the \emph{target}, respectively. If $f\in\mathsf{mor}(\catname{C})$ with source $A$ and target $B$, this is denoted $A\stackrel{f}{\to} B$ or $f:A\rightarrow B$.
+
+The set of morphisms is required to be closed under a notion of \emph{composition}, denoted $\circ$: If $A\morphism{f}B$ and $B\morphism{g}C$, then there exists a unique morphism $A\morphism{m}B$ s.t.\ $m = g\circ f$. In the language of diagrams used in category theory this uniqueness assertion is commonly denoted by a dashed or dotted arrow in a commutative diagram:
+
+\begin{center}
+\begin{tikzcd}
+A \ar[r,"f"] \ar[dashrightarrow, swap]{dr}{m}& B \ar[d,  "g"]\\
+  & C
+\end{tikzcd}
+\end{center}
+Composition of morphisms must be associative, i.e.\ $h \circ \left( g \circ f\right) = \left( h\circ g \right)\circ f$. This associativity requirement allows us to drop the parentheses and we may just write $h\circ g\circ f$. 
+
+For each object $A$ there is a unique morphism $\id_A$, the identity, satisfying $\id_A\circ f = f$, $g\circ \id_A = g$, for each $f$ with target $A$ and each $g$ with source $A$. This morphism will occasionally also be written $1_A$.
+\end{definition}
+
+The set of all morphisms from an object $A$ to an object $B$ is denoted by $\mathbf{C}[A,B]$, or $\mathrm{Hom}_\mathbf{C}\left( A,B \right)$, where $\mathrm{Hom}$ stands for \emph{hom-set}. Various other notations are also used in the literature.
+
+\bigno
+The concept of a category his easily understood by looking at a few examples. The easiest that comes to mind is the category $\mathbf{Set}$, where the objects are just regular old sets, and the morphisms are functions. The composition of morphisms is thus simply the composition of functions, and the identity morphism on each set is the identity function.  It is then elementary to check the category axioms.
+
+Another often-cited example is this: a group can be seen as a category with one object --- say, $\star$ ---  where every morphism is invertible. The group operation is composition of morphisms, and \emph{invertibility} here means that for every morphism $g$ there exists a unique morphism $g\inv$ that is the two-sided inverse of $g$, i.e.\ $g\circ g\inv = \id_\star = g\inv\circ g$. This is also precisely the definition of \emph{isomorphism}: A morphism which has a two-sided inverse.
+
+Two special kinds of morphism need to be mentioned.  Firstly, $f$ is called \emph{an epimorphism} (or \emph{epic)} iff
+\begin{align*}
+g_1 \circ f = g_2 \circ f \implies g_1 = g_2,
+\end{align*}
+and $f$ is called \emph{a monomorphism} (or \emph{monic}), often denoted $X\hookrightarrow Y$, iff
+\begin{align*}
+f\circ g_1 = f\circ g_2 \implies g_1 = g_2.
+\end{align*}
+These in a sense generalize the notions of \emph{surjective} and \emph{injective}, respectively. An isomorphism is in particular always both monic and epic.
+
+\bigno
+In the two examples above morphisms were still functions. But this need not be the case. Suppose, for example, that $S$ is a poset and let $x,y,z\in S$. We interpret $S$ as a category and define hom-sets by $S[x,y]\equiv\{(x,y) \}$ if $x \leq y$, $\emptyset$ otherwise. Then every hom-set has at most one element and composition $(y,z)\circ(x,y) = (x,z)$ is correctly defined.
+
+From categories $\catname{C}, \catname{D}$ multiple new categories can be built. The \emph{opposite category} $\catname{C}^{op}$, for example, has the same objects but for each morphism source and target are exchanged. Or one may define a \emph{product category} $\catname{C}\times\catname{D}$, where the objects are the elements of $\mathsf{obj}(\catname{C})\times\mathsf{obj}(\catname{D})$, and morphisms are the elements of $\mathsf{mor}(\catname{C})\times\mathsf{mor}(\catname{D})$. Composition is inherited from the original categories, i.e.\ $(f_2,g_2)\circ(f_1,g_1) = (f_2\circ f_1, g_2\circ g_1)$.
+
+\index{Category!linear}
+A special property is \emph{linearity}: a category $\catname{C}$ is called \emph{$\mathbb{F}$-linear} if for all objects $X,Y$ the hom-set $\catname{C}[X,Y]$ is a (finite-dimensional) vector space over the field $\mathbb{F}$.
+
+Some categories possess \index{Object!initial}\index{Object!terminal}\emph{initial} (\emph{terminal}) objects. An initial (terminal) object $A$ in $\mathbf{C}$ is one where for all objects $B$ the hom-set $\mathbf{C}[A,B]$ ($\mathbf{C}[B,A]$) consists of only one element. An object that is both initial and terminal is referred to as a \emph{zero object}. All of these are defined up to isomorphism. As an example, $\catname{Set}$ possesses no zero object, but the empty set serves as initial object, and every singleton is terminal.
+
+If a category does have a zero object $0$, then an object $X$ is called \emph{simple} if the only objects that have monomorphisms into $X$ are $0$ and $X$ itself.
+
+\bigno
+
+\bigno
+An elementary concept is that of \emph{functors}, which may be viewed as morphisms between categories.
+
+\begin{definition}[Functor]{\index{Functor}}
+Let $\catname{C},\catname{D}$ be categories. A \emph{functor} $F:\catname{C}\rightarrow \catname{D}$ assigns to each object (morphism) in $\catname{C}$ an object (morphism) in $\catname{D}$ s.t.\ $F\id_A = \id_{FA}$, and either
+\begin{itemize}
+\item[•]$FA\morphism{Ff} FB$ or
+\item[•]$FB\morphism{Ff} FA$,
+\end{itemize}
+ for $f\in\catname{C}[A,B]$.
+In the former case $F$ is called \emph{covariant}, in the latter \emph{contravariant}. A covariant functor respects composition,
+\begin{align*}
+F(g\circ f) = Fg\circ Ff,
+\end{align*}
+while a contravariant one reverses it,
+\begin{align*}
+F(g\circ f) = Ff\circ Fg.
+\end{align*}
+\end{definition}
+Functors are ubiquitous. One extremely important example is the so-called \emph{hom-functor}, which exists in both flavors, co- and contravariant.
+
+\begin{example}[Hom-functor]\index{Functor!Hom-Functor}
+Let $\catname{C}$ be any small category, and fix an object $X$. The covariant hom-functor $\catname{C}[X,-]:\catname{C}\rightarrow \catname{Set}$ sends each object $A$ to the hom-set $\catname{C}[X,A]$, and each morphism $f\in\catname{C}[A,B]$ gets sent to the function
+\begin{align*}
+\catname{C}[X,f]:\catname{C}[X,A] &\rightarrow \catname{C}[X,B],\\
+l &\mapsto f\circ l
+\end{align*}
+The associativity of function composition then shows the covariance.
+
+One analogously defines the contravariant hom-functor $\catname{C}[-,X]$.
+\end{example}
+Of course there are also easier examples. The trivial functor from any category to the category with one object and one morphism, operating in an obvious way; or the identity functor $\mathbf{1}$, an endofunctor (a functor from a category to itself), sending each object and each morphism to itself.
+
+\bigno
+Observing the existence of \emph{natural transformations} was crucial in leading Eilenberg and Mac Lane $\left( \cite{eilenberg1945general} \right)$ to starting this branch of mathematics. These entities at the very heart of category theory can be regarded as morphisms between functors. The following definition makes this precise.
+
+\begin{definition}[Natural Transformation]\index{Natural Transformation}
+Let $F,G:\catname{C}\rightarrow\catname{D}$ be functors. A \emph{natural transformation} $\eta$ from $F$ to $G$, written $\eta:F\Rightarrow G$, is a family of morphisms $(\eta_X)_{X\in \catname{C}}$, $FX\morphism{\eta_X} GX$, indexed by objects of $\catname{C}$. The morphism $\eta_X$ is called the \emph{component at $X$}, and the components are required to make the following diagram commute, for all $f\in \catname{C}[X,Y]$.
+
+\begin{figure}[!htp]\centering
+\begin{tikzcd}
+FX \ar[d,swap,"Ff"] \ar[r,"\eta_X"] & GX \ar[d, "Gf"]\\
+FY \ar[r,"\eta_Y"] & GY
+\end{tikzcd}
+\end{figure}
+In words: $Gf\circ\eta_X = \eta_Y \circ Ff$. In this way a natural transformation relates two functors. If all $\eta_X$ are isomorphisms, $\eta$ is called a \emph{natural isomorphism}.
+\end{definition}
+Composition of natural transformation is defined component-wise, and the collection of all functors from $\catname{C}$ to $\catname{D}$, with natural transformations as morphisms, then forms the \emph{functor category} $\catname{D}^\catname{C}$ or $[\catname{C},\catname{D}]$.
+
+\bigno Now that we have all the basic gadgetry at our disposal we can introduce a categorical version of the \emph{tensor product}: a \emph{monoidal structure}. All categories in this thesis possess one of those.
+
+\begin{definition}[Monoidal Category]\index{Category!monoidal}
+A category $\catname{C}$ equipped with a \emph{monoidal structure} is called a \emph{monoidal category}. The monoidal structure consists of the \emph{monoidal unit} $\mathbf{I}$, a functor $\tensor:\catname{C}\times\catname{C}\rightarrow\catname{C}$, usually written as an infix, and three natural isomorphisms satisfying certain so-called \emph{coherence conditions}. The isomorphisms are
+\begin{itemize}
+\item[•] The \emph{associator} $\alpha: \tensor \circ \left(\tensor\times \mathbf{1}\right) \Rightarrow \tensor \circ \left(\mathbf{1}\times \tensor\right)$ with components $\alpha_{A,B,C}:(A\tensor B)\tensor C\rightarrow A\tensor\left( B\tensor C \right)$.
+\item[•] The \emph{right unitor} $\rho: -\tensor\mathbf{I}\Rightarrow \mathbf{1}$ with components $\rho_A:A\tensor \mathbf{I}\rightarrow A$.
+\item[•] The \emph{left unitor} $\lambda: \mathbf{I}\tensor - \Rightarrow \mathbf{1}$ with components $\lambda_A: \mathbf{I}\tensor A\rightarrow A$.
+\end{itemize}
+The coherence conditions are usually given in the form of diagrams. The \emph{associativity coherence}, also known as the \emph{pentagon axiom}, is:
+\begin{center}
+\tikzsetnextfilename{pentagon_axiom}
+\begin{tikzpicture}[commutative diagrams/every diagram]
+\node (P0) at (90:2.8cm) {$\left( \left( A\tensor B \right) \tensor C \right) \tensor D $};
+\node (P1) at (90+1*72:2.5cm) {$\left( A\tensor \left( B\tensor C \right) \right)\tensor D$};
+\node (P2) at (90+2*72:2.5cm) {\makebox[7ex][r]{$A\tensor\left(\left( B\tensor C \right) \tensor D \right)$}};
+\node (P3) at (90+3*72:2.5cm) {\makebox[5ex][l]{$A\tensor\left( B\tensor \left( C\tensor D \right) \right)$}};
+\node (P4) at (90+4*72:2.5cm) {$\left( A\tensor B \right)\tensor\left( C\tensor D \right)$};
+
+\path[commutative diagrams/.cd, every arrow, every label]
+	(P0) edge node[swap] {$\alpha_{A, B,C}\tensor 1_D$} (P1)
+	(P1) edge node[swap] {$\alpha_{A,B\tensor C, D}$} (P2)
+	(P2) edge node {$1_A\tensor \alpha_{B,C,D}$} (P3)
+	(P0) edge node {$\alpha_{A\tensor B, C, D}$} (P4)
+	(P4) edge node {$\alpha_{A,B,C\tensor D}$} (P3);
+\end{tikzpicture}
+\end{center}
+The \emph{triangle axiom} is
+\begin{center}
+	\begin{tikzcd}
+		\left( A\tensor \mathbf{I} \right)\tensor B \ar[swap, ddr, "\rho_A\tensor 1_B"] \ar[r, "\alpha_{A,\mathbf{I},B}"] & A\tensor\left( \mathbf{I}\tensor B \right)
+		\ar[dd, "1_A\tensor \lambda_B"]		
+		\\ & \\
+		 & A\tensor B
+	\end{tikzcd}
+\end{center}
+\end{definition}
+The two main axioms in this definition give rise to Mac Lane's \emph{coherence theorem} for monoidal categories \cite[Section VII.2]{maclane1998categories}, which tells us that in a monoidal category every diagram consisting of only associators and unitors commutes. In turn we may drop the parentheses in monoidal products of objects, since all ways of bracketing are isomorphic \cite[Theorem 2.9.2]{etingof2015tensor}. 
+
+We will also only be interested in strict monoidal categories, which means that the associator and both unitors  are taken to be the identity natural transformation, i.e.\ all components are identity morphisms.
+
+\bigno
+Monoidal categories are also called \emph{tensor categories}, a name coming from the prototypical example: $\catname{Vect}_\mathbb{F}$, the category of vector spaces over $\mathbb{F}$, where the monoidal product is just your usual tensor product, and the field itself serves as the monoidal unit. The morphisms in this category are linear maps between vector spaces, so $\catname{Vect}_\mathbb{F}$ is also an example of a linear category.
+
+\bigno Given a monoidal category, we may define \emph{dual objects}, whence a whole variety of new terminology emerges.
+
+\begin{definition}\index{Object!dual}\index{Category!rigid}\index{Category!pivotal}
+\begin{itemize}
+\item[\textsf{(i)}] A monoidal category is called \emph{symmetric} if for all objects $X,Y$ there exists an isomorphism $s_{XY}:X\tensor Y \rightarrow Y\tensor X$, natural in $X,Y$, such that
+\[s_{YX}\inv = s_{XY}^{\phantom{-1}}\]
+and such that an obvious associativity coherence diagram between $(X\tensor Y)\tensor Z$ and $Y\tensor (Z\tensor X)$ commutes. \footnote{The parentheses were still written here to clarify how the associator would come into play if the category were not strict.}
+\item[\textsf{(ii)}] Let $\catname{C}$ be a monoidal category. Let $X\in\mathsf{obj}(\catname{C})$. If there exists an object $X^*$ together with two morphisms
+\begin{align*}
+\eta:\mathbf{1} \rightarrow X\tensor X^*
+\end{align*}
+and 
+\begin{align*}
+\epsilon:X^*\tensor X \rightarrow \mathbf{1},
+\end{align*}
+such that both diagrams in Figure \ref{fig:ev_coev_triangle} commute, then we say that $X$ has a \emph{left dual}, namely $X^*$. $\epsilon$ is called the \emph{evaluation}, while $\eta$ is the \emph{coevaluation}.
+\begin{figure}[!htp]\centering
+\begin{tikzcd}
+X \ar[dr,swap,"1_X"]  \ar[r, "\eta\tensor 1_X"] & X\tensor X^*\tensor X  \ar[d,"1_X\tensor \epsilon"]\\
+& X
+\end{tikzcd}~~
+and~~
+\begin{tikzcd}
+X^* \ar[dr,swap,"1_{X^*}"]  \ar[r, "1_{X^*}\tensor \eta"] &X^*\tensor X\tensor X^*  \ar[d,"\epsilon\tensor1_X"]\\
+& X^*
+\end{tikzcd}
+\caption{The axioms for the evaluation and the coevalution}\label{fig:ev_coev_triangle}
+\end{figure}
+
+Right duals ${}^*X$ are defined similarly. Using string diagrams (read from bottom to top) the evaluation and the coevaluation can be drawn as caps and cups, respectively. An object is \emph{self-dual} if $X\cong X^*$.
+
+\item[\textsf{(iii)}] A monoidal category is called \emph{rigid} if every object has duals on both sides. Taking left (right) duals then becomes a contravariant functor, with \emph{dualization} of morphism given by
+\begin{align*}
+&\left( X\morphism{f}Y \right)^*
+=\, Y^*\morphism{f^*}X^*
+\\
+&~~\equiv~  Y^* \morphism{ 1_{Y^*} \tensor \eta_X} Y^* \tensor X\tensor X^*  \morphism{ 1_{Y^*}\tensor f\tensor 1_{X^*}} Y^*\tensor Y \tensor X^* \morphism{\epsilon_Y \tensor 1_{X^*}} X^*.
+\end{align*}
+In the language of string diagrams this is just rotating the morphism by $180^\circ$ \cite[section 4.2]{wang2010topological}.
+\item[\textsf{(iv)}] A rigid category is called \emph{pivotal} if for each object $X$ we get an isomorphism $\phi_X:X \rightarrow (X^*)^*$ natural in $X$ and commuting with $\tensor$ in the obvious sense. The morphisms $\phi$ are called the \emph{pivotal structure}.
+\end{itemize}
+\end{definition}
+
+Categories with duals admit a nice graphical calculus, called \emph{strings diagrams}, rigorously proved by \cite{joyal1991geometry} first, which we are only going to graze very lightly. For a full survey, see either the seminal paper (which is extremely technical), or the excellent paper \cite{selinger2010survey}.
+
+In essence, a string diagram depicts a morphism $f:X\rightarrow Y$ as a box labelled $f$ with two strings attached, one labelled $X$ and one labelled $Y$, drawn `from bottom to top'.
+Tensor product is juxtaposition of both strings and morphisms.  The monoidal unit is not depicted, and identity morphism on $X$ is just the string labelled $X$. Finally, if $X$ has a (left) dual, then the evaluation and coevaluation maps are drawn as caps and cups, respectively. That is
+\begin{align*}
+\epsilon_X \doteq \,
+\begin{tikzpicture}[scale=0.7,baseline=1mm]
+	\draw (0,0)node[left]{$X^*$} arc[start angle=180, end angle=0, radius=1cm] node[right]{$X$};
+\end{tikzpicture}\, , \qquad
+\eta_X \doteq \,
+\begin{tikzpicture}[scale=0.7,baseline=-2mm]
+	\draw (0,0)node[left]{$X$} arc[start angle=180, end angle=360, radius=1cm] node[right]{$X^*$};
+\end{tikzpicture}\,.
+\end{align*}
+This makes clear why we also speak of \emph{taking duals} as \emph{rotation by $180^\circ$}.
+
+\bigno
+In a category with pivotal structure $\phi$, which we from now on assume to be trivial, we can then define a notion of \emph{left} and \emph{right trace} for a morphism $f:X\rightarrow X$ by setting
+\tikzexternaldisable
+\begin{align*}
+\mathrm{tr}_l(f)&\equiv\,
+\begin{tikzpicture}[scale=0.5, baseline=-1mm]
+	\node[draw] (f)  at (0,0) {$f$};
+%
+	\draw (f.north) arc[start angle=0, end angle=180, radius=5mm] -- 
+		 ($(f.south) + (-1,0)$) arc[start angle=180, end angle=360, radius=5mm];
+\end{tikzpicture}\\
+&= 1 
+\morphism{\eta_{X^*}} X^*\tensor X^{**} = X^*\tensor X
+\morphism{1_{X^*}\tensor f} X^*\tensor X
+\morphism{\epsilon_X} 1
+\end{align*}
+and
+\begin{align*}
+\mathrm{tr}_r(f)&\equiv\,
+\begin{tikzpicture}[scale=0.5, baseline=-1mm]
+	\node[draw] (f)  at (0,0) {$f$};
+%
+	\draw (f.north) arc[start angle=180, end angle=0, radius=5mm] -- 
+		 ($(f.south) + (1,0)$) arc[start angle=0, end angle=-180, radius=5mm];
+\end{tikzpicture}\,.
+\end{align*}
+
+Other sources, e.g.\ the \emph{nLab} entry for ``trace''\footnote{\url{https://ncatlab.org/nlab/revision/trace/25}}, define it via the symmetricity isomorphism $s$, but in the scope of this thesis $s$ will be the identity as well, hence both definitions are even formally equivalent.
+
+In general there is no reason for the left and the right trace  to coincide, but if $\mathrm{tr}_r = \mathrm{tr}_l$, then the category is called \emph{spherical}, the name coming from the fact that one trace diagram can be transformed into the other by diffeomorphism on the 2-sphere.

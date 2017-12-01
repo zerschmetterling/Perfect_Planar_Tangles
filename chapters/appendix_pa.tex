@@ -1,0 +1,635 @@
+This appendix is dedicated to a definition of \emph{planar tangles} and \emph{planar algebras} along the lines of \cite{KODIYALAM:OnPlanarAlgebras}. It was originally intended as the actual definition in the body of this document, but it quickly turned out to have a few obstructions --- these come mainly from the seemingly unnecessary forced rigor. But the author decided to keep it, because that same rigor might also help in clarifying possible misconceptions.
+
+%\section{Planar Tangles}
+%In this section we will define the basic objects called \emph{planar tangles}, following and almost paraphrasing the definition given in \cite{KODIYALAM:OnPlanarAlgebras}. We will start by defining the so-called \emph{shaded} version first, but we will later also discuss \emph{unshaded planar tangles}, as these help in understanding \emph{trivalent categories} a bit better, which we define in the last section of this chapter.
+%
+%\bigno
+%Planar tangles, as described in the following definition, form \textbf{PROBABLY} a colored operad $\mathcal{P}$. This will \textbf{HOPEFULLY} be explained later in this chapter, but for now, it shall serve as a justification for 
+
+\bigno So let us jump right into it. The set of \emph{colors} is different than before, namely
+\begin{align*}\index{Colors}
+\mathfrak{Col}=\mathbb{N}\cup \left\{0_+,0_-\right\}
+\end{align*}
+The following definition requires a bit of work, so pictures will also occur quite frequently, though the reader may wish do draw some on their own.
+
+\begin{definition}[Planar Tangle]\index{Planar Tangle!Shaded}\label{def:Shaded Planar Tangle}
+We start by considering a disc $D_0$. In its interior shall be a finite collection $\{D_i\}_{i=1}^b$ of pairwise disjoint discs, which we call \emph{internal discs} of the \emph{external disc} $D_0$. It is allowed that $b=0$,  i.e.\ the collection may be empty, in which case there are no internal discs. For an illustration see Figure \ref{fig:DiscWithDiscs}.
+
+\begin{figure}[!htp]
+\centering
+	\begin{tikzpicture}[scale=1]
+		\coordinate (centerO) at (0,0);
+		\coordinate (centerA) at ($(centerO) + (-0.8,0.6)$);
+		\coordinate (centerB) at (1,0.2);
+		\coordinate (centerC) at (-0.1,-0.9);
+		\coordinate (centerD) at (0.2,1.3);
+		\def\radiusO{2cm};
+		\def\radiusA{0.5cm};
+		\def\radiusB{0.4cm};
+		\def\radiusC{0.6cm};
+		\def\radiusD{0.3cm};
+				
+		\draw (centerO) circle [radius=\radiusO];
+		\draw (centerA) circle [radius=\radiusA];
+		\draw (centerB) circle [radius=\radiusB];
+		\draw (centerC) circle [radius=\radiusC];
+		\draw (centerD) circle [radius=\radiusD];
+		
+		\draw (centerA) node {$D_1$};
+		\draw (centerB) node {$D_2$};
+		\draw (centerC) node {$D_3$};
+		\draw (centerD) node {$D_4$};
+	\end{tikzpicture}
+	\caption{A disc with four internal discs}
+	\label{fig:DiscWithDiscs}
+\end{figure}
+
+\noindent Let now $T$ be a compact, oriented, one-dimensional submanifold of $D_0-\bigcup_{i=1}^b \interior{D_i}$ such that:
+\begin{itemize}
+\item[\textsf{(i)}] its boundary is contained in the union of the boundaries of all discs in our setting: $\partial T\subset (\partial D_0 \cup \bigcup_{i=i}^b \partial D_i )$, and in particular only its boundary points meet the discs' boundaries
+\item[\textsf{(ii)}] its complement $T^c\subset \interior{D_0}-\bigcup_{i=1}^b\interior{D_i}$ inherits the orientation from $T$
+\item[\textsf{(iii)}] $\vert T \cap \partial D_i\rvert=2k_i$  for $k_i\in \mathbb{N}$ and $0\leq i\leq b$.
+\end{itemize}
+In a more pictorial language: $T$ is a set containing images of smooth embeddings of $[0,1]$ such that either: 0 and 1 get mapped to the same point (closed curve) or to the boundaries of discs. The connected components of $T$ are called \emph{strings}, and the connected components of the complement $T^c$ are \emph{regions}.
+
+We now define a function $f:\{0\leq i \leq b\}\rightarrow \partial T$  such that if $k_i>0$ , then $f(i)\in T\cap \partial D_i$. That means: for each internal disc, $f$ picks out a distinguished (or \emph{marked}) point where a string meets the boundary of that disc. Using Jones' original notation we will put a $\markedPoint$ right next to that point. We need this function to be compatible with the orientations in the sense that the connected component of $T$ which contains $f(i)$ is oriented away from (towards) $\partial D_i$ for $i>0$ ($i=0$).\footnote{This is a convention, it could have been switched. The important part is that is allows one string to have two distinguished points as its boundary, i.e.\ one on the external and one on an internal disc.} An example of this can be seen in \ref{fig:DiscWithStrings}.
+
+The regions can now be either shaded or without shading\footnotemark\, according to their orientations: a positively oriented region doesn't have a shading, while we shade negatively oriented ones. Because of our compatibility condition on $f$, this \emph{checkerboard shading} of the regions is uniquely determined by specifying just the  distinguished point for $D_0$: namely, traverse the connected component of $T$ containing $f(0)$ along in a positive sense and shade the region to right. Then shade all regions so that two adjacent regions have different shading.
+
+For all $0\leq i \leq b$, we now say that $D_i$ is of/has color
+
+\makebox[0.9\textwidth][c]
+{\begin{minipage}[c]{0.7\textwidth}
+\textsf{(i)} $k_i$; if $k_i>0$ \hfill
+\textsf{(ii)} $0_\pm$, according to the shading near $\partial D_i$; if $k_i=0$.
+\end{minipage}}
+
+\noindent Of course, $0_+$ means `without shading'.%\footnotetext{A minor caveat: `without shading' means `in a shaded context, but unshaded', whereas `unshaded' is understood as `in an unshaded context'.}
+
+We thus have pairs $(T,f)$, and two pairs $(T_i,f_i)$, $i=1,2$, are equivalent iff there exists an orientation-preserving isotopy transforming e.g.\ $T_1\mapsto T_2$ and preserving the distinguished points. This clearly defines an equivalence relation, and we can finalize the definition:
+A \emph{planar $k_0$-tangle} is an equivalence class $[(T,f)]$ of this equivalence relation, where $k_0$ is the color of the external disc.
+\end{definition}
+It is tedious to always write $[(T,f)]$, so by abuse of notation a planar tangle will be simply denoted by $T$.
+
+\begin{figure}[!htp]
+	\centering
+	\begin{subfigure}{.49\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=1.2]
+			\coordinate (centerO) at (0,0);
+			\coordinate (centerA) at (-0.8,0.6);
+			\coordinate (centerB) at (1,0.2);
+			\coordinate (centerC) at (-0.1,-0.9);
+			\coordinate (centerD) at (0.2,1.3);
+			\def\radiusO{2cm};
+			\def\radiusA{0.5cm};
+			\def\radiusB{0.4cm};
+			\def\radiusC{0.6cm};
+			\def\radiusD{0.3cm};
+					
+			\draw (centerO) circle [radius=\radiusO];
+			\draw (centerA) circle [radius=\radiusA];
+			\draw (centerB) circle [radius=\radiusB];
+			\draw (centerC) circle [radius=\radiusC];
+			\draw (centerD) circle [radius=\radiusD];
+			
+			\draw (centerA) node {$D_1$};
+			\draw (centerB) node {$D_2$};
+			\draw (centerC) node {$D_3$};
+			\draw (centerD) node {$D_4$};	
+	
+			%strings
+			\draw ($(centerO) + (100:\radiusO)$) -- ($ (centerA) +(90:\radiusA) $);
+			\draw ($(centerO) + (30:\radiusO)$) -- ($ (centerB) +(70:\radiusB) $);
+			\draw ($(centerO) + (-60:\radiusO)$) -- ($ (centerC) +(-30:\radiusC) $);
+			\draw ($(centerO) + (-95:\radiusO)$) -- ($ (centerC) +(270:\radiusC) $);
+			
+			\draw ($(centerA) + (20:\radiusA)$) .. controls (0,0.9).. ($ (centerB) +(120:\radiusB) $);
+			\draw ($(centerA) + (-15:\radiusA)$) .. controls (0.1,-0.1).. ($ (centerB) +(210:\radiusB) $);
+			\draw ($(centerA) + (-97:\radiusA)$) -- ($ (centerC) +(169:\radiusC) $);		
+			\draw ($(centerB) + (0:\radiusB)$) .. controls (1.8,-0.1).. ($ (centerC) +(-10:\radiusC) $);
+			
+			\draw (-1.32,-0.4) circle [x radius = 0.35cm, y radius = 0.8cm, rotate = 30];
+		\end{tikzpicture}
+		\caption[]{}
+		\label{fig:DiscWithStrings}
+	\end{subfigure}	
+	\begin{subfigure}{.49\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=1.2]
+			\coordinate (centerO) at (0,0);
+			\coordinate (centerA) at (-0.8,0.6);
+			\coordinate (centerB) at (1,0.2);
+			\coordinate (centerC) at (-0.1,-0.9);
+			\coordinate (centerD) at (0.2,1.3);
+			\def\radiusO{2cm};
+			\def\radiusA{0.5cm};
+			\def\radiusB{0.4cm};
+			\def\radiusC{0.6cm};
+			\def\radiusD{0.3cm};
+					
+			\draw (centerO) circle [radius=\radiusO];
+			\draw (centerA) circle [radius=\radiusA];
+			\draw (centerB) circle [radius=\radiusB];
+			\draw (centerC) circle [radius=\radiusC];
+			\draw (centerD) circle [radius=\radiusD];
+			
+			\draw (centerA) node {$D_1$};
+			\draw (centerB) node {$D_2$};
+			\draw (centerC) node {$D_3$};
+			\draw (centerD) node {$D_4$};	
+	
+			%strings
+			\draw [decoration={markings, mark=at position 0.3 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (100:\radiusO)$) -- ($ (centerA) +(90:\radiusA) $);
+			\draw [decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (30:\radiusO)$) -- ($ (centerB) +(70:\radiusB) $);
+			\draw [decoration={markings, mark=at position 0.4 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (-60:\radiusO)$) -- ($ (centerC) +(-30:\radiusC) $);
+			\draw [decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (-95:\radiusO)$) -- ($ (centerC) +(270:\radiusC) $);
+			
+			\draw [decoration={markings, mark=at position 0.625 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (20:\radiusA)$) .. controls (0,0.9).. ($ (centerB) +(120:\radiusB) $);
+			\draw [decoration={markings, mark=at position 0.4 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (-15:\radiusA)$) .. controls (0.1,-0.1).. ($ (centerB) +(210:\radiusB) $);
+			\draw [decoration={markings, mark=at position 0.3 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (-97:\radiusA)$) -- ($ (centerC) +(169:\radiusC) $);		
+			\draw [decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerB) + (0:\radiusB)$) .. controls (1.8,-0.1).. ($ (centerC) +(-10:\radiusC) $);
+			
+			\draw [decoration={markings, mark=at position 0.625 with {\arrowreversed{triangle 45}}}, postaction={decorate}] (-1.32,-0.4) circle [x radius = 0.35cm, y radius = 0.8cm, rotate = 30];
+			
+			% marked points
+			\node (markedPointO) at ($(centerO) + (100:\radiusO) + (-0.1,0.1)$) {$\markedPoint$};
+			\node (markedPointA) at ($(centerA) + (90:\radiusA) + (-0.1,0.1)$) {$\markedPoint$};
+			\node (markedPointB) at ($(centerB) + (100:\radiusB) + (-0.35,-0.1)$) {$\markedPoint$};
+			\node (markedPointC) at ($(centerC) + (-30:\radiusC) + (0.15,0)$) {$\markedPoint$};
+		\end{tikzpicture}
+		\caption[]{}
+		\label{fig:DiscWithStringsAndDirection}
+	\end{subfigure}
+	
+	\begin{subfigure}{.49\textwidth}
+		\centering
+		\begin{tikzpicture}[scale=1.2]
+			\coordinate (centerO) at (0,0);
+			\coordinate (centerA) at (-0.8,0.6);
+			\coordinate (centerB) at (1,0.2);
+			\coordinate (centerC) at (-0.1,-0.9);
+			\coordinate (centerD) at (0.2,1.3);
+			\def\radiusO{2cm};
+			\def\radiusA{0.5cm};
+			\def\radiusB{0.4cm};
+			\def\radiusC{0.6cm};
+			\def\radiusD{0.3cm};
+			\def\helligkeit{30};
+			
+			% shading
+			\begin{scope}
+				\path[clip] ($(centerO) + (100:\radiusO)$) -- ($ (centerA) +(90:\radiusA) $) --
+					($ (centerA) +(90:\radiusA) $) arc [start angle=90 , end angle=20 , radius=\radiusA] --
+					($(centerA) + (20:\radiusA)$) .. controls (0,0.9).. ($ (centerB) +(120:\radiusB) $) --
+					($ (centerB) +(120:\radiusB) $) arc [start angle=120 , end angle=70 , radius=\radiusB] --
+					($ (centerB) +(70:\radiusB) $) -- ($(centerO) + (30:\radiusO)$) --
+					($(centerO) + (30:\radiusO)$) arc [start angle=30 , end angle=100 , radius=\radiusO];				
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+				
+			\end{scope}
+			
+			\begin{scope}			
+				\path[clip] ($(centerO) + (-95:\radiusO)$) -- ($ (centerC) +(270:\radiusC) $) --
+					($ (centerC) +(-90:\radiusC) $) arc [start angle=270 , end angle=-30 , radius=\radiusC] --
+					($ (centerC) +(-30:\radiusC) $) -- ($(centerO) + (-60:\radiusO)$) --
+					($ (centerO) +(-60:\radiusO) $) arc [start angle=-60 , end angle=-95 , radius=\radiusO];
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+			
+			\begin{scope}			
+				\path[clip] ($(centerC) + (169:\radiusC)$) -- ($ (centerA) +(-97:\radiusA) $) --
+					($ (centerA) +(-97:\radiusA) $) arc [start angle=-97 , end angle=-15 , radius=\radiusA] --
+					($ (centerA) +(-15:\radiusA) $) .. controls (0.1,-0.1) .. ($(centerB) + (210:\radiusB)$) --
+					($ (centerB) +(210:\radiusB) $) arc [start angle=210 , end angle=0 , radius=\radiusB] --
+					($ (centerB) +(0:\radiusB) $) .. controls (1.8,-0.1)..  ($(centerC) + (-10:\radiusC)$) --
+					($ (centerC) +(-10:\radiusC) $) arc [start angle=-10 , end angle=169 , radius=\radiusC];
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+					
+			\draw (centerO) circle [radius=\radiusO];
+			\draw[fill=white] (centerA) circle [radius=\radiusA];
+			\draw[fill=white] (centerB) circle [radius=\radiusB];
+			\draw[fill=white] (centerC) circle [radius=\radiusC];
+			\draw[fill=white] (centerD) circle [radius=\radiusD];
+			
+			\draw (centerA) node {$D_1$};
+			\draw (centerB) node {$D_2$};
+			\draw (centerC) node {$D_3$};
+			\draw (centerD) node {$D_4$};	
+	
+			%strings
+			\draw %[decoration={markings, mark=at position 0.3 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (100:\radiusO)$) -- ($ (centerA) +(90:\radiusA) $);
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (30:\radiusO)$) -- ($ (centerB) +(70:\radiusB) $);
+			\draw %[decoration={markings, mark=at position 0.4 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (-60:\radiusO)$) -- ($ (centerC) +(-30:\radiusC) $);
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (-95:\radiusO)$) -- ($ (centerC) +(270:\radiusC) $);
+			
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (20:\radiusA)$) .. controls (0,0.9).. ($ (centerB) +(120:\radiusB) $);
+			\draw %[decoration={markings, mark=at position 0.4 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (-15:\radiusA)$) .. controls (0.1,-0.1).. ($ (centerB) +(210:\radiusB) $);
+			\draw %[decoration={markings, mark=at position 0.3 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (-97:\radiusA)$) -- ($ (centerC) +(169:\radiusC) $);		
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerB) + (0:\radiusB)$) .. controls (1.8,-0.1).. ($ (centerC) +(-10:\radiusC) $);
+			
+			\draw[fill=gray!\helligkeit, opacity=0.1] (-1.32,-0.4) circle [x radius = 0.35cm, y radius = 0.8cm, rotate = 30];
+			
+			% marked points
+			\node (markedPointO) at ($(centerO) + (100:\radiusO) + (-0.1,0.1)$) {$\markedPoint$};
+			\node (markedPointA) at ($(centerA) + (90:\radiusA) + (-0.1,0.1)$) {$\markedPoint$};
+			\node (markedPointB) at ($(centerB) + (100:\radiusB) + (-0.35,-0.1)$) {$\markedPoint$};
+			\node (markedPointC) at ($(centerC) + (-30:\radiusC) + (0.15,0)$) {$\markedPoint$};
+		\end{tikzpicture}
+		\caption[]{}
+		\label{fig:DiscWithShading}
+	\end{subfigure}
+	\caption[Construction of a shaded tangle]{The disc from above with additional data, namely
+		(\subref{fig:DiscWithStrings}) a collection of strings,
+		(\subref{fig:DiscWithStringsAndDirection}) distinguished points and compatible orientation, and -- equivalent but easier to visualize --
+		(\subref{fig:DiscWithShading}) the corresponding shading, which is completely determined by the distinguished points.}
+		\label{fig:Disc2Tangle}
+\end{figure}
+
+The tangle seen in \ref{fig:DiscWithShading} is an example of a 2-tangle with four internal discs of colors $k_1=k_2=k_3=2$ and $k_4=0_-$, respectively. We will also adapt Jones' notation and write $\mathfrak{D}_T$ for the set of internal discs of the tangle $T$.
+
+\bigno A notion of \emph{composing tangles} is defined in an obvious way. Suppose $(T,f)$ is a $k_0=k(T)$-tangle with $b=b(T)>0$ internal discs $D_i(T)$ of colors $k_i(T)$, respectively, and $(S,g)$ is any $k(S)$-tangle. If for some $1\leq i \leq b(T)$ the colors of $D_i(T)$ and $S$ coincide, that is $k_i(T)=k(S)$, then we can obtain a $k_0$-tangle called $T\circ_i S$ with $b(T)+b(S)-1$ internal discs by `plugging' $S$ into the disc $D_i(T)$ such that the strings meet and the marked points agree, then erasing the boundary. It is not necessary to smooth the strings, since tangles are defined up to isotopy, and w.l.o.g.\ we can take representatives s.t.\ the concatenation of strings is automatically smooth. The discs must of course be given a different numbering. We stipulate that we renumber the discs in $T\circ_i S$ according to the following rule, for $1 \leq j \leq b(T)+b(S)-1$:
+\begin{align}\label{eq:CompositionInternalDiscs}
+D_{j}(T\circ_i S)=
+\begin{cases}
+D_j(T) & j < i \\
+D_{j-i+1}(S) & i\leq j < i+b(S)\\
+D_{j-b(S)+1}(T) & i+b(S)\leq j \leq b(T)+b(S) -1
+\end{cases}
+\end{align}
+An easy example of this concatenation is seen in \ref{fig:CompositionExample}.
+
+\begin{figure}[!htp]\centering
+	\begin{tikzpicture}[scale=1]
+		\begin{scope}
+			\coordinate (centerO) at (0,0);
+			\coordinate (centerA) at ($(centerO) + (-0.8,0.6)$);
+			\coordinate (centerB) at ($(centerO) + (1,0.2)$);
+			\coordinate (centerC) at ($(centerO) + (-0.1,-0.9)$) ;
+			\coordinate (centerD) at ($(centerO) + (0.2,1.3)$) ;
+			\def\radiusO{2cm};
+			\def\radiusA{0.5cm};
+			\def\radiusB{0.4cm};
+			\def\radiusC{0.6cm};
+			\def\radiusD{0.3cm};
+			\def\helligkeit{30};
+			
+			% shading
+			\begin{scope}
+				\path[clip] ($(centerO) + (100:\radiusO)$) -- ($ (centerA) +(90:\radiusA) $) --
+					($ (centerA) +(90:\radiusA) $) arc [start angle=90 , end angle=20 , radius=\radiusA] --
+					($(centerA) + (20:\radiusA)$) .. controls ($(centerO) + (0,0.9)$).. ($ (centerB) +(120:\radiusB) $) --
+					($ (centerB) +(120:\radiusB) $) arc [start angle=120 , end angle=70 , radius=\radiusB] --
+					($ (centerB) +(70:\radiusB) $) -- ($(centerO) + (30:\radiusO)$) --
+					($(centerO) + (30:\radiusO)$) arc [start angle=30 , end angle=100 , radius=\radiusO];				
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+			
+			\begin{scope}			
+				\path[clip] ($(centerO) + (-95:\radiusO)$) -- ($ (centerC) +(270:\radiusC) $) --
+					($ (centerC) +(-90:\radiusC) $) arc [start angle=270 , end angle=-30 , radius=\radiusC] --
+					($ (centerC) +(-30:\radiusC) $) -- ($(centerO) + (-60:\radiusO)$) --
+					($ (centerO) +(-60:\radiusO) $) arc [start angle=-60 , end angle=-95 , radius=\radiusO];
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+			
+			\begin{scope}			
+				\path[clip] ($(centerC) + (169:\radiusC)$) -- ($ (centerA) +(-97:\radiusA) $) --
+					($ (centerA) +(-97:\radiusA) $) arc [start angle=-97 , end angle=-15 , radius=\radiusA] --
+					($ (centerA) +(-15:\radiusA) $) .. controls ($(centerO) + (0.1,-0.1)$) .. ($(centerB) + (210:\radiusB)$) --
+					($ (centerB) +(210:\radiusB) $) arc [start angle=210 , end angle=0 , radius=\radiusB] --
+					($ (centerB) +(0:\radiusB) $) .. controls ($(centerO) + (1.8,-0.1)$)..  ($(centerC) + (-10:\radiusC)$) --
+					($ (centerC) +(-10:\radiusC) $) arc [start angle=-10 , end angle=169 , radius=\radiusC];
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+					
+			\draw (centerO) circle [radius=\radiusO];
+			\draw[fill=white] (centerA) circle [radius=\radiusA];
+			\draw[fill=white] (centerB) circle [radius=\radiusB];
+			\draw[fill=white] (centerC) circle [radius=\radiusC];
+			\draw[fill=white] (centerD) circle [radius=\radiusD];
+			
+			\draw (centerA) node {$D_1$};
+			\draw (centerB) node {$D_2$};
+			\draw (centerC) node {$D_3$};
+			\draw (centerD) node {$D_4$};	
+	
+			%strings
+			\draw %[decoration={markings, mark=at position 0.3 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (100:\radiusO)$) -- ($ (centerA) +(90:\radiusA) $);
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (30:\radiusO)$) -- ($ (centerB) +(70:\radiusB) $);
+			\draw %[decoration={markings, mark=at position 0.4 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (-60:\radiusO)$) -- ($ (centerC) +(-30:\radiusC) $);
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (-95:\radiusO)$) -- ($ (centerC) +(270:\radiusC) $);
+			
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (20:\radiusA)$) .. controls ($(centerO) + (0,0.9)$).. ($ (centerB) +(120:\radiusB) $);
+			\draw %[decoration={markings, mark=at position 0.4 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (-15:\radiusA)$) .. controls ($(centerO) + (0.1,-0.1)$).. ($ (centerB) +(210:\radiusB) $);
+			\draw %[decoration={markings, mark=at position 0.3 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (-97:\radiusA)$) -- ($ (centerC) +(169:\radiusC) $);		
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerB) + (0:\radiusB)$) .. controls ($(centerO) + (1.8,-0.1)$).. ($ (centerC) +(-10:\radiusC) $);
+			
+			\draw[fill=gray!\helligkeit, opacity=0.1] ($(centerO) + (-1.32,-0.4)$) circle [x radius = 0.35cm, y radius = 0.8cm, rotate = 30];
+			
+			% marked points
+			\node (markedPointO) at ($(centerO) + (100:\radiusO) + (-0.1,0.1)$) {$\markedPoint$};
+			\node (markedPointA) at ($(centerA) + (90:\radiusA) + (-0.1,0.1)$) {$\markedPoint$};
+			\node (markedPointB) at ($(centerB) + (100:\radiusB) + (-0.35,-0.1)$) {$\markedPoint$};
+			\node (markedPointC) at ($(centerC) + (-30:\radiusC) + (0.15,0)$) {$\markedPoint$};
+		\end{scope}
+		
+		\node (con) at (2.5,0) {$\circ_3$};
+		
+		\begin{scope}
+			\coordinate (centerO) at (5,0);
+			\coordinate (centerA) at ($(centerO)$);
+			\def\radiusO{2cm};
+			\def\radiusA{1cm};
+			\def\helligkeit{30};
+			
+			% shading
+			\begin{scope}
+				\path[clip] ($(centerO) + (110:\radiusO)$) -- ($ (centerA) +(135:\radiusA) $) --
+					($ (centerA) +(135:\radiusA) $) arc [start angle=135 , end angle=45 , radius=\radiusA] --
+					($(centerA) + (45:\radiusA)$) -- ($ (centerO) +(70:\radiusO) $) --
+					($(centerO) + (70:\radiusO)$) arc [start angle=70 , end angle=110 , radius=\radiusO];				
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+%			
+			\begin{scope}			
+				\path[clip] 
+					($(centerO) + (-30:\radiusO)$) -- ($ (centerA) +(-30:\radiusA) $) --
+					($ (centerA) +(-30:\radiusA) $) arc [start angle=-30 , end angle=-70 , radius=\radiusA] --
+					($(centerA) + (290:\radiusA)$) .. controls ($(centerA) + (270:\radiusA) + (0.4,-0.5)$) and ($(centerA) + (270:\radiusA) + (-0.4,-0.5)$) .. ($ (centerA) +(250:\radiusA) $) --
+					($ (centerA) +(250:\radiusA) $) arc [start angle=250 , end angle=210 , radius=\radiusA] --
+					($(centerA) + (210:\radiusA)$) -- ($ (centerO) +(210:\radiusO) $) --
+					($ (centerO) +(210:\radiusO) $) arc [start angle=210 , end angle=330 , radius=\radiusO];
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+%			
+
+					
+			\draw (centerO) circle [radius=\radiusO];
+			\draw[fill=white] (centerA) circle [radius=\radiusA];
+			
+			\draw (centerA) node {$D_1$};
+	
+			%strings
+			\draw 
+				($(centerO) + (110:\radiusO)$) -- ($ (centerA) +(135:\radiusA) $);
+			\draw 
+				($(centerO) + (70:\radiusO)$) -- ($ (centerA) +(45:\radiusA) $);
+			\draw 
+				($(centerO) + (-30:\radiusO)$) -- ($ (centerA) +(-30:\radiusA) $);
+			\draw 
+				($(centerO) + (210:\radiusO)$) -- ($ (centerA) +(210:\radiusA) $);
+			
+			\draw 
+				($(centerA) + (250:\radiusA)$) .. controls ($(centerA) + (270:\radiusA) + (-0.4,-0.5)$) and ($(centerA) + (270:\radiusA) + (0.4,-0.5)$) .. ($ (centerA) +(290:\radiusA) $);			
+			
+			% marked points
+			\node (markedPointO) at ($(centerO) + (110:\radiusO) + (-0.1,0.1)$) {$\markedPoint$};
+			\node (markedPointA) at ($(centerA) + (250:\radiusA) + (+0.15,-0.15)$) {$\markedPoint$};
+		\end{scope}
+	
+		\node (equal) at (7.5,0) {$=$};
+		
+		\begin{scope}
+			\coordinate (centerO) at (10,0);
+			\coordinate (centerA) at ($(centerO) + (-0.8,0.6)$);
+			\coordinate (centerB) at ($(centerO) + (1,0.2)$);
+			\coordinate (centerC) at ($(centerO) + (-0.1,-0.9)$) ;
+			\coordinate (centerD) at ($(centerO) + (0.2,1.3)$) ;
+			\def\radiusO{2cm};
+			\def\radiusA{0.5cm};
+			\def\radiusB{0.4cm};
+			\def\radiusC{0.4cm};
+			\def\radiusD{0.3cm};
+			\def\helligkeit{30};
+			
+			% shading
+			\begin{scope}
+				\path[clip] ($(centerO) + (100:\radiusO)$) -- ($ (centerA) +(90:\radiusA) $) --
+					($ (centerA) +(90:\radiusA) $) arc [start angle=90 , end angle=20 , radius=\radiusA] --
+					($(centerA) + (20:\radiusA)$) .. controls ($(centerO) + (0,0.9)$).. ($ (centerB) +(120:\radiusB) $) --
+					($ (centerB) +(120:\radiusB) $) arc [start angle=120 , end angle=70 , radius=\radiusB] --
+					($ (centerB) +(70:\radiusB) $) -- ($(centerO) + (30:\radiusO)$) --
+					($(centerO) + (30:\radiusO)$) arc [start angle=30 , end angle=100 , radius=\radiusO];				
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+			
+			\begin{scope}			
+				\path[clip] ($(centerO) + (-95:\radiusO)$) -- ($ (centerC) +(270:\radiusC) $) --
+					($ (centerC) +(-90:\radiusC) $) arc [start angle=270 , end angle=-30 , radius=\radiusC] --
+					($ (centerC) +(-30:\radiusC) $) -- ($(centerO) + (-60:\radiusO)$) --
+					($ (centerO) +(-60:\radiusO) $) arc [start angle=-60 , end angle=-95 , radius=\radiusO];
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+			
+			\begin{scope}			
+				\path[clip] ($(centerC) + (169:\radiusC)$) -- ($ (centerA) +(-97:\radiusA) $) --
+					($ (centerA) +(-97:\radiusA) $) arc [start angle=-97 , end angle=-15 , radius=\radiusA] --
+					($ (centerA) +(-15:\radiusA) $) .. controls ($(centerO) + (0.1,-0.1)$) .. ($(centerB) + (210:\radiusB)$) --
+					($ (centerB) +(210:\radiusB) $) arc [start angle=210 , end angle=0 , radius=\radiusB] --
+					($ (centerB) +(0:\radiusB) $) .. controls ($(centerO) + (1.8,-0.1)$)..  ($(centerC) + (-10:\radiusC)$) --
+					($ (centerC) +(-10:\radiusC) $) arc [start angle=-10 , end angle=60 , radius=\radiusC]
+					($(centerC) + (50:\radiusC)$) .. controls ($(centerC) + (70:\radiusC*2)$) and ($(centerC) + (110:\radiusC*2)$) .. ($(centerC) + (130:\radiusC)$) --
+					($ (centerC) +(120:\radiusC) $) arc [start angle=120 , end angle=169 , radius=\radiusC]					;
+				\fill[color = gray!\helligkeit, opacity=0.1]  (centerO) circle [radius=\radiusO];
+			\end{scope}
+					
+			\draw (centerO) circle [radius=\radiusO];
+			\draw[fill=white] (centerA) circle [radius=\radiusA];
+			\draw[fill=white] (centerB) circle [radius=\radiusB];
+			\draw[fill=white] (centerC) circle [radius=\radiusC];
+			\draw[fill=white] (centerD) circle [radius=\radiusD];
+			
+			\draw (centerA) node {$D_1$};
+			\draw (centerB) node {$D_2$};
+			\draw (centerC) node {$D_3$};
+			\draw (centerD) node {$D_4$};	
+	
+			%strings
+			\draw %[decoration={markings, mark=at position 0.3 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (100:\radiusO)$) -- ($ (centerA) +(90:\radiusA) $);
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (30:\radiusO)$) -- ($ (centerB) +(70:\radiusB) $);
+			\draw %[decoration={markings, mark=at position 0.4 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (-60:\radiusO)$) -- ($ (centerC) +(-30:\radiusC) $);
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerO) + (-95:\radiusO)$) -- ($ (centerC) +(270:\radiusC) $);
+			
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (20:\radiusA)$) .. controls ($(centerO) + (0,0.9)$).. ($ (centerB) +(120:\radiusB) $);
+			\draw %[decoration={markings, mark=at position 0.4 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (-15:\radiusA)$) .. controls ($(centerO) + (0.1,-0.1)$).. ($ (centerB) +(210:\radiusB) $);
+			\draw %[decoration={markings, mark=at position 0.3 with {\arrowreversed{triangle 45}}}, postaction={decorate}] 
+				($(centerA) + (-97:\radiusA)$) -- ($ (centerC) +(169:\radiusC) $);		
+			\draw %[decoration={markings, mark=at position 0.625 with {\arrow{triangle 45}}}, postaction={decorate}] 
+				($(centerB) + (0:\radiusB)$) .. controls ($(centerO) + (1.8,-0.1)$).. ($ (centerC) +(-10:\radiusC) $);
+			\draw
+				($(centerC) + (50:\radiusC)$) .. controls ($(centerC) + (70:\radiusC*2)$) and ($(centerC) + (110:\radiusC*2)$) .. ($(centerC) + (130:\radiusC)$);
+			
+			\draw[fill=gray!\helligkeit, opacity=0.1] ($(centerO) + (-1.32,-0.4)$) circle [x radius = 0.35cm, y radius = 0.8cm, rotate = 30];
+			
+			% marked points
+			\node (markedPointO) at ($(centerO) + (100:\radiusO) + (-0.1,0.1)$) {$\markedPoint$};
+			\node (markedPointA) at ($(centerA) + (90:\radiusA) + (-0.1,0.1)$) {$\markedPoint$};
+			\node (markedPointB) at ($(centerB) + (100:\radiusB) + (-0.35,-0.1)$) {$\markedPoint$};
+			\node (markedPointC) at ($(centerC) + (90:\radiusC) + (0.12,0.07)$) {$\markedPoint$};
+		\end{scope}
+	\end{tikzpicture}
+	\caption[Composition of planar tangles]{Composition of two planar 4-tangles.}
+	\label{fig:CompositionExample}
+\end{figure}
+
+Let us also agree on an equivalent way of drawing these tangles. Sometimes it is more convenient to draw rectangles (\emph{boxes}) instead of disks, which is justified by observing that a disk is after all homeomorphic to a rectangle with rounded corners. As an additional simplification we will then also sometimes speak off the \emph{standard form} of a tangle, meaning that all boxes are drawn such that the distinguished point is the leftmost marked point along the top edge of the rectangle. If a disk has color $k>0$, then the corresponding box has the first $k$ of the marked points along its top edge, while the remaining $k$ marked points will be along the bottom edge. 
+
+
+%We can define the monoidal category of planar tangles. The objects are isotopy classes of tangles, and the tensor product $T\tensor S$ of two tangles is given by the tuple $(T,S)$. The associator is removing all internal parentheses, i.e.\ $(T\tensor S)\tensor V=(T,S,V)=T\tensor (S\tensor V)$which is manifestly associative. The identity is just the identity ta \textbf{THINK ABOUT THE TRUTH} With this notion of composition the planar tangles form a colored operad $\mathfrak{T}$ in the symmetric monoidal category of planar tangles, with the monoidal product given by \textbf{WHAT}. 
+
+We may now define what we mean by a \emph{planar algebra}.
+
+\begin{definition}[Planar Algebra]\index{Planar Algebra!Definition}
+A \emph{planar algebra} is a representation of the planar operad. That is, an operad homomorphism $\mathfrak{T}\rightarrow\mathfrak{V}$, where $\mathfrak{V}$ is a colored operad internal to $\mathbf{Vect}_k$, the symmetric monoidal category of vector spaces over some field $k$. For us, $k = \mathbb{C}$.
+
+That is, a planar algebra $P$ is a family of vector spaces $\left( P_n \right)_{n\in\mathfrak{Col}}$ together with an assignment $Z$ taking a $k(T)$-tangle $T$ and returning a linear map 
+\begin{align*}
+Z_T:\bigotimes_{i=1}^{b(T)}P_{k_i(T)}\longrightarrow P_{k_0(T)}.
+\end{align*}
+This assignment is a homomorphism in the sense that it respects the composition of tangles, i.e.\ $Z_{T\circ_i S}\doteq Z_T\circ_{i}Z_S$, where we did not specify what the equal sign or  the right hand side mean. But the following commutative diagram makes it clear:
+
+\begin{equation*}
+	\begin{tikzcd}[row sep=6em, column sep=10em]
+		\displaystyle\bigotimes_{j=1}^{i=1}P_{k_j(T)}\tensor \displaystyle\bigotimes_{j=1}^{b(S)}P_{k_j(S)}\tensor\displaystyle\bigotimes_{j=i+1}^{b(T)}P_{k_j(T)}
+		 \arrow[rd,"Z_{T\circ_i S}"] 
+		 \arrow[d,"\id\tensor Z_S \tensor\id"] & \\
+		\displaystyle\bigotimes_{j=1}^{b(T)}P_{k_j(T)} \arrow[r,"Z_T"]& P_{k_0(T)}
+	\end{tikzcd}
+\end{equation*}
+In $\mathfrak{V}$, $Z_T\circ_i Z_S$ simply means plugging the output of $Z_S$, a vector, into the $i$-th input of the map $Z_T$.\end{definition}
+
+By convention, the empty tensor product shall then be $\mathbb{C}$. It is obvious how to rewrite the above diagram in case one of the tangles has no internal disks.
+
+Another condition we might wish to impose is that every element in one of the vector spaces is in the image of the action of a planar tangle. That is to say that the tangle that acts as the identity of composition of tangles is the identity, for each vector space, under the action of the planar operad.
+%\textbf{MORE on 0 and degeneracy}
+
+%\subsection{A few important Tangles and Notions for Planar Algebras}
+%We will here introduce some important recurring tangles. Most definitions are better understood with small pictures (that is, drawing $k$-tangles with $k$ small) instead of words, and it should be clear how to generalize the notion to larger tangles. But first, let us agree on the following notation. 
+%\begin{enumerate}
+%\item[•] For each $k\in\mathfrak{Col}$, the free vector space with basis the planar $k$-tangles over some field $\mathbb{F}$ is denoted by $\mathcal{T}_k$.
+%\item[•] If we have $n$ parallel strings that are not closed curves, i.e.\ strings whose endpoints on both ends are adjacent, we will sometimes simply draw one string with the number $n$ next to it. 
+%\item[•] The shading and orientation will be occasionally be omitted, because it follows unambiguously from specifying the distinguished points.
+%\item[•] If a $k$-tangle $T$ has an internal disc $D_j$ with $k_j$ boundary points, we may regard it as a ``map'' $T:\mathcal{T}_{k_j}\rightarrow \mathcal{T}_k$, $S\mapsto T\circ_j S$.
+%\end{enumerate}
+%
+%One can also make sense of a multiplication of $k$-tangles, say $A$ and $B$, denoted $A\cdot B\equiv\textsf{mult}_k (A,B)=\textsf{mult}_k(\circ_2 A \circ_1 B)$, i.e.\ simultaneous composition with the \emph{multiplication tangle} seen in \ref{fig:MultiplicationTangle}.
+%
+%\begin{figure}[!htp]\centering
+%	\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
+%		\coordinate (centerO) at (0,0);
+%		\coordinate (centerB) at (0,1.2);		
+%		\coordinate (centerA) at (0,-1.2);
+%		\def\radiusO{3cm};
+%		\def\radiusA{0.9cm};
+%		\def\radiusB{0.9cm};
+%		
+%		\begin{scope}	
+%			\draw[clip] ($(centerO) + (90:\radiusO)$) arc [start angle=90, end angle=100, radius=\radiusO] -- 
+%				($(centerO) + (-100:\radiusO)$) arc [start angle=-100, end angle=-90, radius=\radiusO];
+%			\fill[color = gray!30, opacity=0.1]  (centerO) circle [radius=\radiusO];
+%		\end{scope}
+%		
+%		\begin{scope}	
+%			\draw[clip] ($(centerO) + (80:\radiusO)$) arc [start angle=80, end angle=-80, radius=\radiusO];
+%			\fill[color = gray!30, opacity=0.1]  (centerO) circle [radius=\radiusO];
+%		\end{scope}
+%		
+%		\draw ($(centerO) + (100:\radiusO)$) -- ($(centerO) + (-100:\radiusO)$);
+%		\draw ($(centerO) + (90:\radiusO)$) -- ($(centerO) + (-90:\radiusO)$);
+%		\draw ($(centerO) + (80:\radiusO)$) -- ($(centerO) + (-80:\radiusO)$);
+%
+%		\draw (centerO) circle [radius=\radiusO];
+%		\draw[fill=white] (centerA) circle [radius=\radiusA];
+%		\draw[fill=white] (centerB) circle [radius=\radiusB];
+%		
+%		\draw (centerA) node {$D_1$};
+%		\draw (centerB) node {$D_2$};
+%		
+%		\draw ($(centerO) + (105:\radiusO) + (0,0.15)$) node {$\markedPoint$};
+%		\draw ($(centerA) + (135:\radiusA) + (0,0.15)$) node {$\markedPoint$};
+%		\draw ($(centerB) + (135:\radiusB) + (0,0.15)$) node {$\markedPoint$};
+%	\end{tikzpicture}
+%	\caption[]{The multiplication tangle $\textsf{mult}_k:\mathcal{T}_k\times\mathcal{T}_k\rightarrow\mathcal{T}_k$ for $k=3$}
+%	\label{fig:MultiplicationTangle}
+%\end{figure}
+%This multiplication is clearly associative, since tangles are defined up to isotopy. Also from this definition, one immediately sees the \emph{unit tangle} arising. This is the tangle $1_k$ or $\mathbf{1}_k$ with no internal disks and the only strings are $k$ parallel strings. So we have a rather beautiful fact here: For all colors $k$, the multiplication and the unit tangle make $\mathcal{T}_k$ into an associative unital algebra. 
+%
+%Moreover, all inclusions are injective algebra homomorphisms, and we have filtrations $\mathcal{T}_\alpha \subset \mathcal{T}_1\subset\mathcal{T}_2\subset \ldots$ for $\alpha\in\{0_+,0_-\}$.
+%
+%%\section{Hilbert planar algebras THIS SECTION IS HYPOTHETICAL}
+%%Suppose $P$ is a non-degenerate (in the sense of $Z_{I^k_k}=\id_{P_k}$) spherical planar algebra with positive modulus and such that for each $k\in\mathfrak{Col}$, the associated vector space is a Hilbert space $\left( P_k, \langle \cdot,\cdot \rangle_k\right)$, subject to the condition $\dim P_k\leq \dim P_{k^\prime}$ iff $k\leq k^\prime$. Each map $Z_T$ can be made into maps
+%%\begin{align}\label{eq:restrictedHom}
+%%\at{Z_T}{l}:P_{k_l(T)}\rightarrow P_{k_0(T)},\quad\text{for } 1\leq l \leq b(T),
+%%\end{align}
+%%in numerous ways. Let's try the following first. Denote by $\{\ket{a_j}\}$ an orthonormal basis for $P_{k_j(T)}$. Then we may write
+%%\begin{align*}
+%%Z_T=\left( Z_T \right)_{a_0 a_1\ldots a_{b(T)}}\ket{a_0}\bra{a_1 \ldots a_{b(T)}},
+%%\end{align*}
+%%and a way of obtaining \eqref{eq:restrictedHom} becomes apparent:
+%%\begin{align*}
+%%\at{Z_T}{l}&\equiv Z_T \ket{a_0\ldots \widehat{a_l}\ldots a_{b_T}} \equiv \left( \at{Z_T}{l} \right)_{a_0a_l}\ket{a_0}\bra{a_l}.
+%%\end{align*}
+%%So right now we might just restrict our attention to the so-called \emph{annular tangles}, i.e.\ tangles with one internal disc. These induce maps between just two spaces, without any tensor products on either side, so they are particularly easy to handle. Fix an annular $k$-tangle $T$ with an internal disc of color $l$; its image under the homomorphism is then the linear map ${Z_T:P_l\rightarrow P_k}$. In the vector space regime, the notion of \emph{adjoint} of this map exists, and in particular,
+%%\begin{align*}
+%%\langle Z_T^\dagger u,v \rangle_l = \langle u, Z_T^{\vphantom{\dagger}} v \rangle_k
+%%\end{align*}
+%%is the defining equation. A natural question is now: How do we see this $Z_T^\dagger$ in our language of tangles? It must be a linear map from $P_k$ to $P_l$. A possible candidate is 
+%%$Z_T^\dagger \equiv Z_{(\phi_N^{\vphantom{-1}}\circ \phi_S\inv)(T)}$, where $\phi_N$ and $\phi_S$ are the stereographic projections from the north or south pole of $S^2$, respectively, and $T$ is a representative of the tangle contained as a proper subset in the unit disc in the plane, with the midpoint of the internal disc being the origin.\footnote{This is only a technical detail. We might as well define the new tangle via $(\phi_N^{\vphantom{-1}}\circ \phi_S\inv)(T-\interior{D_1(T)}),$ where it is clear what we mean.} We also don't worry about the `missing' null set that would turn the image into a proper tangle. After all, the main point of this definition is the description of what can be visualized as `turning the tangle inside out'.
+%%
+%%Now we need to show or at least argue that with the definition $T^\dagger\equiv (\phi_N^{\vphantom{-1}}\circ \phi_S\inv)(T)$ we have $Z_T^\dagger = Z_{T^\dagger}$. Note that this adjoint is \emph{very} different from the one defined by Jones for his subfactor planar algebras.
+%%
+%%I'm pretty sure that this is not true in general, but rather another condition on our planar algebra. Or it means: We must find (annular) tangles for which this is true! For example, for the identity tangle it is indeed true, for this tangle is manifestly invariant under the $\dagger$-operation. And --- looking at our suppositions --- one is tempted to think that the (right) inclusion tangle, if interpreted as inclusion of vector spaces, has the (right) expectation tangle as its `dagger partner', which is a projection. And it thus might be perfect!
+%%
+%%\textbf{NOTE} It is unfortunately not clear to me how to translate the notion of \emph{perfect tensor} into the language of general planar tangles. Surely one definition could be that a tangle is a perfect tensor tangle iff its associated map is a perfect tensor. But that does \emph{not} give rise to an interpretation in the pictorial language. Which is pretty fucking lame, because the whole point was using pictures for calculations.
+%%\begin{definition}[PRELIMINARY: Perfect tensor tangle]
+%%A $k$-tangle $T$ with $b$ internal boxes is called a \emph{perfect tensor tangle} iff the restriction $\at{Z_T}{i}$ is a perfect tensor for $1\leq i\leq b$, whenever $\dim P_{k_i}\leq \dim P_k$ .
+%%
+%%\end{definition}
+%%
+%%\subsection{Unshaded Tangles PRELIMINARY, WHERE TO INSERT}
+%%While for most interesting purposes in this thesis we don't lose generality by considering only shaded tangles and planar algebras, it is still - mostly when talking about trivalent categories - needed to define the more general notion of an \emph{unshaded tangle}.
+%%
+%%And it should be almost entirely clear what that is: Namely a planar tangle where we disregard anything pertaining to orientation. But from this, another step of generalization emerges.
+%%The definition is without images and without rigorous explanations of all elements, but it stands on the shoulders of \ref{def:Shaded Planar Tangle}.
+%%\begin{definition}[Unshaded Planar Tangle]\index{Planar Tangle!Unshaded}
+%%For $k\in\mathbb{N}^*$, an \emph{unshaded planar $k$-tangle} is an exterior disc with $k$ marked points on its boundary, with a (possibly empty) collection of interior discs $D_i$, each of which having $k_i(T)$ marked points on its respective boundary, $1\leq i\leq b(T)$. Every disc comes with a distinguished marked point, as before. There also are strings connecting marked points, or forming closed loops.
+%%\end{definition}
+%%Evidently, losing orientation allowed us to define tangles with an uneven number of boundary points, which was not possible before. It is also worthy to note that we here stipulated that $k$ refer to the actual number of marked points, not half of it like it was for the shaded case.
+%%\newpage
+%%
+%%
+%%
+%%
+%%Planar algebras were introduced by Jones to be able to deal with multilinearity in a pictorial way. The apparent connection to Penrose's notation for tensor calculus is not a coincidence.
