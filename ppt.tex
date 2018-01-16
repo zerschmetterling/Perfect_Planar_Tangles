@@ -18,6 +18,8 @@
 \usepackage{pdfpages}
 \usepackage{todonotes}
 \usepackage{braids}
+\usepackage{braket}
+\usepackage{arydshln}
 
 
 % ***************************************************************************************************************************************
@@ -175,7 +177,7 @@
 \newcommand{\bigno}{\bigskip\noindent}
 
 
-\author{Johannes Berger, Tobias J Osborne}
+\author{Johannes Berger, Tobias J.\ Osborne}
 \title{On Perfect Planar Tangles}
 \date{}
 
@@ -189,20 +191,26 @@
 	\end{minipage}
 \end{center}
 
+\tikzexternaldisable
+\section{Introduction}
+	\input{./sections/introduction.tex}
+
+\section{A Simple Example}
+	\input{./sections/simple_example.tex}
 
 %\chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction}
 %	\input{./chapters/introduction.tex}
 
-\section{Planar Algebras}
-	\index{Planar Algebras}
-	\input{./chapters/planar_algebras.tex}
+%\section{Planar Algebras}
+%	\index{Planar Algebras}
+%	\input{./chapters/planar_algebras.tex}
 
-\section{Perfect Tangles: Definition and Examples}
-	\input{./chapters/examples.tex}
+%\section{Perfect Tangles: Definition and Examples}
+%	\input{./chapters/examples.tex}
 
 \input{./c4_braiding.tex}
 
-%\bibstyle{amsalpha}\pagestyle{plain}
+\bibliographystyle{amsalpha}\pagestyle{plain}
 \nocite{*}
-%\bibliography{./master_bibliography.bib}
+\bibliography{./master_bibliography.bib}
 \end{document}

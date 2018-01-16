@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.8.14)  1 DEC 2017 14:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.27)  3 JAN 2018 15:42
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
 **ppt.tex
 (./ppt.tex
 LaTeX2e <2017-04-15>
-Babel <3.12> and hyphenation patterns for 84 language(s) loaded.
+Babel <3.15> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texmf-dist/tex/latex/base/size11.clo
@@ -342,7 +342,7 @@ Now handling font encoding U ...
    defining Unicode char U+2423 (decimal 9251)
 ))
 (/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/11/05 v2.16a AMS math features
+Package: amsmath 2017/09/02 v2.17a AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
@@ -479,7 +479,7 @@ Package: thm-amsthm 2014/04/21 v66
 \thmt@style@headstyle=\toks30
 ))
 (/usr/share/texmf-dist/tex/latex/mathtools/mathtools.sty
-Package: mathtools 2017/05/24 v1.19 mathematical typesetting tools
+Package: mathtools 2017/10/30 v1.20 mathematical typesetting tools
 
 (/usr/share/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
@@ -536,16 +536,13 @@ File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
 Package: svg 2017/05/23 v2.00b (include SVG pictures)
 
 (/usr/share/texmf-dist/tex/latex/koma-script/scrbase.sty
-Package: scrbase 2017/04/13 v3.23 KOMA-Script package (KOMA-Script-independent 
+Package: scrbase 2017/09/07 v3.24 KOMA-Script package (KOMA-Script-independent 
 basics and keyval usage)
 
 (/usr/share/texmf-dist/tex/latex/koma-script/scrlfile.sty
-Package: scrlfile 2017/04/13 v3.23 KOMA-Script package (loading files)
-
-Package scrlfile, 2017/04/13 v3.23 KOMA-Script package (loading files)
-                  Copyright (C) Markus Kohm
-
-)) (/usr/share/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: scrlfile 2017/09/07 v3.24 KOMA-Script package (loading files)
+))
+(/usr/share/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 (/usr/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
@@ -571,7 +568,7 @@ Package shellesc Info: Unrestricted shell escape enabled on input line 67.
 \c@svg@param@currpage=\count105
 
 (/usr/share/texmf-dist/tex/latex/ifplatform/ifplatform.sty
-Package: ifplatform 2010/10/22 v0.4 Testing for the operating system
+Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
 
 (/usr/share/texmf-dist/tex/generic/oberdiek/catchfile.sty
 Package: catchfile 2016/05/16 v1.7 Catch the contents of a file (HO)
@@ -1039,7 +1036,7 @@ Package: makecmds 2009/09/03 v1.0a extra command making commands
 No file ppt.sagetex.sout.
 \sagecommandlineskip=\skip54
 ) (/usr/share/texmf-dist/tex/latex/pdfpages/pdfpages.sty
-Package: pdfpages 2017/07/14 v0.5j Insert pages of external PDF documents (AM)
+Package: pdfpages 2017/10/31 v0.5l Insert pages of external PDF documents (AM)
 
 (/usr/share/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
@@ -1051,7 +1048,7 @@ Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
 \AM@pageheight=\dimen196
 
 (/usr/share/texmf-dist/tex/latex/pdfpages/pppdftex.def
-File: pppdftex.def 2017/07/14 v0.5j Pdfpages driver for pdfTeX (AM)
+File: pppdftex.def 2017/10/31 v0.5l Pdfpages driver for pdfTeX (AM)
 )
 \AM@pagebox=\box43
 \AM@global@opts=\toks50
@@ -1097,6 +1094,28 @@ Package braids Warning: This package was designed using PGF2.10; you are using
 \braid@eh=\dimen261
 \c@braid@level=\count153
 \c@braid@strands=\count154
+) (/usr/share/texmf-dist/tex/latex/arydshln/arydshln.sty
+Package: arydshln 2016/04/28 v1.73 
+\dashlinedash=\dimen262
+\dashlinegap=\dimen263
+\adl@box=\box45
+\adl@height=\dimen264
+\adl@heightsave=\dimen265
+\adl@depth=\dimen266
+\adl@depthsave=\dimen267
+\adl@finaldepth=\dimen268
+\adl@columns=\count155
+\adl@ncol=\count156
+\adl@currentcolumn=\count157
+\adl@currentcolumnsave=\count158
+\adl@totalheight=\count159
+\adl@totalheightsave=\count160
+\adl@dash=\count161
+\adl@gap=\count162
+\adl@cla=\count163
+\adl@clb=\count164
+\adl@everyvbox=\toks54
+\adl@LTpagetotal=\dimen269
 )
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 decorations.markings.code.tex
@@ -1113,10 +1132,10 @@ File: tikzlibraryquotes.code.tex 2014/03/21 v3.0.1a (rcs-revision 1.4)
 )
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2015/05/13 v3.0.1a (rcs-revision 1.13)
-\pgfarrowinset=\dimen262
-\pgfarrowlength=\dimen263
-\pgfarrowwidth=\dimen264
-\pgfarrowlinewidth=\dimen265
+\pgfarrowinset=\dimen270
+\pgfarrowlength=\dimen271
+\pgfarrowwidth=\dimen272
+\pgfarrowlinewidth=\dimen273
 ))
 (/usr/share/texmf-dist/tex/latex/pgf/frontendlayer/libraries/tikzlibraryexterna
 l.code.tex
@@ -1126,7 +1145,7 @@ lshared.code.tex))
 
  (/usr/share/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2017/01/02 v2.4 e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count155
+\etb@tempcnta=\count165
 )
 (/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2017/03/14 v6.85a Hypertext links for LaTeX
@@ -1167,16 +1186,16 @@ Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
 (/usr/share/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
-\@linkdim=\dimen266
-\Hy@linkcounter=\count156
-\Hy@pagecounter=\count157
+\@linkdim=\dimen274
+\Hy@linkcounter=\count166
+\Hy@pagecounter=\count167
 
 (/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2017/03/14 v6.85a Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count158
+\Hy@SavedSpaceFactor=\count168
 
 (/usr/share/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -1189,17 +1208,17 @@ Package hyperref Info: Plain pages OFF on input line 4513.
 Package hyperref Info: Backreferencing OFF on input line 4518.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4751.
-\c@Hy@tempcnt=\count159
+\c@Hy@tempcnt=\count169
 
 (/usr/share/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5104.
-\XeTeXLinkMargin=\dimen267
-\Fld@menulength=\count160
-\Field@Width=\dimen268
-\Fld@charsize=\dimen269
+\XeTeXLinkMargin=\dimen275
+\Fld@menulength=\count170
+\Field@Width=\dimen276
+\Fld@charsize=\dimen277
 Package hyperref Info: Hyper figures OFF on input line 6358.
 Package hyperref Info: Link nesting OFF on input line 6363.
 Package hyperref Info: Hyper index ON on input line 6366.
@@ -1209,17 +1228,17 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6383.
 Package hyperref Info: PDF/A mode OFF on input line 6388.
 LaTeX Info: Redefining \ref on input line 6428.
 LaTeX Info: Redefining \pageref on input line 6432.
-\Hy@abspage=\count161
-\c@Item=\count162
-\c@Hfootnote=\count163
+\Hy@abspage=\count171
+\c@Item=\count172
+\c@Hfootnote=\count173
 )
 
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2017/03/14 v6.85a Hyperref driver for pdfTeX
-\Fld@listcount=\count164
-\c@bookmark@seq@number=\count165
+\Fld@listcount=\count174
+\c@bookmark@seq@number=\count175
 
 (/usr/share/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
@@ -1230,18 +1249,18 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 (/usr/share/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
-\Gm@cnth=\count166
-\Gm@cntv=\count167
-\c@Gm@tempcnt=\count168
-\Gm@bindingoffset=\dimen270
-\Gm@wd@mp=\dimen271
-\Gm@odd@mp=\dimen272
-\Gm@even@mp=\dimen273
-\Gm@layoutwidth=\dimen274
-\Gm@layoutheight=\dimen275
-\Gm@layouthoffset=\dimen276
-\Gm@layoutvoffset=\dimen277
-\Gm@dimlist=\toks54
+\Gm@cnth=\count176
+\Gm@cntv=\count177
+\c@Gm@tempcnt=\count178
+\Gm@bindingoffset=\dimen278
+\Gm@wd@mp=\dimen279
+\Gm@odd@mp=\dimen280
+\Gm@even@mp=\dimen281
+\Gm@layoutwidth=\dimen282
+\Gm@layoutheight=\dimen283
+\Gm@layouthoffset=\dimen284
+\Gm@layoutvoffset=\dimen285
+\Gm@dimlist=\toks55
 )
 (/usr/share/texmf-dist/tex/latex/ms/ragged2e.sty
 Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
@@ -1266,12 +1285,12 @@ Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
 )
 (/usr/share/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2017/07/07 v2.7 Micro-typographical refinements (RS)
-\MT@toks=\toks55
-\MT@count=\count169
+\MT@toks=\toks56
+\MT@count=\count179
 LaTeX Info: Redefining \textls on input line 789.
-\MT@outer@kern=\dimen278
+\MT@outer@kern=\dimen286
 LaTeX Info: Redefining \textmicrotypecontext on input line 1334.
-\MT@listname@count=\count170
+\MT@listname@count=\count180
 
 (/usr/share/texmf-dist/tex/latex/microtype/microtype-pdftex.def
 File: microtype-pdftex.def 2017/07/07 v2.7 Definitions specific to pdftex (RS)
@@ -1296,28 +1315,27 @@ nous mode
 
 (/usr/share/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
-\c@tracingmulticols=\count171
-\mult@box=\box45
-\multicol@leftmargin=\dimen279
-\c@unbalance=\count172
-\c@collectmore=\count173
-\doublecol@number=\count174
-\multicoltolerance=\count175
-\multicolpretolerance=\count176
-\full@width=\dimen280
-\page@free=\dimen281
-\premulticols=\dimen282
-\postmulticols=\dimen283
+\c@tracingmulticols=\count181
+\mult@box=\box46
+\multicol@leftmargin=\dimen287
+\c@unbalance=\count182
+\c@collectmore=\count183
+\doublecol@number=\count184
+\multicoltolerance=\count185
+\multicolpretolerance=\count186
+\full@width=\dimen288
+\page@free=\dimen289
+\premulticols=\dimen290
+\postmulticols=\dimen291
 \multicolsep=\skip71
 \multicolbaselineskip=\skip72
-\partial@page=\box46
-\last@line=\box47
-\maxbalancingoverflow=\dimen284
-\mult@rightbox=\box48
-\mult@grightbox=\box49
-\mult@gfirstbox=\box50
-\mult@firstbox=\box51
-\@tempa=\box52
+\partial@page=\box47
+\last@line=\box48
+\maxbalancingoverflow=\dimen292
+\mult@rightbox=\box49
+\mult@grightbox=\box50
+\mult@gfirstbox=\box51
+\mult@firstbox=\box52
 \@tempa=\box53
 \@tempa=\box54
 \@tempa=\box55
@@ -1334,14 +1352,15 @@ Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
 \@tempa=\box66
 \@tempa=\box67
 \@tempa=\box68
-\c@columnbadness=\count177
-\c@finalcolumnbadness=\count178
-\last@try=\dimen285
-\multicolovershoot=\dimen286
-\multicolundershoot=\dimen287
-\mult@nat@firstbox=\box69
-\colbreak@box=\box70
-\mc@col@check@num=\count179
+\@tempa=\box69
+\c@columnbadness=\count187
+\c@finalcolumnbadness=\count188
+\last@try=\dimen293
+\multicolovershoot=\dimen294
+\multicolundershoot=\dimen295
+\mult@nat@firstbox=\box70
+\colbreak@box=\box71
+\mc@col@check@num=\count189
 ))
 (/usr/share/texmf-dist/tex/latex/tocbibind/tocbibind.sty
 Package: tocbibind 2010/10/13 v1.5k extra ToC listings
@@ -1352,9 +1371,9 @@ Package tocbibind Note: Using section or other style headings.
 
 ) (/usr/share/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
-\c@@pps=\count180
-\c@@ppsavesec=\count181
-\c@@ppsaveapp=\count182
+\c@@pps=\count190
+\c@@ppsavesec=\count191
+\c@@ppsaveapp=\count192
 )
 (/usr/share/texmf-dist/tex/latex/epigraph/epigraph.sty
 Package: epigraph 2009/09/02 v1.5c typesetting epigraphs
@@ -1368,39 +1387,39 @@ Package: epigraph 2009/09/02 v1.5c typesetting epigraphs
 
 
 Writing index file ppt.idx
-\c@conj=\count183
-\c@factoid=\count184
-\c@definition=\count185
+\c@conj=\count193
+\c@factoid=\count194
+\c@definition=\count195
 (./ppt.aux)
 \openout1 = `ppt.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 183.
-LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 185.
+LaTeX Font Info:    ... okay on input line 185.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count186
-\scratchdimen=\dimen288
-\scratchbox=\box71
-\nofMPsegments=\count187
-\nofMParguments=\count188
-\everyMPshowfont=\toks56
-\MPscratchCnt=\count189
-\MPscratchDim=\dimen289
-\MPnumerator=\count190
-\makeMPintoPDFobject=\count191
-\everyMPtoPDFconversion=\toks57
+\scratchcounter=\count196
+\scratchdimen=\dimen296
+\scratchbox=\box72
+\nofMPsegments=\count197
+\nofMParguments=\count198
+\everyMPshowfont=\toks57
+\MPscratchCnt=\count199
+\MPscratchDim=\dimen297
+\MPnumerator=\count266
+\makeMPintoPDFobject=\count267
+\everyMPtoPDFconversion=\toks58
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1428,13 +1447,13 @@ ABD: EveryShipout initializing macros
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.15} into 
 your preamble.
- on input line 183.
+ on input line 185.
 
-\c@lstlisting=\count192
+\c@lstlisting=\count268
 \ST@sf=\write6
 \openout6 = `ppt.sagetex.sage'.
 
-\AtBeginShipoutBox=\box72
+\AtBeginShipoutBox=\box73
 (/usr/share/texmf-dist/tex/latex/oberdiek/pdflscape.sty
 Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
 
@@ -1443,7 +1462,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-Package hyperref Info: Link coloring ON on input line 183.
+Package hyperref Info: Link coloring ON on input line 185.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1451,11 +1470,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count193
+\c@section@level=\count269
 )
-LaTeX Info: Redefining \ref on input line 183.
-LaTeX Info: Redefining \pageref on input line 183.
-LaTeX Info: Redefining \nameref on input line 183.
+LaTeX Info: Redefining \ref on input line 185.
+LaTeX Info: Redefining \pageref on input line 185.
+LaTeX Info: Redefining \nameref on input line 185.
  (./ppt.out)
 (./ppt.out)
 \@outlinefile=\write7
@@ -1497,8 +1516,8 @@ LaTeX Info: Redefining \nameref on input line 183.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 183.
-LaTeX Info: Redefining \microtypecontext on input line 183.
+LaTeX Info: Redefining \selectfont on input line 185.
+LaTeX Info: Redefining \microtypecontext on input line 185.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1513,7 +1532,7 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 186.
+LaTeX Font Info:    Try loading font information for U+msa on input line 188.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1521,7 +1540,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/share/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 186.
+LaTeX Font Info:    Try loading font information for U+msb on input line 188.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1529,337 +1548,48 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (/usr/share/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-(./chapters/planar_algebras.tex
+(./sections/introduction.tex [1
 
-LaTeX Warning: Citation `jones1999planar1' on page 1 undefined on input line 3.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./sections/simple_exampl
+e.tex [2]) (./c4_braiding.tex [3] [4
 
-
-
-LaTeX Warning: Citation `joyal1991geometry' on page 1 undefined on input line 3
-.
-
-
-LaTeX Warning: Citation `peters2010planar' on page 1 undefined on input line 5.
-
-
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmss' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-
-LaTeX Warning: Reference `app:PA rigor' on page 1 undefined on input line 8.
-
-Package hyperref Info: bookmark level for unknown definition defaults to 0 on i
-nput line 12.
-LaTeX Font Info:    Try loading font information for U+euf on input line 13.
-(/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
-File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-)
-(/usr/share/texmf-dist/tex/latex/microtype/mt-euf.cfg
-File: mt-euf.cfg 2006/07/03 v1.1 microtype config. file: AMS Euler Fraktur (RS)
-
-) [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-===== Image 'figures/figure_subsection1.1_no0' is up-to-date. ======
-===== Image 'figures/figure_subsection1.1_no1' is up-to-date. ======
-
-LaTeX Warning: Reference `eq:CompositionInternalDiscs' on page 2 undefined on i
-nput line 158.
-
-[2]
-===== Image 'figures/figure_subsection1.1_no2' is up-to-date. ======
-
-LaTeX Warning: Citation `loday2012algebraic' on page 3 undefined on input line 
-241.
-
-[3 <./figures/figure_subsection1.1_no0.pdf> <./figures/figure_subsection1.1_no1
-.pdf> <./figures/figure_subsection1.1_no2.pdf>]
-===== Image 'figures/figure_subsection1.1_no3' is up-to-date. ======
-===== Image 'figures/figure_subsection1.1_no4' is up-to-date. ======
-[4 <./figures/figure_subsection1.1_no4.pdf>]
-===== Image 'figures/figure_subsection1.1_no5' is up-to-date. ======
-===== Image 'figures/figure_subsection1.1_no6' is up-to-date. ======
-===== Image 'figures/figure_subsection1.1_no7' is up-to-date. ======
-[5 <./figures/figure_subsection1.1_no5.pdf>]
-
-LaTeX Warning: Citation `jones2000planarBipartite' on page 6 undefined on input
- line 428.
-
-
-LaTeX Warning: Citation `aluffi2009algebra' on page 6 undefined on input line 4
-37.
-
-[6 <./figures/figure_subsection1.1_no6.pdf> <./figures/figure_subsection1.1_no7
-.pdf>] [7]
-===== Image 'figures/figure_subsection1.2_no0' is up-to-date. ======
-===== Image 'figures/figure_subsection1.2_no1' is up-to-date. ======
-[8 <./figures/figure_subsection1.2_no1.pdf>]
-
-LaTeX Warning: Citation `jones1999planar1' on page 9 undefined on input line 52
-9.
-
-
-LaTeX Warning: Reference `Appendix:Categories' on page 9 undefined on input lin
-e 535.
-
-[9]
-
-LaTeX Warning: Citation `peters2010planar' on page 10 undefined on input line 5
-49.
-
-Package hyperref Info: bookmark level for unknown fact defaults to 0 on input l
-ine 550.
-(./chapters/trivalent_categories.tex
-
-LaTeX Warning: Citation `Morrison2017Trivalent' on page 10 undefined on input l
-ine 2.
-
-[10]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 19.
- (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
-
-===== Image 'figures/figure_subsection2.0_no0' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no1' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no2' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no3' is up-to-date. ======
-
-LaTeX Warning: Citation `Morrison2017Trivalent' on page 11 undefined on input l
-ine 42.
-
-===== Image 'figures/figure_subsection2.0_no4' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no5' is up-to-date. ======
-[11 <./figures/figure_subsection2.0_no2.pdf> <./figures/figure_subsection2.0_no
-3.pdf>]
-===== Image 'figures/figure_subsection2.0_no6' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no7' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no8' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no9' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no10' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no11' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no12' is up-to-date. ======
-===== Image 'figures/figure_subsection2.0_no13' is up-to-date. ======
-[12 <./figures/figure_subsection2.0_no5.pdf> <./figures/figure_subsection2.0_no
-8.pdf> <./figures/figure_subsection2.0_no9.pdf> <./figures/figure_subsection2.0
-_no12.pdf> <./figures/figure_subsection2.0_no13.pdf>]
-
-LaTeX Warning: Citation `wang2010topological' on page 13 undefined on input lin
-e 107.
-
-)) (./chapters/examples.tex
-
-LaTeX Warning: Citation `jones1999planar1' on page 13 undefined on input line 3
-.
-
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmtt' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-[13]
-
-LaTeX Warning: Citation `jones1999planar1' on page 14 undefined on input line 1
-0.
-
-Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
-input line 31.
-===== Image 'figures/figure_subsection4.0_no0' is up-to-date. ======
-===== Image 'figures/figure_subsection4.0_no1' is up-to-date. ======
-===== Image 'figures/figure_subsection4.0_no2' is up-to-date. ======
-===== Image 'figures/figure_subsection4.0_no3' is up-to-date. ======
-===== Image 'figures/figure_subsection4.0_no4' is up-to-date. ======
-===== Image 'figures/figure_subsection4.0_no5' is up-to-date. ======
-[14]
-===== Image 'figures/figure_subsection4.0_no6' is up-to-date. ======
-[15 <./figures/figure_subsection4.0_no3.pdf> <./figures/figure_subsection4.0_no
-4.pdf> <./figures/figure_subsection4.0_no5.pdf>]
-===== Image 'figures/figure_subsection4.0_no7' is up-to-date. ======
-[16 <./figures/figure_subsection4.0_no6.pdf> <./figures/figure_subsection4.0_no
-7.pdf>]
-Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input 
-line 193.
-
-===== Image 'figures/figure_subsection4.0_no8' is up-to-date. ======
-Package hyperref Info: bookmark level for unknown remark defaults to 0 on input
- line 232.
-[17 <./figures/figure_subsection4.0_no8.pdf>]
-
-LaTeX Warning: Reference `@sageinline0' on page 18 undefined on input line 255.
-
-
-
-LaTeX Warning: Reference `App: Code' on page 18 undefined on input line 267.
-
-[18]
-===== Image 'figures/figure_subsection6.0_no0' is up-to-date. ======
-===== Image 'figures/figure_subsection6.0_no1' is up-to-date. ======
-===== Image 'figures/figure_subsection6.0_no2' is up-to-date. ======
-===== Image 'figures/figure_subsection6.0_no3' is up-to-date. ======
-[19]
-===== Image 'figures/figure_subsection6.0_no4' is up-to-date. ======
-===== Image 'figures/figure_subsection6.0_no5' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no0' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no1' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no2' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no3' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no4' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no5' is up-to-date. ======
-[20 <./figures/figure_subsection6.0_no2.pdf> <./figures/figure_subsection6.0_no
-3.pdf> <./figures/figure_subsection6.0_no5.pdf> <./figures/figure_subsection7.0
-_no0.pdf> <./figures/figure_subsection7.0_no1.pdf> <./figures/figure_subsection
-7.0_no4.pdf> <./figures/figure_subsection7.0_no5.pdf>]
-===== Image 'figures/figure_subsection7.0_no6' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no7' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no8' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no9' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no10' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no11' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no12' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no13' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no14' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no15' is up-to-date. ======
-[21 <./figures/figure_subsection7.0_no9.pdf> <./figures/figure_subsection7.0_no
-10.pdf> <./figures/figure_subsection7.0_no11.pdf>]
-===== Image 'figures/figure_subsection7.0_no16' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no17' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no18' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no19' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no20' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no21' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no22' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no23' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no24' is up-to-date. ======
-===== Image 'figures/figure_subsection7.0_no25' is up-to-date. ======
-
-LaTeX Warning: Reference `ex:TL3' on page 22 undefined on input line 472.
-
-[22 <./figures/figure_subsection7.0_no14.pdf> <./figures/figure_subsection7.0_n
-o15.pdf> <./figures/figure_subsection7.0_no18.pdf> <./figures/figure_subsection
-7.0_no19.pdf> <./figures/figure_subsection7.0_no21.pdf> <./figures/figure_subse
-ction7.0_no24.pdf> <./figures/figure_subsection7.0_no25.pdf>]
-===== Image 'figures/figure_subsection8.0_no0' is up-to-date. ======
-===== Image 'figures/figure_subsection8.0_no1' is up-to-date. ======
-[23]
-Package hyperref Info: bookmark level for unknown conjecture defaults to 0 on i
-nput line 555.
-LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 557.
- [24 <./figures/figure_subsection8.0_no1.pdf>]
-===== Image 'figures/figure_subsection8.0_no2' is up-to-date. ======
-
-Overfull \hbox (5.24504pt too wide) in paragraph at lines 611--611
-[] 
- []
-
-[25 <./figures/figure_subsection8.0_no2.pdf>]
-===== Image 'figures/figure_subsection9.0_no0' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no1' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no2' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no3' is up-to-date. ======
-[26 <./figures/figure_subsection9.0_no2.pdf> <./figures/figure_subsection9.0_no
-3.pdf>]
-
-LaTeX Warning: Reference `sec:FirstGeneralConstruction' on page 27 undefined on
- input line 671.
-
-===== Image 'figures/figure_subsection9.0_no4' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no5' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no6' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no7' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no8' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no9' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no10' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no11' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no12' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no13' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no14' is up-to-date. ======
-===== Image 'figures/figure_subsection9.0_no15' is up-to-date. ======
-[27 <./figures/figure_subsection9.0_no10.pdf> <./figures/figure_subsection9.0_n
-o11.pdf> <./figures/figure_subsection9.0_no12.pdf> <./figures/figure_subsection
-9.0_no13.pdf> <./figures/figure_subsection9.0_no14.pdf> <./figures/figure_subse
-ction9.0_no15.pdf>] [28]
-
-LaTeX Warning: Reference `thm:general_existence' on page 29 undefined on input 
-line 826.
-
-===== Image 'figures/figure_subsection10.0_no0' is up-to-date. ======
-===== Image 'figures/figure_subsection10.0_no1' is up-to-date. ======
-===== Image 'figures/figure_subsection10.0_no2' is up-to-date. ======
-===== Image 'figures/figure_subsection10.0_no3' is up-to-date. ======
-===== Image 'figures/figure_subsection10.0_no4' is up-to-date. ======
-===== Image 'figures/figure_subsection10.0_no5' is up-to-date. ======
-===== Image 'figures/figure_subsection10.0_no6' is up-to-date. ======
-===== Image 'figures/figure_subsection10.0_no7' is up-to-date. ======
-[29 <./figures/figure_subsection10.0_no3.pdf> <./figures/figure_subsection10.0_
-no4.pdf> <./figures/figure_subsection10.0_no5.pdf>]
-
-LaTeX Warning: Citation `Morrison2017Trivalent' on page 30 undefined on input l
-ine 924.
-
-[30 <./figures/figure_subsection10.0_no7.pdf>] [31]) (./c4_braiding.tex
-[32])
+])
+(./ppt.bbl [5] [6])
 *********************************************************************
-
-Package sagetex Warning: there were undefined Sage formulas and/or plots.
-Run Sage on ppt.sagetex.sage, and then run LaTeX on ppt.tex again.
-
-*********************************************************************
-[33
-
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 208.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 208.
+[7]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 216.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 216.
  (./ppt.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 208.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 208.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 216.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 216.
 Package rerunfilecheck Info: File `ppt.out' has not changed.
-(rerunfilecheck)             Checksum: DC0AF2D8B606569E8B4EEA391801608A;1409.
-
-
-LaTeX Warning: There were undefined references.
-
+(rerunfilecheck)             Checksum: 1A404F8C80A9FCC6A809C455B7D6A11D;144.
  ) 
 Here is how much of TeX's memory you used:
- 37864 strings out of 492990
- 854496 string characters out of 6138688
- 1075731 words of memory out of 5000000
- 40273 multiletter control sequences out of 15000+600000
- 31069 words of font info for 189 fonts, out of 8000000 for 9000
+ 37691 strings out of 492985
+ 851345 string characters out of 6138637
+ 1078445 words of memory out of 5000000
+ 40380 multiletter control sequences out of 15000+600000
+ 18420 words of font info for 110 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,18n,100p,922b,1025s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,16n,100p,817b,1121s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-csc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pf
-b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6
-.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmss10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
-/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmti9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
-></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/te
-xmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1
-/public/amsfonts/symbols/msbm10.pfb>
-Output written on ppt.pdf (33 pages, 495584 bytes).
+ts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><
+/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmti10.pfb>
+Output written on ppt.pdf (7 pages, 179442 bytes).
 PDF statistics:
- 835 PDF objects out of 1000 (max. 8388607)
- 666 compressed objects within 7 object streams
- 120 named destinations out of 1000 (max. 500000)
- 36473 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 164 PDF objects out of 1000 (max. 8388607)
+ 138 compressed objects within 2 object streams
+ 44 named destinations out of 1000 (max. 500000)
+ 15909 words of extra memory for PDF output out of 17280 (max. 10000000)
 

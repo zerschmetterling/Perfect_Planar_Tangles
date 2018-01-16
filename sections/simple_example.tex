@@ -1,0 +1,61 @@
+Consider a tensor 
+\begin{align*}T = \,
+	\begin{tikzpicture}[baseline=-1mm]
+		\node[draw,rectangle] (T) at (0,0) {$T$};
+		\draw ($(T.north) + (-0.15,0)$) -- node[left] {$d$} ++ (0,0.5);
+		\draw ($(T.north) + (0.15,0)$) -- node[right] {$c$} ++ (0,0.5);
+		\draw ($(T.south) + (0.15,0)$) -- node[right] {$b$} ++ (0,-0.5);
+		\draw ($(T.south) + (-0.15,0)$) -- node[left] {$a$} ++ (0,-0.5);	
+	\end{tikzpicture}\, ,
+\end{align*}
+read from bottom to top. We can then also represent this as the linear map
+\begin{align*}
+T\doteq T_{abcd} \ket{cd}\bra{ab}
+\end{align*}
+where summation is implied. 
+
+A natural question to ask is then: What do the rotations look like? To answer this, let us first draw the rotation and then read it off of the picture.
+\begin{align*}
+\operatorname{rot}T = \,
+	\begin{tikzpicture}[baseline=-1mm]
+		\node[draw,rectangle] (T) at (0,0) {$T$};
+		\draw ($(T.north) + (0.15,0)$) -- node[right] {$c$} ++ (0,0.5);
+		\draw ($(T.north) + (-0.15,0)$) arc[start angle=0, end angle=180, x radius=3mm, y radius=5mm] -- node[left,yshift=-2.5mm]{$d$}
+			($(T.south) + (-0.15,0) + (-0.6,-0.5)$);
+		\draw ($(T.south) + (-0.15,0)$) -- node[left] {$a$} ++ (0,-0.5);
+		\draw ($(T.south) + (0.15,0)$) arc[start angle=180, end angle=360, x radius=3mm, y radius=5mm] -- node[right,yshift=2.5mm]{$b$}
+			($(T.north) + (0.15,0) + (0.6,0.5)$);
+	\end{tikzpicture}\, ,
+\end{align*}
+so that 
+\begin{align*}
+\operatorname{rot} T \doteq T_{abcd} \ket{bc}\bra{da},
+\end{align*}
+and we see that rotation is really just cyclic permutation of the indices.
+
+\bigno
+We now restrict to the simple case where all indices range over the same finite set of values, and where $T$ and all its rotations are unitary. In that case, rotating twice is realized in the matrix representation as nothing else than taking the transpose. As an example, we shall consider the qutrit \emph{controlled not}-gate $CNOT_a$\footnote{\cite{ccorbaci2016construction}}, which is given by
+\begin{align*}
+CNOT_a = 
+\phantom{+}& \ket{00}\bra{00} + \ket{01}\bra{01} + \ket{02}\bra{02}\\
++& \ket{10}\bra{12} + \ket{11}\bra{10} + \ket{12}\bra{11}\\
++& \ket{20}\bra{21} + \ket{21}\bra{22} + \ket{22}\bra{20},
+\end{align*}
+or in matrix form (only nonzero entries are shown)
+\begin{align*}
+CNOT_a =  \left(
+\begin{array}{ccc;{2pt/2pt}ccc;{2pt/2pt}ccc}
+1 &   &   &   &   &   &   &   &   \\
+  & 1 &   &   &   &   &   &   &   \\
+  &   & 1 &   &   &   &   &   &   \\ \hdashline[2pt/2pt]
+  &   &   &   &   & 1 &   &   &   \\
+  &   &   & 1 &   &   &   &   &   \\
+  &   &   &   & 1 &   &   &   &   \\ \hdashline[2pt/2pt]
+  &   &   &   &   &   &   & 1 &   \\
+  &   &   &   &   &   &   &   & 1 \\
+  &   &   &   &   &   & 1 &   &  
+\end{array}
+\right).
+\end{align*}
+This is clearly unitary. Finding the first rotation and seeing that it is also unitary is trivial, because \[ \rot CNOT_a = (CNOT_b)^T, \]
+and we are done showing that this is planarly perfect.

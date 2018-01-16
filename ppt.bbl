@@ -1,0 +1,156 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{RGRA17}
+
+\bibitem[Abr09]{abramsky2009temperley}
+Samson Abramsky, \emph{{Temperley-Lieb Algebra: From Knot Theory to Logic and
+  Computation via Quantum Mechanics}}, arXiv preprint arXiv:0910.2737 (2009).
+
+\bibitem[ADH15]{almheiri2015bulk}
+Ahmed Almheiri, Xi~Dong, and Daniel Harlow, \emph{{Bulk Locality and Quantum
+  Error Correction in AdS/CFT}}, Journal of High Energy Physics \textbf{2015}
+  (2015), no.~4, 163.
+
+\bibitem[Alu09]{aluffi2009algebra}
+Paolo Aluffi, \emph{{Algebra: Chapter 0}}, vol. 104, American Mathematical
+  Soc., 2009.
+
+\bibitem[BB17]{TN_biamonte}
+Jacob Biamonte and Ville Bergholm, \emph{{Tensor Networks in a Nutshell}},
+  2017.
+
+\bibitem[Ber17]{berger2017PerfectPlanarTangles}
+Johannes Berger, \emph{{On Perfect Planar Tangles}}, 2017.
+
+\bibitem[BGJK15]{oberwolfach}
+Dietmar Bisch, Terry~J Gannon, Vaughan~FR Jones, and Yasuyuki Kawahigashi,
+  \emph{{Subfactors and Conformal Field Theory}}, Oberwolfach Reports
+  \textbf{12} (2015), no.~2, 849--926.
+
+\bibitem[{\c{C}}KG16]{ccorbaci2016construction}
+Sevcan {\c{C}}orbaci, Mikail~Do{\u{g}}u{\c{s}} Karaka{\c{s}}, and Azmi
+  Gen{\c{c}}ten, \emph{Construction of two qutrit entanglement by using
+  magnetic resonance selective pulse sequences}, Journal of Physics: Conference
+  Series, vol. 766, IOP Publishing, 2016, p.~012014.
+
+\bibitem[Coo11]{cooper2011mathematical}
+Ellis~D Cooper, \emph{{Mathematical Mechanics: From Particle to Muscle}},
+  vol.~77, World Scientific, 2011.
+
+\bibitem[EGNO15]{etingof2015tensor}
+Pavel~I Etingof, Shlomo Gelaki, Dmitri Nikshych, and Victor Ostrik,
+  \emph{{Tensor Categories}}, vol. 205, American Mathematical Society
+  Providence, RI, 2015.
+
+\bibitem[EM45]{eilenberg1945general}
+Samuel Eilenberg and Saunders MacLane, \emph{{General Theory of Natural
+  Equivalences}}, Transactions of the American Mathematical Society \textbf{58}
+  (1945), no.~2, 231--294.
+
+\bibitem[GAL{\etalchar{+}}15]{goyeneche2015absolutely}
+Dardo Goyeneche, Daniel Alsina, Jos{\'e}~I Latorre, Arnau Riera, and Karol
+  {\.Z}yczkowski, \emph{{Absolutely Maximally Entangled States, Combinatorial
+  Designs, and Multiunitary Matrices}}, Physical Review A \textbf{92} (2015),
+  no.~3, 032316.
+
+\bibitem[Gho11]{ghosh2011planar}
+Shamindra~Kumar Ghosh, \emph{{Planar Algebras: A Category Theoretic Point of
+  View}}, Journal of Algebra \textbf{339} (2011), no.~1, 27--54.
+
+\bibitem[Jon99]{jones1999planar1}
+Vaughan~FR Jones, \emph{{Planar Algebras}, {I}}, arXiv preprint math/9909027
+  (1999).
+
+\bibitem[Jon00]{jones2000planarBipartite}
+\bysame, \emph{The {Planar Algebra} of a {Bipartite Graph}}, Knots in Hellas
+  \textbf{98} (2000), no.~24, 94--117.
+
+\bibitem[JS91]{joyal1991geometry}
+Andr{\'e} Joyal and Ross Street, \emph{The {Geometry} of {Tensor} {Calculus},
+  {I}}, Advances in mathematics \textbf{88} (1991), no.~1, 55--112.
+
+\bibitem[Kau87]{kauffman1987state}
+Louis~H Kauffman, \emph{{State Models and the Jones Polynomial}}, Topology
+  \textbf{26} (1987), no.~3, 395--407.
+
+\bibitem[KS04]{KODIYALAM:OnPlanarAlgebras}
+Vijay Kodiyalam and V.~S. Sunder, \emph{On {Jones'} {Planar Algebras}}, Journal
+  of Knot Theory and Its Ramifications \textbf{13} (2004), no.~02, 219--247.
+
+\bibitem[Lan98]{maclane1998categories}
+Saunders~M Lane, \emph{{Categories for the Working Mathematician (Graduate
+  Texts in Mathematics)}}.
+
+\bibitem[Lee97]{lee1997riemannian}
+John~M Lee, \emph{{Riemannian Manifolds: An Introduction to Curvature}}, vol.
+  176, Springer Science \& Business Media, 1997.
+
+\bibitem[LV12]{loday2012algebraic}
+Jean-Louis Loday and Bruno Vallette, \emph{{Algebraic Operads}}, vol. 346,
+  Springer Science \& Business Media, 2012.
+
+\bibitem[Mal99]{maldacena1999large}
+Juan Maldacena, \emph{{The Large N Limit of Superconformal Field Theories and
+  Supergravity}}, AIP Conference Proceedings CONF-981170, vol. 484, AIP, 1999,
+  pp.~51--63.
+
+\bibitem[MPS17]{Morrison2017Trivalent}
+Scott Morrison, Emily Peters, and Noah Snyder, \emph{Categories {G}enerated by
+  a {Trivalent} {Vertex}}, Selecta Mathematica \textbf{23} (2017), no.~2,
+  817--868.
+
+\bibitem[Oru13]{TN_orus}
+Roman Orus, \emph{{A Practical Introduction to Tensor Networks: Matrix Product
+  States and Projected Entangled Pair States}}.
+
+\bibitem[OS17]{Osborne:2017woa}
+Tobias~J. Osborne and Deniz~E. Stiegemann, \emph{Dynamics for {Holographic}
+  {Codes}}, arXiv preprint 1706.08823 (2017).
+
+\bibitem[Pet10]{peters2010planar}
+Emily Peters, \emph{{A Planar Algebra Construction of the Haagerup Subfactor}},
+  International Journal of Mathematics \textbf{21} (2010), no.~08, 987--1045.
+
+\bibitem[PYHP15]{Pastawski2015Holographic}
+Fernando Pastawski, Beni Yoshida, Daniel Harlow, and John Preskill,
+  \emph{Holographic {Quantum} {Error-correcting} {Codes}: {Toy} {Models} for
+  the {Bulk}/{Boundary} {Correspondence}}, Journal of High Energy Physics
+  \textbf{2015} (2015), no.~6, 149.
+
+\bibitem[RGRA17]{raissi2017constructingQECC}
+Zahra Raissi, Christian Gogolin, Arnau Riera, and Antonio Acín,
+  \emph{{Constructing Optimal Quantum Error Correcting Codes from Absolute
+  Maximally Entangled States}}, 2017.
+
+\bibitem[RT06]{ryu2006holographic}
+Shinsei Ryu and Tadashi Takayanagi, \emph{{Holographic Derivation of
+  Entanglement Entropy from the Anti--de Sitter Space/Conformal Field Theory
+  Correspondence}}, Physical review letters \textbf{96} (2006), no.~18, 181602.
+
+\bibitem[Sel10]{selinger2010survey}
+Peter Selinger, \emph{{A Survey of Graphical Languages for Monoidal
+  Categories}}, New structures for physics, Springer, 2010, pp.~289--355.
+
+\bibitem[Sim11]{simmonsCategories}
+Harold Simmons, \emph{An {Introduction} to {Category Theory}}, Cambridge
+  University Press, 2011.
+
+\bibitem[TL71]{temperley1971relations}
+Harold~NV Temperley and Elliott~H Lieb, \emph{{Relations Between the
+  'Percolation' and 'Colouring' Problem and other Graph-Theoretical Problems
+  Associated with Regular Planar Lattices: Some Exact Results for the
+  'Percolation' Problem}}, Proceedings of the Royal Society of London A:
+  Mathematical, Physical and Engineering Sciences, vol. 322, The Royal Society,
+  1971, pp.~251--280.
+
+\bibitem[Wan10]{wang2010topological}
+Zhenghan Wang, \emph{{Topological Quantum Computation}}, no. 112, American
+  Mathematical Soc., 2010.
+
+\end{thebibliography}

@@ -1,6 +1,4 @@
 This is makeindex, version 2.15 [TeX Live 2017] (kpathsea + Thai support).
-Scanning input file ppt.idx....done (7 entries accepted, 0 rejected).
-Sorting entries....done (24 comparisons).
-Generating output file ppt.ind....done (23 lines written, 0 warnings).
-Output written in ppt.ind.
+Scanning input file ppt.idx...done (0 entries accepted, 0 rejected).
+Nothing written in ppt.ind.
 Transcript written in ppt.ilg.
